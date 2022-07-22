@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 /**
@@ -45,6 +47,7 @@ public class Authorities implements java.io.Serializable {
 		this.id = id;
 	}
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idAccounts", nullable = false)
 	public Accounts getAccounts() {
@@ -55,6 +58,7 @@ public class Authorities implements java.io.Serializable {
 		this.accounts = accounts;
 	}
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idRoles", nullable = false)
 	public Roles getRoles() {

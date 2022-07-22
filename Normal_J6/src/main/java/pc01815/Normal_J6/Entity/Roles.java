@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 /**
@@ -59,6 +61,7 @@ public class Roles implements java.io.Serializable {
 		this.name = name;
 	}
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "roles")
 	public Set<Authorities> getAuthoritieses() {
 		return this.authoritieses;

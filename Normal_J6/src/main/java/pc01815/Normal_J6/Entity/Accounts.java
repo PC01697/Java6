@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 /**
@@ -130,6 +132,7 @@ public class Accounts implements java.io.Serializable {
 		this.comments = comments;
 	}
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accounts")
 	public Set<Orders> getOrderses() {
 		return this.orderses;
