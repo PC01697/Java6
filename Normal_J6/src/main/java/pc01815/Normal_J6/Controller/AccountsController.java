@@ -6,7 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.ServletContext;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +17,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import pc01815.Normal_J6.Entity.Accounts;
 import pc01815.Normal_J6.Services.AccountsService;
+import pc01815.Normal_J6.Util.FileUploadUtil;
 
 @RestController
 @RequestMapping("api")
@@ -26,6 +31,7 @@ public class AccountsController {
 
 	@Autowired
 	AccountsService accountsService;
+
 	
 	@GetMapping("/accounts")
 	public List<Accounts> getAll(){
@@ -42,6 +48,7 @@ public class AccountsController {
 	public Accounts getByUsername(@PathVariable("username") String username) {
 		return accountsService.findByUsernameService(username);
 	}
+	
 	
 	
 	
