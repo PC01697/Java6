@@ -1,11 +1,11 @@
 package pc01815.Normal_J6.Controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pc01815.Normal_J6.Entity.Accounts;
-import pc01815.Normal_J6.Entity.Authorities;
-import pc01815.Normal_J6.Repository.AccountsRepository;
 import pc01815.Normal_J6.Services.AccountsService;
 
 @RestController
@@ -44,6 +42,7 @@ public class AccountsController {
 	public Accounts getByUsername(@PathVariable("username") String username) {
 		return accountsService.findByUsernameService(username);
 	}
+	
 	
 	
 }

@@ -1,9 +1,8 @@
 package pc01815.Normal_J6.Services;
 
-import java.util.ArrayList;
-import java.util.Collection;
+
+
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -46,6 +45,10 @@ public class AccountServiceImpl implements AccountsService{
 	public Accounts findByUsernameService(String username) {
 		return accountsRepository.findByUsername(username);
 	}
+	
+	
+	
+	
 //
 //	@Override
 //	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
