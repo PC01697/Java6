@@ -114,6 +114,7 @@ public class Accounts implements java.io.Serializable {
 		this.photo = photo;
 	}
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accounts")
 	public Set<Authorities> getAuthoritieses() {
 		return this.authoritieses;
