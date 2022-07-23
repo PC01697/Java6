@@ -67,6 +67,7 @@ public class AccountsController {
 			System.err.println("đang có đăng nhập");
 			 new SecurityContextLogoutHandler().logout(req, reps, auth);
 		}
+		
 		return "was logout"; 
 	}
 }
