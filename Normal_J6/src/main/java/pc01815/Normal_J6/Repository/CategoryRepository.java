@@ -1,6 +1,7 @@
 package pc01815.Normal_J6.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -15,4 +16,5 @@ public interface CategoryRepository extends JpaRepository<Category, Integer>{
 	@Transactional
 	@Query(value = "select * from category where name LIKE :name", nativeQuery = true)
 	List<Category> findCategoryByName(@Param("name") String name);
+	
 }

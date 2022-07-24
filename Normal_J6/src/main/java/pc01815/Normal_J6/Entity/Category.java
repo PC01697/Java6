@@ -11,6 +11,9 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
@@ -23,6 +26,7 @@ import lombok.Data;
 public class Category implements java.io.Serializable {
 
 	private Integer id;
+	@NotEmpty(message = "Không được để trống tên category")
 	private String name;
 	private Set<Products> productses = new HashSet<Products>(0);
 
