@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pc01815.Normal_J6.Entity.Category;
 import pc01815.Normal_J6.Services.CategoryService;
-import pc01815.Normal_J6.Util.ApplicationExceptionHandler;
 
 @RestController
 @RequestMapping("api")
@@ -36,7 +35,7 @@ public class CategoryController {
 	CategoryService categoryService;
 	
 	@PostMapping("/saveCategory")
-	public ResponseEntity<Category> saveCategory(@Valid @RequestBody Category category){
+	public ResponseEntity<Category> saveCategory(@RequestBody Category category){
 		return new ResponseEntity<Category>(categoryService.saveCategoryService(category),HttpStatus.CREATED);
 	}
 	
