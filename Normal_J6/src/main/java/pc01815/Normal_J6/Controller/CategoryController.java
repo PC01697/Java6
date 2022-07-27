@@ -2,6 +2,8 @@ package pc01815.Normal_J6.Controller;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.validation.Constraint;
@@ -13,10 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,21 +38,44 @@ public class CategoryController {
 	@Autowired
 	CategoryService categoryService;
 	
-	@PostMapping("/saveCategory")
-	public ResponseEntity<Category> saveCategory(@RequestBody Category category){
+	@PostMapping(value = "/categories", consumes = "application/json")
+	public ResponseEntity<Category> saveCategory(@RequestBody @Valid Category category){
 		return new ResponseEntity<Category>(categoryService.saveCategoryService(category),HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/findAllCategory")
-	public List<Category> findAll(){
-		return categoryService.findAllCategoryService().stream().collect(Collectors.toList());
+	@PutMapping(value = "/categories/{id}", consumes = "application/json")
+	public ResponseEntity<Category> updateCategory(@PathVariable("id") int id, @RequestBody Category category){
+			Optional<Category> categoryOption = categoryService.findByIdCategory(id);
+			return (ResponseEntity<Category>) categoryOption.map(c -> {
+				category.setId(c.getId());
+				return new ResponseEntity<>(categoryService.saveCategoryService(category),HttpStatus.OK);
+			}).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
+	
+	@GetMapping(value = "/categories")
+	public ResponseEntity<List<Category>> findAllCategory(
+			@RequestParam("page") Optional<Integer> page,
+			@RequestParam("entry") Optional<Integer> entry,
+			@RequestParam("sortBy") Optional<String> sortBy
+			){
+		return new ResponseEntity<List<Category>>(categoryService.findAllCategoryService(page,sortBy, entry).stream().collect(Collectors.toList()),HttpStatus.OK);
+	
 	}
 	
 	
-	@PostMapping("/findCategoryByName")
-	public List<Category> findCategoryByName(@RequestParam(name = "categoryName") @NotEmpty(message = "Không được để trống category") String categoryName) {
-		return categoryService.findCategoryByNameService("%" + categoryName + "%"); 
-		
-		
+	@GetMapping("/categories/{categoryName}")
+	public ResponseEntity<List<Category>> findCategoryByName(@PathVariable("categoryName") String categoryName) {
+		List<Category> list = categoryService.findCategoryByNameService("%" + categoryName + "%");
+		if(list.isEmpty()) {
+			return new ResponseEntity<List<Category>>(list,HttpStatus.NOT_FOUND);
+		}else {
+			return new ResponseEntity<List<Category>>(list,HttpStatus.OK);
+		}	
+	}
+	
+	@DeleteMapping("/categories/{idCategory}")
+	public ResponseEntity<HttpStatus> deleteCategoryById(@PathVariable("idCategory") int id){
+		categoryService.deleteCategoryById(id);
+		return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
 	}
 }

@@ -17,4 +17,6 @@ public interface CategoryRepository extends JpaRepository<Category, Integer>{
 	@Query(value = "select * from category where name LIKE :name", nativeQuery = true)
 	List<Category> findCategoryByName(@Param("name") String name);
 	
+
+	
 }
