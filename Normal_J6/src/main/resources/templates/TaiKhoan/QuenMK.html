@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Quên mật khẩu</title>
+<style>
+body{
+     background-image: url(../img/nen.jpg);
+  
+}
+.dangnhap{
+  background-color: rgb(127, 152, 221);
+  opacity: 0.9;
+    border-radius: 20px;
+    position: relative;
+    width: 400px;
+    height: 320px;
+    border: 1px solid white;
+    left: 35%;
+    top: 200px;
+    color: black;
+}
+.dangnhaptrong{
+    position: absolute;
+    top:100px;
+    left :80px;
+}
+.nhap{
+    width: 250px;
+    height: 25px;
+    outline: none;
+}
+.dn{
+    
+    background: orangered;
+    border: none;
+    border-radius: 10px;
+    width: 250px;
+    height: 25px;
+    box-shadow: inset 0 0 20px white;
+}
+.dn:focus{
+    box-shadow: inset 0 0 5px blue;
+    outline: none;
+}
+.quen{
+    position: absolute;
+    left: 90px;
+    bottom: 7%;
+    text-decoration: none;
+}
+.trangchu{
+    position: absolute;
+    left: 1%;
+    bottom: 0px;
+    text-decoration: none;
+}
+.trangchu:hover{
+    color: red    ;
+}
+.quen:hover{
+    color: red    ;
+}
+.dk{
+    position: absolute;
+    right: 70px;
+    bottom: 7%;
+    text-decoration: none;
+}
+.dk:hover{
+    color: red;
+}
+</style>
+</head>
+<body>
+ <form action="/quenmk" class="dangnhap" method="POST">
+        <h1 style="text-align: center;">Quên Mật Khẩu</h1>
+
+        <br>
+        <div class="dangnhaptrong">
+        <input class="nhap" type="text" name="username" placeholder="Username">
+        <br><br>
+        <input class="nhap" type="text" name="email" placeholder="Email">
+
+        <br><br><br>
+       <button type="submit" class="dn"><b>Gửi</b></button>
+    </div>
+
+    <a class="quen" href="dangnhap"><h4>Đăng Nhập</h4></a>
+    <a class="dk" href="dangky"><h4>Đăng Ký</h4></a>
+    <br>
+    <a class="trangchu" href="trangchu"><h4><< Trang chủ</h4></a>
+    </form>
+</body>
+</html>
