@@ -33,7 +33,7 @@ public class AccountsController {
 	AccountsService accountsService;
 
 	
-	@GetMapping("/accounts")
+	@GetMapping(value = "/accounts", produces = "application/json")
 	public List<Accounts> getAll(){
 		return accountsService.getAllService().stream().collect(Collectors.toList());
 	}

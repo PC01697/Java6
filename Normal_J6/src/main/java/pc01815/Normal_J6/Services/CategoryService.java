@@ -12,4 +12,8 @@ public interface CategoryService {
 	List<Category> findAllCategoryService();
 	
 	List<Category> findCategoryByNameService(String categoryName);
+	
+	void deleteCategoryById(int id);
+	
+	Optional<Category> findByIdCategory(int id);
 }
