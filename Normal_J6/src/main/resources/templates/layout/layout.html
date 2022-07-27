@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html xmlns = "http://www.thymeleaf.org"
+  th:fragment="dynamic(title,view)">
+<head>
+<meta charset="UTF-8">
+<title th:replace="${title}"></title>
+
+
+ <link rel="shortcut icon" href="img\1.png">
+    <link rel="stylesheet" href="..\css\font-awesome.min.css">
+    <link rel="stylesheet" href="..\css\ionicons.min.css">
+    <link rel="stylesheet" href="..\css\linearicons.css">
+    <link rel="stylesheet" href="..\css\nice-select.css">
+    <link rel="stylesheet" href="..\css\jquery.fancybox.css">
+    <link rel="stylesheet" href="..\css\jquery-ui.min.css">
+    <link rel="stylesheet" href="..\css\meanmenu.min.css">
+    <link rel="stylesheet" href="..\css\nivo-slider.css">
+    <link rel="stylesheet" href="..\css\owl.carousel.min.css">
+    <link rel="stylesheet" href="..\css\bootstrap.min.css">
+    <link rel="stylesheet" href="..\css\default.css">
+    <link rel="stylesheet" href="..\css\style.css">
+    <link rel="stylesheet" href="..\css\responsive.css">
+
+    <script src="..\js\vendor\modernizr-3.5.0.min.js"></script>
+</head>
+<body>
+    <!--[if lte IE 9]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+	<![endif]-->
+
+    <!-- Main Wrapper Start Here -->
+    <div class="wrapper">
+        <!-- Banner Popup Start -->
+      
+        <!-- Banner Popup End -->
+       <!-- Newsletter Popup Start -->
+        <!-- Newsletter Popup End -->
+        <!-- Main Header Area Start Here -->
+        <header>
+            <!-- Header Top Start Here -->
+            <div class="header-top-area">
+                <div class="container">
+                    <!-- Header Top Start -->
+                    <div class="header-top">
+                        <ul>                                          
+                            <li><span th:text="#{lo.mn.language}"></span> <a href="#"><i class="lnr lnr-chevron-down"></i></a>
+                                <!-- Dropdown Start -->
+                                <ul class="ht-dropdown">
+                               
+                                    <li><a href="?lang=en"><img th:src="@{\img\header\2.png}" alt="language-selector">English</a></li>
+                                    <li><a href="?lang=vi"><img th:src="@{\img\header\1.png}" alt="language-selector">Việt Nam</a></li>
+                                </ul>
+                                <!-- Dropdown End -->
+                            </li>
+                  
+                            <li> <span th:text="#{lo.mn.myaccount}"></span><a href="#" ><i class="lnr lnr-chevron-down"></i></a>
+                                <!-- Dropdown Start -->
+                                <ul class="ht-dropdown">
+                                
+                                  <c:choose>
+<c:when test="${empty sessionScope.user}">
+                                  <li><a href="../dangnhap" th:text="#{lo.mn.login}" ></a></li>
+                                    <li><a href="../dangky" th:text="#{lo.mn.register}"></a></li>
+                                    <li><a href="../quenmk" th:text="#{lo.mn.forgot}"></a></li>
+                                
+</c:when>
+<c:otherwise>
+    
+                           
+                                    <li><a href="../doimk" th:text="#{lo.mn.changepass}" ></a></li>
+                                    <li><a href="../capnhattk" th:text="#{lo.mn.updateacc}"  ></a></li>
+                                    <hr>
+                                  
+                                      <li><a href="../lichsu/${sessionScope.user.username}"  th:text="#{lo.mn.history}" ></a></li>
+                                    <hr>
+                                        <li><a href="../dangnhap" th:text="#{lo.mn.logout}"></a></li>
+</c:otherwise>
+</c:choose>
+                                </ul>
+                                <!-- Dropdown End -->
+                            </li> 
+                        </ul>
+                    </div>
+                    <!-- Header Top End -->
+                </div>
+                <!-- Container End -->
+            </div>
+            <!-- Header Top End Here -->
+            <!-- Header Middle Start Here -->
+            <div class="header-middle ptb-15">
+                <div class="container">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col-lg-3 col-md-12">
+                            <div class="logo mb-all-30">
+                                <a href="../trangchu"><img src="..\img\logo\1.png" alt="logo-image"></a>
+                            </div>
+                        </div>
+                        <!-- Categorie Search Box Start Here -->
+                        <div class="col-lg-5 col-md-8 ml-auto mr-auto col-10">
+                            <div class="categorie-search-box">
+                                <form action="#">
+                                 
+                                    <input type="text" name="search" placeholder="I’m shopping for...">
+                                    <button><i class="lnr lnr-magnifier"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- Categorie Search Box End Here -->
+                        <!-- Cart Box Start Here -->
+                        <div class="col-lg-4 col-md-12">
+                            <div class="cart-box mt-all-30">
+                                <ul class="d-flex justify-content-lg-end justify-content-center align-items-center">
+                                    <li><a href="../giohang"><i class="lnr lnr-cart"></i><span class="my-cart"><span class="total-pro">${soluong}</span><span  th:text="#{lo.mn.cart}" ></span></span></a>
+                                        
+                                    </li>
+                                   
+                                    </li>
+                                    <li><a href="../dangnhap"><i class="lnr lnr-user"></i><span class="my-cart"><span>
+                                          <c:choose>
+						<c:when test="${empty sessionScope.user}">
+						 <strong  th:text="#{lo.mn.login}"></strong>
+	  					</c:when>
+						<c:otherwise>
+						  ${sessionScope.user.fullname}
+						
+						
+						</c:otherwise>
+						</c:choose>
+                                    </span></a>
+
+
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Cart Box End Here -->
+                    </div>
+                    <!-- Row End -->
+                </div>
+                <!-- Container End -->
+            </div>
+            <!-- Header Middle End Here -->
+            <!-- Header Bottom Start Here -->
+            <div class="header-bottom  header-sticky">
+                <div class="container">
+                    <div class="row align-items-center">
+                         <div class="col-xl-3 col-lg-4 col-md-6 vertical-menu d-none d-lg-block">
+                            <span class="categorie-title" th:text="#{lo.mn.category}"></span>
+                        </div>                       
+                        <div class="col-xl-9 col-lg-8 col-md-12 ">
+                            <nav class="d-none d-lg-block">
+                                <ul class="header-bottom-list d-flex">
+                                    <li><a href="trangchu" th:text="#{lo.mn.home}"></a></li>
+                                    <li> <a href="#"  th:text="#{lo.mn.page}"><i class="fa fa-angle-down"></i></a>
+                                        <!-- Home Version Dropdown Start -->
+                                        <ul class="ht-dropdown dropdown-style-two">
+                                            <li><a href="dangky" th:text="#{lo.mn.register}"></a></li>
+                                            <li><a href="dangnhap"  th:text="#{lo.mn.login}"></a></li>
+                                            <li><a href="quenmk" th:text="#{lo.mn.forgot}"></a></li>
+                         
+                                        </ul>
+                                        <!-- Home Version Dropdown End -->
+                                    </li>
+                                    <li><a href="404" th:text="#{lo.mn.about}"></a></li>
+                                    <li><a href="lienhe"  th:text="#{lo.mn.contact}" ></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- Row End -->
+                </div>
+                <!-- Container End -->
+            </div>
+            <!-- Header Bottom End Here -->
+        </header>
+        <!-- Main Header Area End Here -->
+        <!-- Categorie Menu & Slider Area Start Here -->
+        <div class="main-page-banner pb-50 off-white-bg">
+            <div class="container">
+                <div class="row">
+                    <!-- Vertical Menu Start Here -->
+                    <div class="col-xl-3 col-lg-4 d-none d-lg-block">
+                        <div class="vertical-menu mb-all-30">
+                            <nav>
+                                <ul class="vertical-menu-list">
+                                   <c:forEach var="HoLy" items="${item}">
+                                    <li class=""><a href="../shop/${HoLy.id}">${HoLy.name}</a>
+
+                              
+                         
+                                    </li>
+                                    </c:forEach>
+                               
+                                    
+                           
+                                            <!-- Single Column End -->
+                                        </ul>
+                                        <!-- Vertical Mega-Menu End --> 
+                                    </li>
+                                    
+                                    <!-- More Categoies End -->
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+ 
+ 
+ 
+    <main th:replace="${view}"></main>
+ 
+ 
+ 
+ 
+ 
+ 
+
+        <!-- Support Area Start Here -->
+        <div class="support-area bdr-top">
+            <div class="container">
+                <div class="d-flex flex-wrap text-center">
+                    <div class="single-support">
+                        <div class="support-icon">
+                            <i class="lnr lnr-gift"></i>
+                        </div>
+                        <div class="support-desc">
+                            <h6>Great Value</h6>
+                            <span>Nunc id ante quis tellus faucibus dictum in eget.</span>
+                        </div>
+                    </div>
+                    <div class="single-support">
+                        <div class="support-icon">
+                            <i class="lnr lnr-rocket"></i>
+                        </div>
+                        <div class="support-desc">
+                            <h6>Worlwide Delivery</h6>
+                            <span>Quisque posuere enim augue, in rhoncus diam dictum non</span>
+                        </div>
+                    </div>
+                    <div class="single-support">
+                        <div class="support-icon">
+                           <i class="lnr lnr-lock"></i>
+                        </div>
+                        <div class="support-desc">
+                            <h6>Safe Payment</h6>
+                            <span>Duis suscipit elit sem, sed mattis tellus accumsan.</span>
+                        </div>
+                    </div>
+                    <div class="single-support">
+                        <div class="support-icon">
+                           <i class="lnr lnr-enter-down"></i>
+                        </div>
+                        <div class="support-desc">
+                            <h6>Shop Confidence</h6>
+                            <span>Faucibus dictum suscipit eget metus. Duis  elit sem, sed.</span>
+                        </div>
+                    </div>
+                    <div class="single-support">
+                        <div class="support-icon">
+                           <i class="lnr lnr-users"></i>
+                        </div>
+                        <div class="support-desc">
+                            <h6>24/7 Help Center</h6>
+                            <span>Quisque posuere enim augue, in rhoncus diam dictum non.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Container End -->
+        </div>
+        <!-- Support Area End Here -->
+        <!-- Footer Area Start Here -->
+        <footer class="off-white-bg2 pt-95 bdr-top pt-sm-55">
+            <!-- Footer Top Start -->
+            <div class="footer-top">
+                <div class="container">
+                    <!-- Signup Newsletter Start -->
+             
+                    <!-- Signup-Newsletter End -->                   
+                    <div class="row">
+                        <!-- Single Footer Start -->
+                        <div class="col-lg-2 col-md-4 col-sm-6">
+                            <div class="single-footer mb-sm-40">
+                                <h3 class="footer-title">Information</h3>
+                                <div class="footer-content">
+                                    <ul class="footer-list">
+                                        <li><a href="404">About Us</a></li>
+                                        <li><a href="#">Delivery Information</a></li>
+                                        <li><a href="#">Privacy Policy</a></li>
+                                        <li><a href="lienhe">Terms & Conditions</a></li>
+                                        <li><a href="dangnhap">FAQs</a></li>
+                                        <li><a href="dangnhap">Return Policy</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Footer Start -->
+                        <!-- Single Footer Start -->
+                        <div class="col-lg-2 col-md-4 col-sm-6">
+                            <div class="single-footer mb-sm-40">
+                                <h3 class="footer-title">Customer Service</h3>
+                                <div class="footer-content">
+                                    <ul class="footer-list">
+                                        <li><a href="lienhe">Contact Us</a></li>
+                                        <li><a href="#">Returns</a></li>
+                                        <li><a href="#">Order History</a></li>
+                                        <li><a href="yeuthich">Wish List</a></li>
+                                        <li><a href="#">Site Map</a></li>
+                                        <li><a href="#">Gift Certificates</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Footer Start -->
+                        <!-- Single Footer Start -->
+                        <div class="col-lg-2 col-md-4 col-sm-6">
+                            <div class="single-footer mb-sm-40">
+                                <h3 class="footer-title">Extras</h3>
+                                <div class="footer-content">
+                                    <ul class="footer-list">
+                                        <li><a href="#">Newsletter</a></li>
+                                        <li><a href="#">Brands</a></li>
+                                        <li><a href="#">Gift Certificates</a></li>
+                                        <li><a href="#">Affiliate</a></li>
+                                        <li><a href="#">Specials</a></li>
+                                        <li><a href="#">Site Map</a></li>      
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Footer Start -->
+                        <!-- Single Footer Start -->
+                        <div class="col-lg-2 col-md-4 col-sm-6">
+                            <div class="single-footer mb-sm-40">
+                                <h3 class="footer-title">My Account</h3>
+                                <div class="footer-content">
+                                    <ul class="footer-list">
+                                        <li><a href="lienhe">Contact Us</a></li>
+                                        <li><a href="#">Returns</a></li>
+                                        <li><a href="#">My Account</a></li>
+                                        <li><a href="#">Order History</a></li>
+                                        <li><a href="yeuthich">Wish List</a></li>
+                                        <li><a href="#">Newsletter</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Footer Start -->
+                        <!-- Single Footer Start -->
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="single-footer mb-sm-40">
+                                <h3 class="footer-title">My Account</h3>
+                                <div class="footer-content">
+                                    <ul class="footer-list address-content">
+                                        <li><i class="lnr lnr-map-marker"></i> Address: 288 Nguyễn Văn Linh, Hưng Lợi, Ninh Kiều, Cần Thơ</li>
+                                        <li><i class="lnr lnr-envelope"></i><a href="#"> mail Us: baodgpc01660@fpt.edu.vn </a></li>
+                                        <li>
+                                            <i class="lnr lnr-phone-handset"></i> Phone: 0947268364
+                                        </li>
+                                    </ul>
+                                    <div class="payment mt-25 bdr-top pt-30">
+                                        <a href="#"><img class="img" src="..\img\payment\1.png" alt="payment-image"></a>
+                                    </div>                                   
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Footer Start -->
+                    </div>
+                    <!-- Row End -->
+                </div>
+                <!-- Container End -->
+            </div>
+            <!-- Footer Top End -->
+            <!-- Footer Middle Start -->
+            <div class="footer-middle text-center">
+                <div class="container">
+                    <div class="footer-middle-content pt-20 pb-30">
+                            <ul class="social-footer">
+                                <li><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="https://plus.google.com/"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="https://www.linkedin.com/"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><img src="..\img\icon\social-img1.png" alt="google play"></a></li>
+                                <li><a href="#"><img src="..\img\icon\social-img2.png" alt="app store"></a></li>
+                            </ul>
+                    </div>
+                </div>
+                <!-- Container End -->
+            </div>
+            <!-- Footer Middle End -->
+            <!-- Footer Bottom Start -->
+            <div class="footer-bottom pb-30">
+                <div class="container">
+
+                     <div class="copyright-text text-center">                    
+                        <p>Copyright © 2022 <a target="_blank" href="#">Truemart</a> All Rights Reserved.</p>
+                     </div>
+                </div>
+                <!-- Container End -->
+            </div>
+            <!-- Footer Bottom End -->
+        </footer>
+        <!-- Footer Area End Here -->
+        <!-- Quick View Content Start -->
+
+        <!-- Quick View Content End -->
+    </div>
+    <!-- Main Wrapper End Here -->
+
+  <!-- jquery 3.2.1 -->
+    <script src="..\js\vendor\jquery-3.2.1.min.js"></script>
+    <!-- Countdown js -->
+    <script src="..\js\jquery.countdown.min.js"></script>
+    <!-- Mobile menu js -->
+    <script src="..\js\jquery.meanmenu.min.js"></script>
+    <!-- ScrollUp js -->
+    <script src="..\js\jquery.scrollUp.js"></script>
+    <!-- Nivo slider js -->
+    <script src="..\js\jquery.nivo.slider.js"></script>
+    <!-- Fancybox js -->
+    <script src="..\js\jquery.fancybox.min.js"></script>
+    <!-- Jquery nice select js -->
+    <script src="..\js\jquery.nice-select.min.js"></script>
+    <!-- Jquery ui price slider js -->
+    <script src="..\js\jquery-ui.min.js"></script>
+    <!-- Owl carousel -->
+    <script src="..\js\owl.carousel.min.js"></script>
+    <!-- Bootstrap popper js -->
+    <script src="..\js\popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="..\js\bootstrap.min.js"></script>
+    <!-- Plugin js -->
+    <script src="..\js\plugins.js"></script>
+    <!-- Main activaion js -->
+    <script src="..\js\main.js"></script>
+</body>
+</html>
