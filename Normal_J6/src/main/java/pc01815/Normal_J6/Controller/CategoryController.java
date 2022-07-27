@@ -53,8 +53,13 @@ public class CategoryController {
 	}
 	
 	@GetMapping(value = "/categories")
-	public ResponseEntity<List<Category>> findAllCategory(){
-		return new ResponseEntity<List<Category>>(categoryService.findAllCategoryService().stream().collect(Collectors.toList()),HttpStatus.OK);
+	public ResponseEntity<List<Category>> findAllCategory(
+			@RequestParam("page") Optional<Integer> page,
+			@RequestParam("entry") Optional<Integer> entry,
+			@RequestParam("sortBy") Optional<String> sortBy
+			){
+		return new ResponseEntity<List<Category>>(categoryService.findAllCategoryService(page,sortBy, entry).stream().collect(Collectors.toList()),HttpStatus.OK);
+	
 	}
 	
 	

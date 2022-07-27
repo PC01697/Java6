@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import pc01815.Normal_J6.Entity.Category;
@@ -21,12 +24,6 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public List<Category> findAllCategoryService() {
-		List<Category> listCategory = categoryRepository.findAll();
-		return listCategory;
-	}
-
-	@Override
 	public List<Category> findCategoryByNameService(String categoryName) {
 		return categoryRepository.findCategoryByName(categoryName);
 	}
@@ -39,6 +36,13 @@ public class CategoryServiceImpl implements CategoryService{
 	@Override
 	public Optional<Category> findByIdCategory(int id) {
 		return categoryRepository.findById(id);
+	}
+
+	@Override
+	public Page<Category> findAllCategoryService(Optional<Integer> page, Optional<String> sortBy, Optional<Integer> entry) {
+		return categoryRepository.findAll(
+						PageRequest.of(page.orElse(0), entry.orElse(3), Sort.Direction.ASC, sortBy.orElse("name"))
+				);
 	}
 
 	

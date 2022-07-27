@@ -3,13 +3,15 @@ package pc01815.Normal_J6.Services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+
 import pc01815.Normal_J6.Entity.Category;
 
 public interface CategoryService {
 	
 	Category saveCategoryService(Category category);
 	
-	List<Category> findAllCategoryService();
+	Page<Category> findAllCategoryService(Optional<Integer> page, Optional<String> sortBy, Optional<Integer> entry);
 	
 	List<Category> findCategoryByNameService(String categoryName);
 	

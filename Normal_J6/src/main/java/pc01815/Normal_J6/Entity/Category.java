@@ -1,7 +1,9 @@
 package pc01815.Normal_J6.Entity;
 // Generated Jul 17, 2022, 5:56:00 PM by Hibernate Tools 4.3.6.Final
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +16,13 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.boot.actuate.autoconfigure.metrics.MetricsProperties.Web.Server.ServerRequest;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.Data;
 
@@ -28,7 +37,7 @@ public class Category implements java.io.Serializable {
 	private Integer id;
 	@NotEmpty(message = "Không được để trống tên category")
 	private String name;
-	private Set<Products> productses = new HashSet<Products>(0);
+	private List<Products> productses = new ArrayList<Products>(0);
 
 	public Category() {
 	}
@@ -37,7 +46,7 @@ public class Category implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public Category(String name, Set<Products> productses) {
+	public Category(String name, List<Products> productses) {
 		this.name = name;
 		this.productses = productses;
 	}
@@ -62,13 +71,14 @@ public class Category implements java.io.Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
-	public Set<Products> getProductses() {
+//	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="name", scope=ServerRequest.class)
+	@JsonBackReference
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "category")
+	public List<Products> getProductses() {
 		return this.productses;
 	}
 
-	public void setProductses(Set<Products> productses) {
+	public void setProductses(List<Products> productses) {
 		this.productses = productses;
 	}
 
