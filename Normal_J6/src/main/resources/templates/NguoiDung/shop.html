@@ -3,9 +3,148 @@
    th:replace="~{/layout/layout::dynamic(~{::title},~{::body})}">
 <head>
 <meta charset="UTF-8">
-<title th:text="#{home.title}"></title>
+<title th:text="#{shop.title}"></title>
 </head>
 <body>
+ <div class="breadcrumb-area mt-30">
+            <div class="container">
+                <div class="breadcrumb">
+                    <ul class="d-flex align-items-center">
+                        <li><a href="trangchu">Trang Chủ</a></li>
+                        <li class="active"><a href="chitiet">Shop</a></li>
+                    </ul>
+                </div>	
+            </div>
+            <!-- Container End -->
+        </div>
+        <!-- Breadcrumb End -->
+        <!-- Shop Page Start -->
+        <div class="main-shop-page pt-100 pb-100 ptb-sm-60">
+            <div class="container">
+                <!-- Row End -->
+                <div class="row">
+                    <!-- Sidebar Shopping Option Start -->
+                    <div class="col-lg-3 order-2 order-lg-1">
+                        <div class="sidebar">
+                            <!-- Sidebar Electronics Categorie Start -->
+                        
 
+                            <div class="col-img">
+                                <a href="shop.html"><img src="..\img\banner\banner-sidebar.jpg" alt="slider-banner"></a>
+                            </div>
+                            <!-- Single Banner End -->
+                        </div>
+                    </div>
+                    <!-- Sidebar Shopping Option End -->
+                    <!-- Product Categorie List Start -->
+                    <div class="col-lg-9 order-1 order-lg-2">
+                        <!-- Grid & List View Start -->
+                        <div class="grid-list-top border-default universal-padding d-md-flex justify-content-md-between align-items-center mb-30">
+                            <div class="grid-list-view  mb-sm-15">
+                                <ul class="nav tabs-area d-flex align-items-center">
+                                   
+                                  
+                                </ul>
+                            </div>
+                            <!-- Toolbar Short Area Start -->
+                
+                            <!-- Toolbar Short Area End -->
+                            <!-- Toolbar Short Area Start -->
+                 
+                            <!-- Toolbar Short Area End -->
+                        </div>
+                        <!-- Grid & List View End -->
+                        <div class="main-categorie mb-all-40">
+                            <!-- Grid & List Main Area End -->
+                            <div class="tab-content fix">
+                                <div id="grid-view" class="tab-pane fade show active">
+                                    <div class="row">
+                                        <!-- Single Product Start -->
+                                        
+                                         <c:forEach var="HoLy" items="${page.content}">
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                            <div class="single-product">
+                                                <!-- Product Image Start -->
+                                                <div class="pro-img">
+                                                    <a href="chitiet?id=${HoLy.id}">
+                                                        <img class="primary-img" src="../img/products/${HoLy.image1}" alt="single-product">
+                                                        <img class="secondary-img" src="../img/products/${HoLy.image2}" alt="single-product">
+                                                    </a>
+                                                   
+                                                </div>
+                                                <!-- Product Image End -->
+                                                <!-- Product Content Start -->
+                                                <div class="pro-content">
+                                                    <div class="pro-info">
+                                                        <h4><a href="chitiet?id=${HoLy.id}">${HoLy.name}</a></h4>
+                                                        <p><span class="price">${HoLy.price}₫</span></p>
+                                                      
+                                                
+                                                    </div>
+                                                    <div class="pro-actions">
+                                                        <div class="actions-primary">
+                                                            <a href="../add/${HoLy.id}" title="Thêm vào giỏ hàng"> + Thêm vào giỏ hàng</a>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <!-- Product Content End -->
+                                            </div>
+                                        </div>
+                                           </c:forEach>
+                                       
+                                       
+                                      
+                                   
+                                      
+          
+                                        <!-- Single Product End -->
+                                    </div>
+                                    <!-- Row End -->
+                                </div>
+                                <!-- #grid view End -->
+                  
+                                <!-- #list view End -->
+                                <div class="pro-pagination">
+                 
+                                               <nav aria-label="Page navigation example">
+                      <ul class="pagination justify-content-center">
+                  
+                  <li class="page-item"><a class="page-link" href="${uri}?p=0"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M11.854 3.646a.5.5 0 0 1 0 .708L8.207 8l3.647 3.646a.5.5 0 0 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 0 1 .708 0zM4.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 1 0v-13a.5.5 0 0 0-.5-.5z"/>
+</svg></a></li>
+                  <li class="page-item"><a class="page-link" href="${uri}?p=${page.number-1 < 0 ? 0:page.number-1}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+  <path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+</svg></a></li>
+                  <li class="page-item"><a class="page-link" href="${uri}?p=${page.number+1 > page.totalPages - 1 ? page.totalPages - 1: page.number+1}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+  <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+</svg></a></li>
+                  <li class="page-item"><a class="page-link" href="${uri}?p=${page.totalPages-1}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-bar-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M4.146 3.646a.5.5 0 0 0 0 .708L7.793 8l-3.647 3.646a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708 0zM11.5 1a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-1 0v-13a.5.5 0 0 1 .5-.5z"/>
+</svg></a></li>
+
+
+
+                </ul>
+              </nav>                                
+                                    <div class="product-pagination">
+                                        <span class="grid-item-list">Trang  ${page.number+1}/${page.totalPages}(${page.totalElements} Sản phẩm)</span>
+                                    </div>
+                                </div>
+                                <!-- Product Pagination Info -->
+                            </div>
+                            <!-- Grid & List Main Area End -->
+                        </div>
+                    </div>
+                    <!-- product Categorie List End -->
+                </div>
+                <!-- Row End -->
+            </div>
+            <!-- Container End -->
+        </div>
+
+ 
 </body>
 </html>
