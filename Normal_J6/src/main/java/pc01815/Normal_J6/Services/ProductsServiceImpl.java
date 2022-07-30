@@ -40,14 +40,12 @@ public class ProductsServiceImpl implements ProductsService{
 
 	@Override
 	public void deleteProductsById(int id) {
-		// TODO Auto-generated method stub
-		
+		 productsRepository.deleteById(id);
 	}
 
 	@Override
 	public Optional<Products> findByIdProducts(int id) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+		return productsRepository.findById(id);
 	}
 
 }

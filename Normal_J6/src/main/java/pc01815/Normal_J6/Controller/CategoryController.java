@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import javax.validation.Constraint;
 import javax.validation.Valid;
@@ -59,7 +60,7 @@ public class CategoryController {
 			@RequestParam("sortBy") Optional<String> sortBy
 			){
 		return new ResponseEntity<List<Category>>(categoryService.findAllCategoryService(page,sortBy, entry).stream().collect(Collectors.toList()),HttpStatus.OK);
-	
+		
 	}
 	
 	
