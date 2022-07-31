@@ -1,4 +1,4 @@
-package pc01815.Normal_J6.Controller;
+package pc01815.Normal_J6.RestController;
 
 import java.util.Collections;
 import java.util.List;
@@ -34,7 +34,7 @@ import pc01815.Normal_J6.Services.CategoryService;
 @RestController
 @RequestMapping("api")
 @Validated
-public class CategoryController {
+public class CategoryRestController {
 
 	@Autowired
 	CategoryService categoryService;

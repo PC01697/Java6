@@ -1,10 +1,9 @@
-package pc01815.Normal_J6.Controller;
+package pc01815.Normal_J6.RestController;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,21 +12,19 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-import pc01815.Normal_J6.Entity.Category;
 import pc01815.Normal_J6.Entity.Products;
 import pc01815.Normal_J6.Services.ProductsService;
 
 @RestController
 @RequestMapping("api")
-public class ProductsController {
+public class ProductsRestController {
 
 	@Autowired
 	ProductsService productsService;
@@ -41,6 +38,15 @@ public class ProductsController {
 		return new ResponseEntity<List<Products>>(productsService.findAllCProductsService(page,sortBy, entry).stream().collect(Collectors.toList()),HttpStatus.OK);
 	}
 	
+	@GetMapping("/products/{productsName}")
+	public ResponseEntity<List<Products>> findProductsByName(@PathVariable("productsName") String productsName){
+		List<Products> list = productsService.findProductsByNameService("%" + productsName + "%");
+		if(list.isEmpty()) {
+			return new ResponseEntity<List<Products>>(list,HttpStatus.NOT_FOUND);
+		}else {
+			return new ResponseEntity<List<Products>>(list,HttpStatus.OK);
+		}
+	}
 	
 	@PostMapping(value = "/products")
 	public ResponseEntity<Products> saveCategory(@RequestBody Products products){
@@ -53,5 +59,26 @@ public class ProductsController {
 		productsService.deleteProductsById(id);
 		return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
 	}
+	
+//	@PutMapping(value = "/products/{id}", consumes = "application/json")
+//	public ResponseEntity<Products> updateProducts(@PathVariable("id") int id,@RequestBody Products products){
+//		Optional<Products> productsOption = productsService.findByIdProducts(id);
+//		return (ResponseEntity<Products>) productsOption.map(p -> {
+//			products.setId(p.getId());
+////			products.setName(p.getName());
+////			products.setUnitPrice(p.getUnitPrice());
+//			products.setImage(p.getImage());
+//			products.setProductDate(p.getProductDate());
+//			products.setAvaible(p.isAvaible());
+//			products.setCategory(p.getCategory());
+//			products.setQuantity(p.getQuantity());
+//			products.setDescription(p.getDescription());
+//			products.setDiscount(p.getDiscount());
+//			products.setViewCount(p.getViewCount());
+//			products.setSpecial(p.isSpecial());
+//			return new ResponseEntity<>(productsService.saveProductsService(products),HttpStatus.OK);
+//		}).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//	}
+	
 	
 }

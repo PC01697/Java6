@@ -1,4 +1,4 @@
-package pc01815.Normal_J6.Controller;
+package pc01815.Normal_J6.RestController;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +27,7 @@ import pc01815.Normal_J6.Util.FileUploadUtil;
 
 @RestController
 @RequestMapping("api")
-public class AccountsController {
+public class AccountsRestController {
 
 	@Autowired
 	AccountsService accountsService;

@@ -34,8 +34,7 @@ public class ProductsServiceImpl implements ProductsService{
 
 	@Override
 	public List<Products> findProductsByNameService(String productName) {
-		// TODO Auto-generated method stub
-		return null;
+		return productsRepository.findProductByName(productName);
 	}
 
 	@Override

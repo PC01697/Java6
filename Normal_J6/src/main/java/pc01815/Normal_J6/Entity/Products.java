@@ -48,7 +48,7 @@ public class Products implements java.io.Serializable {
 	private String name;
 	private float unitPrice;
 	private String image;
-	private Date productDate;
+	private Date productDate = new Date();
 	private boolean avaible;
 	private int quantity;
 	private String description;
@@ -125,7 +125,7 @@ public class Products implements java.io.Serializable {
 		this.image = image;
 	}
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "ProductDate", nullable = false, length = 10)
 	public Date getProductDate() {
 		return this.productDate;
