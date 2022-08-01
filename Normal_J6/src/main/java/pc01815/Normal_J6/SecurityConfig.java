@@ -34,11 +34,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		auth.userDetailsService(username ->{
 			try {
 				Accounts user = accountService.findByUsernameService(username);
-				String pass = user.getPassword();
-				String[] roles = user.getAuthoritieses().stream()
-						.map(er -> er.getRoles().getId())
-						.collect(Collectors.toList()).toArray(new String[0]);
-				return User.withUsername(username).password(pass).roles(roles).build();
+				
+				String pass = pe.encode(user.getPassword());
+//				String[] roles = user.getAuthoritieses().stream()
+//						.map(er -> er.getRoles().getId())
+//						.collect(Collectors.toList()).toArray(new String[0]);
+				return User.withUsername(username).password(pass).roles("ADMIN").build();
 			} catch (Exception e) {
 				throw new UsernameNotFoundException(username+"not found!");
 			}
@@ -56,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.formLogin()
 			.loginPage("/security/login/form")
 			.loginProcessingUrl("/security/login")
-			.defaultSuccessUrl("/index",false)
+			.defaultSuccessUrl("/security/login/sucess",false)
 			.failureUrl("/security/login/error");
 		
 		http.exceptionHandling()

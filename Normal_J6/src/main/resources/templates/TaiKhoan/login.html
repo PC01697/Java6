@@ -2,9 +2,9 @@
 <html xmlns= "http://www.thymeleaf.org">
 <head>
 <title>Classy Login form Widget Flat Responsive Widget Template :: w3layouts</title>
-<script src="js/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 <!-- Custom Theme files -->
-<link href="css/styleLogin.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="/css/styleLogin.css" rel="stylesheet" type="text/css" media="all"/>
 <!-- for-mobile-apps -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -25,7 +25,7 @@
 					
 					<div class="header-left-bottom agileinfo">
 						
-					 <form th:action="@{/security/login}" method="post">
+					 <form action="/security/login" method="post">
 						<input type="text"  value="User name" name="username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User name';}"/>
 					<input type="password"  value="Password" name="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}"/>
 						<div class="remember">
