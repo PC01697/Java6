@@ -41,13 +41,15 @@
   <base href="/admin/">
 </head>
 <body class="hold-transition skin-blue sidebar-mini" ng-app="myApp">
-
+<div class="wrapper" style="height: auto; min-height: 100%;">
 <header ng-include="navbar" ng-controller="header-footer" >
 </header>
 <aside ng-include="aside"  ng-controller="header-footer"></aside>
 
  <main ui-view></main>
 <footer ng-include="footer"  ng-controller="header-footer" ></footer>
+</div>
+
 
 
 <!-- jQuery 3 -->
