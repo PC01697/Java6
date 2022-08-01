@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 
 public class TrangChu {
-	@RequestMapping("/trangchu")
+	@RequestMapping("/index")
 	public String form(Model model) {
 		
 		return "NguoiDung/trangchu";

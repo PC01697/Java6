@@ -57,25 +57,25 @@
                                 <!-- Dropdown Start -->
                                 <ul class="ht-dropdown">
                                 
-                                  <c:choose>
-<c:when test="${empty sessionScope.user}">
-                                  <li><a href="../dangnhap" th:text="#{lo.mn.login}" ></a></li>
+                                  <th:block th:if="${#request.remoteUser}">
+                                      <li><a th:href="@{/security/logout}" th:text="#{lo.mn.logout}"></a></li>
+                                      
+                                      <li th:if="${#request.isUserInRole('ADMIN')">
+                                      	   <a th:href="@{admin}">Administration</a>
+                                      </li>
+                                  <th:block>
+                                  <th:block th:unless="${#request.remoteUser}">
+                                  		 <li><a href="../dangnhap" th:text="#{lo.mn.login}" ></a></li>
                                     <li><a href="../dangky" th:text="#{lo.mn.register}"></a></li>
                                     <li><a href="../quenmk" th:text="#{lo.mn.forgot}"></a></li>
-                                
-</c:when>
-<c:otherwise>
-    
-                           
                                     <li><a href="../doimk" th:text="#{lo.mn.changepass}" ></a></li>
                                     <li><a href="../capnhattk" th:text="#{lo.mn.updateacc}"  ></a></li>
                                     <hr>
                                   
-                                      <li><a href="../lichsu/${sessionScope.user.username}"  th:text="#{lo.mn.history}" ></a></li>
+                                      <li><a href="../lichsu/${sessionScope.user.username}"  th:text="#{lo.mn.history}"></a></li>
                                     <hr>
-                                        <li><a href="../dangnhap" th:text="#{lo.mn.logout}"></a></li>
-</c:otherwise>
-</c:choose>
+                                  </th:block>
+ 
                                 </ul>
                                 <!-- Dropdown End -->
                             </li> 
@@ -115,22 +115,12 @@
                                     </li>
                                    
                                     </li>
-                                    <li><a href="../dangnhap"><i class="lnr lnr-user"></i><span class="my-cart"><span>
-                                          <c:choose>
-						<c:when test="${empty sessionScope.user}">
-						 <strong  th:text="#{lo.mn.login}"></strong>
-	  					</c:when>
-						<c:otherwise>
-						  ${sessionScope.user.fullname}
-						
-						
-						</c:otherwise>
-						</c:choose>
+                                    <div th:if="${#request.remoteUser}">
+                                    <li><a href="../dangnhap"><i class="lnr lnr-user"></i><span class="my-cart"><span>  
+						              <strong th:text="#{lo.mn.login}">[[${#request.remoteUser}]]</strong>
                                     </span></a>
-
-
-
                                     </li>
+                                    </div>
                                 </ul>
                             </div>
                         </div>
