@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import pc01815.Normal_J6.Entity.Accounts;
 import pc01815.Normal_J6.Entity.Authorities;
+import pc01815.Normal_J6.Services.AccountServiceImpl;
 import pc01815.Normal_J6.Services.AccountsService;
 
 @Configuration
@@ -24,6 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Autowired
 	AccountsService accountService;
+	@Autowired
+	AccountServiceImpl accountImpl;
 //	@Autowired
 //	BCryptPasswordEncoder pe;
 	@Bean
@@ -32,21 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	}
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
-		auth.userDetailsService(username ->{
-			try {
-				Accounts user = accountService.findByUsernameService(username);
-				
-				String pass = pe.encode(user.getPassword());
-				Set<Authorities> roles = user.getAuthoritieses();
-//				String[] roles = user.getAuthoritieses().stream()
-//						.map(er -> er.getRoles().getId())
-//						.collect(Collectors.toList()).toArray(new String[0]);
-				return User.withUsername(username).password(pass).roles("ADMIN").build();
-			} catch (Exception e) {
-				throw new UsernameNotFoundException(username+"not found!");
-			}
-		});
+		
+		auth.userDetailsService(accountImpl);
 	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {

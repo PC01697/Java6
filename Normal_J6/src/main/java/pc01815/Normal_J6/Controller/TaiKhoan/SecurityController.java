@@ -12,7 +12,7 @@ public class SecurityController {
 		m.addAttribute("tb","Vui lòng đăng nhập!!");
 		return "TaiKhoan/login";
 	}
-	@RequestMapping("/security/login/sucess")
+	@RequestMapping("/security/login/success")
 	public String loginSucess(Model m) {
 		m.addAttribute("tb","Đăng nhập thành công");
 		return "TaiKhoan/login";

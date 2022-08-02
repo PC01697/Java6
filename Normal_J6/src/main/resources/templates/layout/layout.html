@@ -60,7 +60,7 @@
                                   <th:block th:if="${#request.remoteUser}">
                                       <li><a th:href="@{/security/logout}" th:text="#{lo.mn.logout}"></a></li>
                                       
-                                      <li th:if="${#request.isUserInRole('ADMIN')">
+                                      <li th:if="${#request.isUserInRole('ADMIN')}">
                                       	   <a th:href="@{admin}">Administration</a>
                                       </li>
                                   <th:block>
