@@ -13,14 +13,17 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.core.userdetails.User;
-
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
-
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import pc01815.Normal_J6.Entity.Accounts;
@@ -42,7 +45,7 @@ public class AccountServiceImpl implements AccountsService{
 	
 	@Autowired
 	RolesRepository roleRepo;
-
+   
 	@Override
 	public List<Accounts> getAllService() {
 		List<Accounts> listAccount = accountsRepository.findAll();
@@ -84,5 +87,13 @@ public class AccountServiceImpl implements AccountsService{
 		}
 	}
 	
-
+ 
+	public void loginfromOAuth2(OAuth2AuthenticationToken oauth2) {
+		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
+		String email = oauth2.getPrincipal().getAttribute("email");
+		String pass = Long.toHexString(System.currentTimeMillis());
+		UserDetails user = User.withUsername(email).password(pe.encode(pass)).roles("User").build();
+		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
+		SecurityContextHolder.getContext().setAuthentication(auth);
+	}
 }

@@ -59,6 +59,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.logout()
 			.logoutUrl("/security/logout")
 			.logoutSuccessUrl("/security/logout/success");
+		
+		http.oauth2Login()
+			.loginPage("/security/login/form")
+			.defaultSuccessUrl("/loginSuccess",true)
+			.failureUrl("/security/login/error")
+			.authorizationEndpoint()
+			    .baseUri("/oauth2/authorization");
 	}
 	
 	
