@@ -117,6 +117,7 @@
                                     </li>
                                    
                                     </li>
+
                                     
                                     
                                        <li><a href="../dangnhap"><i class="lnr lnr-user"></i><span class="my-cart"><span>
@@ -134,6 +135,11 @@
                                     <div th:if="${#request.remoteUser}">
                                     <li><a href="../dangnhap"><i class="lnr lnr-user"></i><span class="my-cart"><span>  
 						              
+=======
+                                    <div>
+                                    <li><a href="/login"><i class="lnr lnr-user"></i><span class="my-cart"><span>  
+						              <strong th:text="#{lo.mn.login}">[[${#request.remoteUser}]]</strong>
+>>>>>>> branch 'master' of https://github.com/trung3/Normal_J6.git
                                     </span></a>
                                     </li>
                                     </div>
@@ -168,7 +174,7 @@
                                         </ul>
                                         <!-- Home Version Dropdown End -->
                                     </li>
-                                    <li><a href="404" th:text="#{lo.mn.about}"></a></li>
+                                    <li><a href="gioithieu" th:text="#{lo.mn.about}"></a></li>
                                     <li><a href="lienhe"  th:text="#{lo.mn.contact}" ></a></li>
                                 </ul>
                             </nav>

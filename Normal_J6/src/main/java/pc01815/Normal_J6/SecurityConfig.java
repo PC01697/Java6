@@ -1,5 +1,6 @@
 package pc01815.Normal_J6;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import pc01815.Normal_J6.Entity.Accounts;
+import pc01815.Normal_J6.Entity.Authorities;
 import pc01815.Normal_J6.Services.AccountsService;
 
 @Configuration
@@ -36,6 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				Accounts user = accountService.findByUsernameService(username);
 				
 				String pass = pe.encode(user.getPassword());
+				Set<Authorities> roles = user.getAuthoritieses();
 //				String[] roles = user.getAuthoritieses().stream()
 //						.map(er -> er.getRoles().getId())
 //						.collect(Collectors.toList()).toArray(new String[0]);
@@ -57,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.formLogin()
 			.loginPage("/security/login/form")
 			.loginProcessingUrl("/security/login")
-			.defaultSuccessUrl("/security/login/sucess",false)
+			.defaultSuccessUrl("/index",false)
 			.failureUrl("/security/login/error");
 		
 		http.exceptionHandling()
