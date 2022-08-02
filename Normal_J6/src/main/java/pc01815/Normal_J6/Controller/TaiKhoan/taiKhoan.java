@@ -14,7 +14,7 @@ import pc01815.Normal_J6.Services.AccountsService;
 public class taiKhoan {
 	@Autowired
 	AccountsService accountService;
-    @RequestMapping("/login")
+    @RequestMapping("/dangnhap")
     public String login() {
 //    	BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
 //    	Accounts user = accountService.findByUsernameService("admin");
