@@ -63,9 +63,7 @@
                                            <li><a href="../lichsu/${sessionScope.user.username}"  th:text="#{lo.mn.history}"></a></li>
                                       <li><a th:href="@{/security/logout}" th:text="#{lo.mn.logout}"></a></li>
                                       
-                                      <li th:if="${#request.isUserInRole('ADMIN')">
-                                      	   <a th:href="@{admin}">Administration</a>
-                                      </li>
+                                 
                                   </th:block>
                                   <th:block th:unless="${#request.remoteUser}">
                                   		 <li><a href="../dangnhap" th:text="#{lo.mn.login}" ></a></li>
@@ -196,13 +194,16 @@
                         <div class="vertical-menu mb-all-30">
                             <nav>
                                 <ul class="vertical-menu-list">
-                                   <c:forEach var="HoLy" items="${item}">
-                                    <li class=""><a href="../shop/${HoLy.id}">${HoLy.name}</a>
+                                   <div th:each="HoLy:${item}">
+                     
+                                      <br>
+                                           <li ><a th:href="@{|/shop/${HoLy.id}|}">[[${HoLy.name}]]</a>
+                                         
 
                               
                          
                                     </li>
-                                    </c:forEach>
+                        
                                
                                     
                            
