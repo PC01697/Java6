@@ -121,8 +121,9 @@
                                     
                                        <li><a href="../dangnhap"><i class="lnr lnr-user"></i><span class="my-cart"><span>
                                          <div th:if="${#request.remoteUser}">
-                                         <strong th:text="#{lo.mn.login}">[[${#request.remoteUser}]]</strong>
+                                         
                                             </div>
+                                            <strong th:text="#{lo.mn.login}">[[${#request.remoteUser}]]</strong>
                                     </span></a>
 
 
@@ -132,7 +133,7 @@
                                     
                                     <div th:if="${#request.remoteUser}">
                                     <li><a href="../dangnhap"><i class="lnr lnr-user"></i><span class="my-cart"><span>  
-						              <strong th:text="#{lo.mn.login}">[[${#request.remoteUser}]]</strong>
+						              
                                     </span></a>
                                     </li>
                                     </div>
