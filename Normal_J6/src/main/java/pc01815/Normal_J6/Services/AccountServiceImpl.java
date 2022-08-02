@@ -2,7 +2,11 @@ package pc01815.Normal_J6.Services;
 
 
 
+<<<<<<< HEAD
 import java.util.Collections;
+=======
+import java.util.Collection;
+>>>>>>> branch 'master' of https://github.com/trung3/Normal_J6.git
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -10,7 +14,11 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
 import org.springframework.security.core.userdetails.User;
+=======
+import org.springframework.security.core.GrantedAuthority;
+>>>>>>> branch 'master' of https://github.com/trung3/Normal_J6.git
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -52,6 +60,7 @@ public class AccountServiceImpl implements AccountsService{
 		return accountsRepository.findByUsername(username);
 	}
 
+<<<<<<< HEAD
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		try {
@@ -79,4 +88,6 @@ public class AccountServiceImpl implements AccountsService{
 	
 	
 	
+=======
+>>>>>>> branch 'master' of https://github.com/trung3/Normal_J6.git
 }
