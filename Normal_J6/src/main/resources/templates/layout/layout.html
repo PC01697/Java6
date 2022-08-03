@@ -115,16 +115,20 @@
                                     </li>
                                    
                                     </li>
+                                     <li><a href="/login"><i class="lnr lnr-user"></i><span class="my-cart"><span>  
+						            
+						              
+                                    
+                                    </li>
                                     <div th:if="${#request.remoteUser}">
                                    
                                     [[${#request.remoteUser}]]
                                     </div>
                                     <div th:unless="${#request.remoteUser}">
-                                         <li><a href="/login"><i class="lnr lnr-user"></i><span class="my-cart"><span>  
+                                         
 						              <strong th:text="#{lo.mn.login}"></strong>
 						              
-                                    </span></a>
-                                    </li>
+                                   </span></a>
                                     </div>
                                 </ul>
                             </div>
