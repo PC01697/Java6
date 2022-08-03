@@ -61,7 +61,7 @@
                                     <div class="row">
                                         <!-- Single Product Start -->
                                         
-                                         <c:forEach var="HoLy" items="${page.content}">
+                                         <div th:each="HoLy:${page.content}">
                                         <div class="col-lg-4 col-md-4 col-sm-6 col-6">
                                             <div class="single-product">
                                                 <!-- Product Image Start -->
@@ -91,7 +91,7 @@
                                                 <!-- Product Content End -->
                                             </div>
                                         </div>
-                                           </c:forEach>
+                                    
                                        
                                        
                                       

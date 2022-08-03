@@ -57,22 +57,38 @@
                                 <!-- Dropdown Start -->
                                 <ul class="ht-dropdown">
                                 
+
+                                  <th:block th:if="${#request.remoteUser}">
+                                       <li><a href="../doimk" th:text="#{lo.mn.changepass}" ></a></li>
+                                        <li><a href="../capnhattk" th:text="#{lo.mn.updateacc}"  ></a></li>
+                                           <li><a href="../lichsu/${sessionScope.user.username}"  th:text="#{lo.mn.history}"></a></li>
+
                                   <div th:if="${#request.remoteUser}">
+
                                       <li><a th:href="@{/security/logout}" th:text="#{lo.mn.logout}"></a></li>
                                       
+
+                                 
+                                  </th:block>
+
                                       <li th:if="${#request.isUserInRole('ADMIN')}">
                                       	   <a th:href="@{admin}">Administration</a>
                                       </li>
+
+                                  <th:block>
+
+                                  <th:block th:unless="${#request.remoteUser}">
+
                                   </div>
                                   <div th:unless="${#request.remoteUser}">
+
                                   		 <li><a href="../dangnhap" th:text="#{lo.mn.login}" ></a></li>
                                     <li><a href="../dangky" th:text="#{lo.mn.register}"></a></li>
                                     <li><a href="../quenmk" th:text="#{lo.mn.forgot}"></a></li>
-                                    <li><a href="../doimk" th:text="#{lo.mn.changepass}" ></a></li>
-                                    <li><a href="../capnhattk" th:text="#{lo.mn.updateacc}"  ></a></li>
+                    
                                     <hr>
                                   
-                                      <li><a href="../lichsu/${sessionScope.user.username}"  th:text="#{lo.mn.history}"></a></li>
+                       
                                     <hr>
                                   </div>
  
@@ -115,11 +131,33 @@
                                     </li>
                                    
                                     </li>
+
                                      <li><a href="/login"><i class="lnr lnr-user"></i><span class="my-cart"><span>  
 						            
-						              
-                                    
                                     </li>
+
+                                       <li><a href="../dangnhap"><i class="lnr lnr-user"></i><span class="my-cart"><span>
+                                         <div th:if="${#request.remoteUser}">
+                                         
+                                            </div>
+                                            <strong th:text="#{lo.mn.login}">[[${#request.remoteUser}]]</strong>
+                                    </span></a>
+
+
+
+                                    </li>
+                                    
+                                    
+                                    <div th:if="${#request.remoteUser}">
+                                    <li><a href="../dangnhap"><i class="lnr lnr-user"></i><span class="my-cart"><span>  
+						              
+
+                                    <div>
+                                    <li><a href="/login"><i class="lnr lnr-user"></i><span class="my-cart"><span>  
+						              <strong th:text="#{lo.mn.login}">[[${#request.remoteUser}]]</strong>
+
+
+
                                     <div th:if="${#request.remoteUser}">
                                    
                                     [[${#request.remoteUser}]]
@@ -127,8 +165,14 @@
                                     <div th:unless="${#request.remoteUser}">
                                          
 						              <strong th:text="#{lo.mn.login}"></strong>
+
 						              
                                    </span></a>
+
+						              
+                                    </span></a>
+                                    </li>
+
                                     </div>
                                 </ul>
                             </div>
@@ -161,7 +205,7 @@
                                         </ul>
                                         <!-- Home Version Dropdown End -->
                                     </li>
-                                    <li><a href="404" th:text="#{lo.mn.about}"></a></li>
+                                    <li><a href="gioithieu" th:text="#{lo.mn.about}"></a></li>
                                     <li><a href="lienhe"  th:text="#{lo.mn.contact}" ></a></li>
                                 </ul>
                             </nav>
@@ -183,13 +227,21 @@
                         <div class="vertical-menu mb-all-30">
                             <nav>
                                 <ul class="vertical-menu-list">
+
+                                   <div th:each="HoLy:${item}">
+                     
+                                      <br>
+                                           <li ><a th:href="@{|/shop/${HoLy.id}|}">[[${HoLy.name}]]</a>
+                                         
+
                                    <c:forEach var="HoLy" items="${item}">
                                     <li class=""><a href="\../shop/${HoLy.id}">${HoLy.name}</a>
+
 
                               
                          
                                     </li>
-                                    </c:forEach>
+                        
                                
                                     
                            

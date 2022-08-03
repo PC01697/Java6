@@ -16,7 +16,7 @@ import pc01815.Normal_J6.Services.AccountsService;
 public class taiKhoan {
 	@Autowired
 	AccountsService accountService;
-    @RequestMapping("/login")
+    @RequestMapping("/dangnhap")
     public String login() {
     	
     	return "TaiKhoan/login";

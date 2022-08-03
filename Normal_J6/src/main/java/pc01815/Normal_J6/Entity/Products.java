@@ -38,7 +38,7 @@ import lombok.Value;
  */
 @Data
 @Entity
-@NoArgsConstructor
+
 @AllArgsConstructor
 @Table(name = "products", catalog = "normal_j6")
 public class Products implements java.io.Serializable {
