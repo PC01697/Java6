@@ -5,6 +5,9 @@ app.controller("header-footer", function ($scope) {
 });
 
 app.controller("categoryCrt",function ($scope,categoryService) {
+	$scope.category = [];
+	$scope.currentPage= 1;
+	$scope.pageSize = 3;
 	categoryService.categoryGetAll().then(function(data){
 		$scope.category = data;
 		console.log($scope.category);

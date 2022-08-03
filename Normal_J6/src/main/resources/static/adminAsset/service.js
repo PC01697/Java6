@@ -3,7 +3,7 @@ app.factory("categoryFactory", ($http) => {
   service.GetAll = GetAll;
   function GetAll() {
     return $http
-      .get("/api/categories")
+      .get("/api/categories?entry=50")
       .then(handleSuccess, handleError("Không load được user"));
   }
 function handleSuccess(res) {

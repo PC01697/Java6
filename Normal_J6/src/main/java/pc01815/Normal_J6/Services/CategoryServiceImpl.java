@@ -40,9 +40,12 @@ public class CategoryServiceImpl implements CategoryService{
 
 	@Override
 	public Page<Category> findAllCategoryService(Optional<Integer> page, Optional<String> sortBy, Optional<Integer> entry) {
-		return categoryRepository.findAll(
+		Page<Category> test = categoryRepository.findAll(
 						PageRequest.of(page.orElse(0), entry.orElse(3), Sort.Direction.ASC, sortBy.orElse("name"))
 				);
+		System.err.println(test.getSize());
+		System.err.println(test.getTotalPages());
+		return test;
 	}
 
 	
