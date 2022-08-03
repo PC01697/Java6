@@ -18,16 +18,7 @@ public class taiKhoan {
 	AccountsService accountService;
     @RequestMapping("/dangnhap")
     public String login() {
-//    	BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
-//    	Accounts user = accountService.findByUsernameService("admin");
-//    	String pass = pe.encode(user.getPassword());
-//		
-//    	System.out.println("username: "+user.getUsername());
-////    	System.out.println("pass: "+user.getAuthoritieses());
-//    	Set<Authorities> a =user.getAuthoritieses();
-//    	for (Authorities authorities : a) {
-//			System.out.println("VT:"+authorities.getRoles());
-//		}
+    	
     	return "TaiKhoan/login";
     }
 }

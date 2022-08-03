@@ -7,21 +7,21 @@
 
 
  <link rel="shortcut icon" href="img\1.png">
-    <link rel="stylesheet" href="..\css\font-awesome.min.css">
-    <link rel="stylesheet" href="..\css\ionicons.min.css">
-    <link rel="stylesheet" href="..\css\linearicons.css">
-    <link rel="stylesheet" href="..\css\nice-select.css">
-    <link rel="stylesheet" href="..\css\jquery.fancybox.css">
-    <link rel="stylesheet" href="..\css\jquery-ui.min.css">
-    <link rel="stylesheet" href="..\css\meanmenu.min.css">
-    <link rel="stylesheet" href="..\css\nivo-slider.css">
-    <link rel="stylesheet" href="..\css\owl.carousel.min.css">
-    <link rel="stylesheet" href="..\css\bootstrap.min.css">
-    <link rel="stylesheet" href="..\css\default.css">
-    <link rel="stylesheet" href="..\css\style.css">
-    <link rel="stylesheet" href="..\css\responsive.css">
+    <link rel="stylesheet" href="\..\css\font-awesome.min.css">
+    <link rel="stylesheet" href="\..\css\ionicons.min.css">
+    <link rel="stylesheet" href="\..\css\linearicons.css">
+    <link rel="stylesheet" href="\..\css\nice-select.css">
+    <link rel="stylesheet" href="\..\css\jquery.fancybox.css">
+    <link rel="stylesheet" href="\..\css\jquery-ui.min.css">
+    <link rel="stylesheet" href="\..\css\meanmenu.min.css">
+    <link rel="stylesheet" href="\..\css\nivo-slider.css">
+    <link rel="stylesheet" href="\..\css\owl.carousel.min.css">
+    <link rel="stylesheet" href="\..\css\bootstrap.min.css">
+    <link rel="stylesheet" href="\..\css\default.css">
+    <link rel="stylesheet" href="\..\css\style.css">
+    <link rel="stylesheet" href="\..\css\responsive.css">
 
-    <script src="..\js\vendor\modernizr-3.5.0.min.js"></script>
+    <script src="\..\js\vendor\modernizr-3.5.0.min.js"></script>
 </head>
 <body>
     <!--[if lte IE 9]>
@@ -57,22 +57,31 @@
                                 <!-- Dropdown Start -->
                                 <ul class="ht-dropdown">
                                 
+
                                   <th:block th:if="${#request.remoteUser}">
                                        <li><a href="../doimk" th:text="#{lo.mn.changepass}" ></a></li>
                                         <li><a href="../capnhattk" th:text="#{lo.mn.updateacc}"  ></a></li>
                                            <li><a href="../lichsu/${sessionScope.user.username}"  th:text="#{lo.mn.history}"></a></li>
+
+                                  <div th:if="${#request.remoteUser}">
+
                                       <li><a th:href="@{/security/logout}" th:text="#{lo.mn.logout}"></a></li>
                                       
-<<<<<<< HEAD
+
                                  
                                   </th:block>
-=======
+
                                       <li th:if="${#request.isUserInRole('ADMIN')}">
                                       	   <a th:href="@{admin}">Administration</a>
                                       </li>
+
                                   <th:block>
->>>>>>> branch 'master' of https://github.com/trung3/Normal_J6.git
+
                                   <th:block th:unless="${#request.remoteUser}">
+
+                                  </div>
+                                  <div th:unless="${#request.remoteUser}">
+
                                   		 <li><a href="../dangnhap" th:text="#{lo.mn.login}" ></a></li>
                                     <li><a href="../dangky" th:text="#{lo.mn.register}"></a></li>
                                     <li><a href="../quenmk" th:text="#{lo.mn.forgot}"></a></li>
@@ -81,7 +90,7 @@
                                   
                        
                                     <hr>
-                                  </th:block>
+                                  </div>
  
                                 </ul>
                                 <!-- Dropdown End -->
@@ -99,7 +108,7 @@
                     <div class="row align-items-center no-gutters">
                         <div class="col-lg-3 col-md-12">
                             <div class="logo mb-all-30">
-                                <a href="../trangchu"><img src="..\img\logo\1.png" alt="logo-image"></a>
+                                <a href="../trangchu"><img src="\..\img\logo\1.png" alt="logo-image"></a>
                             </div>
                         </div>
                         <!-- Categorie Search Box Start Here -->
@@ -123,6 +132,7 @@
                                    
                                     </li>
 
+
                                     
                                     
                                        <li><a href="../dangnhap"><i class="lnr lnr-user"></i><span class="my-cart"><span>
@@ -140,11 +150,20 @@
                                     <div th:if="${#request.remoteUser}">
                                     <li><a href="../dangnhap"><i class="lnr lnr-user"></i><span class="my-cart"><span>  
 						              
-=======
+
                                     <div>
                                     <li><a href="/login"><i class="lnr lnr-user"></i><span class="my-cart"><span>  
 						              <strong th:text="#{lo.mn.login}">[[${#request.remoteUser}]]</strong>
->>>>>>> branch 'master' of https://github.com/trung3/Normal_J6.git
+
+
+                                    <div th:if="${#request.remoteUser}">
+                                   
+                                    [[${#request.remoteUser}]]
+                                    </div>
+                                    <div th:unless="${#request.remoteUser}">
+                                         <li><a href="/login"><i class="lnr lnr-user"></i><span class="my-cart"><span>  
+						              <strong th:text="#{lo.mn.login}"></strong>
+						              
                                     </span></a>
                                     </li>
                                     </div>
@@ -201,11 +220,16 @@
                         <div class="vertical-menu mb-all-30">
                             <nav>
                                 <ul class="vertical-menu-list">
+<<<<<<< HEAD
                                    <div th:each="HoLy:${item}">
                      
                                       <br>
                                            <li ><a th:href="@{|/shop/${HoLy.id}|}">[[${HoLy.name}]]</a>
                                          
+=======
+                                   <c:forEach var="HoLy" items="${item}">
+                                    <li class=""><a href="\../shop/${HoLy.id}">${HoLy.name}</a>
+>>>>>>> branch 'master' of https://github.com/trung3/Normal_J6.git
 
                               
                          

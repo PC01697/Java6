@@ -2,25 +2,28 @@ package pc01815.Normal_J6.Services;
 
 
 
-<<<<<<< HEAD
+
 import java.util.Collections;
-=======
+
 import java.util.Collection;
->>>>>>> branch 'master' of https://github.com/trung3/Normal_J6.git
+
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
+
 import org.springframework.security.core.userdetails.User;
-=======
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
->>>>>>> branch 'master' of https://github.com/trung3/Normal_J6.git
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import pc01815.Normal_J6.Entity.Accounts;
@@ -42,7 +45,7 @@ public class AccountServiceImpl implements AccountsService{
 	
 	@Autowired
 	RolesRepository roleRepo;
-
+   
 	@Override
 	public List<Accounts> getAllService() {
 		List<Accounts> listAccount = accountsRepository.findAll();
@@ -60,7 +63,7 @@ public class AccountServiceImpl implements AccountsService{
 		return accountsRepository.findByUsername(username);
 	}
 
-<<<<<<< HEAD
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		try {
@@ -77,17 +80,20 @@ public class AccountServiceImpl implements AccountsService{
 					.map(au ->au.getRoles().getId())
 					.collect(Collectors.toList()).toArray(new String[0]);
 		
+				
 			return User.withUsername(username).password(pass).roles(roles).build();
 		} catch (Exception e) {
 			throw new UsernameNotFoundException(username+"not found!!");
 		}
 	}
 	
-
-
-	
-	
-	
-=======
->>>>>>> branch 'master' of https://github.com/trung3/Normal_J6.git
+ 
+	public void loginfromOAuth2(OAuth2AuthenticationToken oauth2) {
+		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
+		String email = oauth2.getPrincipal().getAttribute("email");
+		String pass = Long.toHexString(System.currentTimeMillis());
+		UserDetails user = User.withUsername(email).password(pe.encode(pass)).roles("User").build();
+		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
+		SecurityContextHolder.getContext().setAuthentication(auth);
+	}
 }

@@ -9,11 +9,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import pc01815.Normal_J6.Entity.Accounts;
 import pc01815.Normal_J6.Entity.Authorities;
 
-<<<<<<< HEAD
+
 public interface AccountsService extends UserDetailsService {
-=======
-public interface AccountsService{
->>>>>>> branch 'master' of https://github.com/trung3/Normal_J6.git
+
+
 
 	List<Accounts> getAllService();
 	
