@@ -36,36 +36,36 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
-		auth.userDetailsService(accountImpl);
+		auth.userDetailsService(accountService);
 	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
-//		http.authorizeRequests()
-//			.antMatchers("/order/**").authenticated()
-//			.antMatchers("/admin/**").hasAnyRole("ADMIN")
-//			.antMatchers("/rest/authorities").hasRole("ADMIN")
-//			.anyRequest().permitAll();
-//		
-//		http.formLogin()
-//			.loginPage("/security/login/form")
-//			.loginProcessingUrl("/security/login")
-//			.defaultSuccessUrl("/index",false)
-//			.failureUrl("/security/login/error");
-//		
-//		http.exceptionHandling()
-//			.accessDeniedPage("/security/unauthoried");
-//		
-//		http.logout()
-//			.logoutUrl("/security/logout")
-//			.logoutSuccessUrl("/security/logout/success");
-//		
-//		http.oauth2Login()
-//			.loginPage("/security/login/form")
-//			.defaultSuccessUrl("/loginSuccess",true)
-//			.failureUrl("/security/login/error")
-//			.authorizationEndpoint()
-//			    .baseUri("/oauth2/authorization");
+		http.authorizeRequests()
+			.antMatchers("/order/**").authenticated()
+			.antMatchers("/admin/**").hasAnyRole("ADMIN")
+			.antMatchers("/rest/authorities").hasRole("ADMIN")
+			.anyRequest().permitAll();
+		
+		http.formLogin()
+			.loginPage("/security/login/form")
+			.loginProcessingUrl("/security/login")
+			.defaultSuccessUrl("/index",false)
+			.failureUrl("/security/login/error");
+		
+		http.exceptionHandling()
+			.accessDeniedPage("/security/unauthoried");
+		
+		http.logout()
+			.logoutUrl("/security/logout")
+			.logoutSuccessUrl("/security/logout/success");
+		
+		http.oauth2Login()
+			.loginPage("/security/login/form")
+			.defaultSuccessUrl("/loginSuccess",true)
+			.failureUrl("/security/login/error")
+			.authorizationEndpoint()
+			    .baseUri("/oauth2/authorization");
 	}
 //	
 //	

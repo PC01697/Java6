@@ -69,28 +69,28 @@ public class AccountServiceImpl implements AccountsService{
 		try {
 			Accounts account = accountsRepository.findByUsername(username);
 			String pass = account.getPassword();
-//			Set<Authorities> roles = account.getAuthoritieses();
-//			System.out.println("------------------------------------");
-//			for (Authorities authorities : roles) {
-//				
-//				System.out.println(authorities.getRoles());
-//			}
-//			System.out.println("------------------------------------");
-			String[] roles = account.getAuthoritieses().stream()
-					.map(au ->au.getRoles().getId())
-					.collect(Collectors.toList()).toArray(new String[0]);
-		
+
+			Set<Authorities> roles = account.getAuthoritieses();
+			for(Authorities a:roles) {
+				System.out.println("Vai tro:"+a);
+			}
+//			String[] roles = account.getAuthoritieses().stream()
+//					.map(au ->au.getRoles().getName())
+//					.collect(Collectors.toList()).toArray(new String[0]);
+//		System.out.println(roles);
 				
-			return User.withUsername(username).password(pass).roles(roles).build();
+			return User.withUsername(username).password(pass).roles("ADMIN").build();
 		} catch (Exception e) {
+			
 			throw new UsernameNotFoundException(username+"not found!!");
+			
 		}
 	}
 	
  
 	public void loginfromOAuth2(OAuth2AuthenticationToken oauth2) {
 		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
-		String email = oauth2.getPrincipal().getAttribute("email");
+		String email = oauth2.getPrincipal().getAttribute("name");
 		String pass = Long.toHexString(System.currentTimeMillis());
 		UserDetails user = User.withUsername(email).password(pe.encode(pass)).roles("User").build();
 		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
