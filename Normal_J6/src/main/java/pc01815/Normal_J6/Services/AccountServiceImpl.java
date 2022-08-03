@@ -2,11 +2,23 @@ package pc01815.Normal_J6.Services;
 
 
 
+<<<<<<< HEAD
+import java.util.Collections;
+=======
+import java.util.Collection;
+>>>>>>> branch 'master' of https://github.com/trung3/Normal_J6.git
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
+import org.springframework.security.core.userdetails.User;
+=======
+import org.springframework.security.core.GrantedAuthority;
+>>>>>>> branch 'master' of https://github.com/trung3/Normal_J6.git
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -47,23 +59,35 @@ public class AccountServiceImpl implements AccountsService{
 	public Accounts findByUsernameService(String username) {
 		return accountsRepository.findByUsername(username);
 	}
-	
-	
-	
+
+<<<<<<< HEAD
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		try {
+			Accounts account = accountsRepository.findByUsername(username);
+			String pass = account.getPassword();
+//			Set<Authorities> roles = account.getAuthoritieses();
+//			System.out.println("------------------------------------");
+//			for (Authorities authorities : roles) {
+//				
+//				System.out.println(authorities.getRoles());
+//			}
+//			System.out.println("------------------------------------");
+			String[] roles = account.getAuthoritieses().stream()
+					.map(au ->au.getRoles().getId())
+					.collect(Collectors.toList()).toArray(new String[0]);
+		
+			return User.withUsername(username).password(pass).roles(roles).build();
+		} catch (Exception e) {
+			throw new UsernameNotFoundException(username+"not found!!");
+		}
+	}
 	
 
-//	@Override
-//	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//		Accounts account = accountsRepository.findByUsername(username);
-//		String pass = account.getPassword();
-//		String[] roles = account.getAuthoritieses().stream();
-//		return User.withUsername(accounts.getUsername()).password(accounts.getPassword()).roles(roleName).build();
-//	
-//		
-//	}
-
 
 	
 	
 	
+=======
+>>>>>>> branch 'master' of https://github.com/trung3/Normal_J6.git
 }

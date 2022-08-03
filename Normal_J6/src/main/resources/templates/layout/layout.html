@@ -63,8 +63,15 @@
                                            <li><a href="../lichsu/${sessionScope.user.username}"  th:text="#{lo.mn.history}"></a></li>
                                       <li><a th:href="@{/security/logout}" th:text="#{lo.mn.logout}"></a></li>
                                       
+<<<<<<< HEAD
                                  
                                   </th:block>
+=======
+                                      <li th:if="${#request.isUserInRole('ADMIN')}">
+                                      	   <a th:href="@{admin}">Administration</a>
+                                      </li>
+                                  <th:block>
+>>>>>>> branch 'master' of https://github.com/trung3/Normal_J6.git
                                   <th:block th:unless="${#request.remoteUser}">
                                   		 <li><a href="../dangnhap" th:text="#{lo.mn.login}" ></a></li>
                                     <li><a href="../dangky" th:text="#{lo.mn.register}"></a></li>
