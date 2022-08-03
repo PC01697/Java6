@@ -66,25 +66,18 @@ public class AccountServiceImpl implements AccountsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		try {
+	
 			Accounts account = accountsRepository.findByUsername(username);
-			String pass = account.getPassword();
-//			Set<Authorities> roles = account.getAuthoritieses();
-//			System.out.println("------------------------------------");
-//			for (Authorities authorities : roles) {
-//				
-//				System.out.println(authorities.getRoles());
-//			}
-//			System.out.println("------------------------------------");
+			
 			String[] roles = account.getAuthoritieses().stream()
-					.map(au ->au.getRoles().getId())
-					.collect(Collectors.toList()).toArray(new String[0]);
-		
-				
-			return User.withUsername(username).password(pass).roles(roles).build();
-		} catch (Exception e) {
-			throw new UsernameNotFoundException(username+"not found!!");
-		}
+					.map(t -> t.getRoles().getName()).collect(Collectors.toList()).toArray(new String[0]);
+			String getRoles = null;
+			for (String string : roles) {
+				getRoles = string;
+			}
+			UserDetails user = 	User.withUsername(account.getUsername()).password(account.getPassword()).roles(getRoles).build();
+			return user;
+
 	}
 	
  
