@@ -1,8 +1,5 @@
 package pc01815.Normal_J6.Services;
 
-
-
-
 import java.util.Collections;
 
 import java.util.Collection;
@@ -66,25 +63,21 @@ public class AccountServiceImpl implements AccountsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		try {
+	   
 			Accounts account = accountsRepository.findByUsername(username);
+
 			String pass = account.getPassword();
 
-			Set<Authorities> roles = account.getAuthoritieses();
-			for(Authorities a:roles) {
-				System.out.println("Vai tro:"+a);
+			String[] roles = account.getAuthoritieses().stream()
+					.map(t -> t.getRoles().getName()).collect(Collectors.toList()).toArray(new String[0]);
+			String getRoles = null;
+			for (String string : roles) {
+				getRoles = string;
 			}
-//			String[] roles = account.getAuthoritieses().stream()
-//					.map(au ->au.getRoles().getName())
-//					.collect(Collectors.toList()).toArray(new String[0]);
-//		System.out.println(roles);
-				
-			return User.withUsername(username).password(pass).roles("ADMIN").build();
-		} catch (Exception e) {
-			
-			throw new UsernameNotFoundException(username+"not found!!");
-			
-		}
+			UserDetails user = 	User.withUsername(account.getUsername()).password(account.getPassword()).roles(getRoles).build();
+			return user;
+
+
 	}
 	
  
