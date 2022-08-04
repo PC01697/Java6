@@ -39,7 +39,6 @@ public class Accounts implements java.io.Serializable {
 	private String email;
 	private String photo = null;
 
-//$2a$10$en7LTVLgqWTXt.RakZtlT.KSoe8y0Hwjmhcv0ub8M5nFbWkwSRq5C
 
 	private List<Authorities> authoritieses = new ArrayList<Authorities>();
 

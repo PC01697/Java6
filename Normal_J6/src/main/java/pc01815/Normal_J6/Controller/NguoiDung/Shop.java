@@ -1,5 +1,6 @@
 package pc01815.Normal_J6.Controller.NguoiDung;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import pc01815.Normal_J6.Entity.Category;
 import pc01815.Normal_J6.Entity.Products;
+import pc01815.Normal_J6.Repository.CategoryRepository;
 import pc01815.Normal_J6.Repository.ProductsRepository;
 
 
@@ -20,11 +23,16 @@ import pc01815.Normal_J6.Repository.ProductsRepository;
 public class Shop {
 	@Autowired
 	ProductsRepository productDao;
+	@Autowired
+CategoryRepository categoryDao;
 	@RequestMapping("/shop/{id}")
 	public String form(Model model, @PathVariable("id") Integer id,
 			@RequestParam("p") Optional<Integer> p) {
+		List<Category> item = categoryDao.findAll();
+		model.addAttribute("item", item);
 		Pageable pageable = PageRequest.of(p.orElse(0), 9);
 		Page<Products> page = productDao.findByShop(id,pageable);
+
 		model.addAttribute("page", page);
 		return "NguoiDung/shop";
 		
