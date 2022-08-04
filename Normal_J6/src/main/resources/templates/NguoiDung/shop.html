@@ -67,11 +67,11 @@
                                             <div class="single-product">
                                                 <!-- Product Image Start -->
                                                 <div class="pro-img">
-                                                    <a th:src="@{|/chitiet/${HoLy.id}|}">
+                                                    <a th:href="@{|/chitiet/${HoLy.id}|}">
                                                       <img class="primary-img" th:src="@{|/img/products/${HoLy.image}|}" alt="single-product">
                                                         <img class="secondary-img"  th:src="@{|/img/products/${HoLy.image}|}" alt="single-product">
                                                     </a>
-                                                   
+                                               
                                                 </div>
                                                 <!-- Product Image End -->
                                                 <!-- Product Content Start -->
@@ -84,7 +84,7 @@
                                                     </div>
                                                     <div class="pro-actions">
                                                         <div class="actions-primary">
-                                                            <a href="../add/${HoLy.id}" title="Thêm vào giỏ hàng"> + Thêm vào giỏ hàng</a>
+                                                            <a src="/chitiet/${HoLy.id}" title="Thêm vào giỏ hàng"> + Thêm vào giỏ hàng</a>
                                                         </div>
 
                                                     </div>
