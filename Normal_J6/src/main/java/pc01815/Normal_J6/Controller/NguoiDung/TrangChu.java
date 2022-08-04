@@ -27,17 +27,11 @@ public class TrangChu {
 
 	@Autowired
 CategoryRepository categoryDao;
-	@RequestMapping("/trangchu")
+	@RequestMapping("/index")
 	public String form(Model model) {
 		List<Category> item = categoryDao.findAll();
 		model.addAttribute("item", item);
-        return "BC";
+        return "NguoiDung/trangchu";
 	}
 	
-	@RequestMapping("/index")
-	public String form() {
-
-		return "NguoiDung/trangchu";
-		
-	}
 }

@@ -62,13 +62,14 @@
                                         <!-- Single Product Start -->
                                         
                                          <div th:each="HoLy:${page.content}">
+                                         "HoLy:${item}"
                                         <div class="col-lg-4 col-md-4 col-sm-6 col-6">
                                             <div class="single-product">
                                                 <!-- Product Image Start -->
                                                 <div class="pro-img">
                                                     <a href="chitiet?id=${HoLy.id}">
-                                                        <img class="primary-img" src="../img/products/${HoLy.image1}" alt="single-product">
-                                                        <img class="secondary-img" src="../img/products/${HoLy.image2}" alt="single-product">
+                                                        <img class="primary-img" src="../img/products/${HoLy.image}" alt="single-product">
+                                                        <img class="secondary-img" src="../img/products/${HoLy.image}" alt="single-product">
                                                     </a>
                                                    
                                                 </div>
@@ -77,7 +78,7 @@
                                                 <div class="pro-content">
                                                     <div class="pro-info">
                                                         <h4><a href="chitiet?id=${HoLy.id}">${HoLy.name}</a></h4>
-                                                        <p><span class="price">${HoLy.price}₫</span></p>
+                                                        <p><span class="price">${HoLy.unitPrice}₫</span></p>
                                                       
                                                 
                                                     </div>

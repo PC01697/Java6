@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="\..\css\responsive.css">
 
     <script src="\..\js\vendor\modernizr-3.5.0.min.js"></script>
+    
 </head>
 <body>
     <!--[if lte IE 9]>
@@ -72,7 +73,7 @@
                                   </div>
 
  										<div th:unless="${#request.remoteUser}">
-                                                 <li><a href="../dangnhap" th:text="#{lo.mn.login}" ></a></li>
+                                                 <li><a href="../login" th:text="#{lo.mn.login}" ></a></li>
                                     <li><a href="../dangky" th:text="#{lo.mn.register}"></a></li>
                                     <li><a href="../quenmk" th:text="#{lo.mn.forgot}"></a></li>
                                             </div>
@@ -200,13 +201,6 @@
                                       <br>
                                            <li ><a th:href="@{|/shop/${HoLy.id}|}">[[${HoLy.name}]]</a>
                                          
-
-                                   <c:forEach var="HoLy" items="${item}">
-                                    <li class=""><a href="\../shop/${HoLy.id}">${HoLy.name}</a>
-
-
-                              
-                         
                                     </li>
                         
                                
