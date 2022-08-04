@@ -21,4 +21,9 @@ public class taiKhoan {
     	
     	return "TaiKhoan/login";
     }
+    @RequestMapping("/register")
+    public String register() {
+    	
+    	return "TaiKhoan/SignUp";
+    }
 }

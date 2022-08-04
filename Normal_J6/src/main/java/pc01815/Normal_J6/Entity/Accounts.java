@@ -1,7 +1,9 @@
 package pc01815.Normal_J6.Entity;
 // Generated Jul 17, 2022, 5:56:00 PM by Hibernate Tools 4.3.6.Final
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +30,7 @@ public class Accounts implements java.io.Serializable {
 	private String fullname;
 	private String email;
 	private String photo;
-	private Set<Authorities> authoritieses = new HashSet<Authorities>(0);
+	private List<Authorities> authoritieses = new ArrayList<Authorities>();
 	private Set<Comment> comments = new HashSet<Comment>(0);
 	private Set<Orders> orderses = new HashSet<Orders>(0);
 
@@ -44,7 +46,7 @@ public class Accounts implements java.io.Serializable {
 	}
 
 	public Accounts(String username, String password, String fullname, String email, String photo,
-			Set<Authorities> authoritieses, Set<Comment> comments, Set<Orders> orderses) {
+			List<Authorities> authoritieses, Set<Comment> comments, Set<Orders> orderses) {
 		this.username = username;
 		this.password = password;
 		this.fullname = fullname;
@@ -114,11 +116,11 @@ public class Accounts implements java.io.Serializable {
 
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accounts")
-	public Set<Authorities> getAuthoritieses() {
+	public List<Authorities> getAuthoritieses() {
 		return this.authoritieses;
 	}
 
-	public void setAuthoritieses(Set<Authorities> authoritieses) {
+	public void setAuthoritieses(List<Authorities> authoritieses) {
 		this.authoritieses = authoritieses;
 	}
 

@@ -118,7 +118,7 @@ span.login-color {
   color:#FFB900;
   font-weight: 700;
 }
-.header-left-bottom input[type="text"] {
+.header-left-bottom input[type="text"],[type="email"] {
     background: url(../img/m.png)no-repeat 0px 5px;
     outline: none;
     font-size: 15px;
@@ -285,7 +285,7 @@ span.sin-color {
    margin:70px 0px 0px 0px;
    position:relative;
 }
-.header-bottom-strip input[type="text"] {
+.header-bottom-strip input[type="text"],[type="email"] {
 	outline: none;
 	font-size: 17px;
 	font-weight: 400;
@@ -326,7 +326,7 @@ span.sin-color {
 .strip-left.middle {
   margin: 0px 20px;
 }
-.strip-left input[type="text"] {
+.strip-left input[type="text"],[type="email"] {
   outline: none;
   font-size: 15px;
   color: #000;
@@ -667,7 +667,7 @@ span.sin-color {
 .header-main h1 {
     font-size: 45px;
 }
-.header-left-bottom input[type="text"] {
+.header-left-bottom input[type="text"],[type="email"] {
     width: 83%;
 }
 .header-left-bottom input[type="password"] {
@@ -687,7 +687,7 @@ span.sin-color {
 }
 }
 @media(max-width:414px){
-.header-left-bottom input[type="text"] {
+.header-left-bottom input[type="text"],[type="email"] {
     width: 80%;
 }
 .header-left-bottom input[type="password"] {
@@ -751,7 +751,7 @@ span.sin-color {
 .header-main {
     padding: 25px 0px 15px 0px;	
 }
-.header-left-bottom input[type="text"] {
+.header-left-bottom input[type="text"],[type="email"] {
     padding: 12px 13px 15px 44px;
     width: 77%;
 }
@@ -795,7 +795,7 @@ span.sin-color {
 .header-left-bottom input[type="password"] {
     margin: 0 0 17px;
 }
-.header-left-bottom input[type="text"] {
+.header-left-bottom input[type="text"],[type="email"] {
     margin: 0 0 17px;
 }
 .header-social a.face {
