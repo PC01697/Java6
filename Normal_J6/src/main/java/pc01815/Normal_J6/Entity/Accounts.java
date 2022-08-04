@@ -30,7 +30,11 @@ public class Accounts implements java.io.Serializable {
 	private String fullname;
 	private String email;
 	private String photo;
-	private List<Authorities> authoritieses = new ArrayList<Authorities>(0);
+
+
+
+	private List<Authorities> authoritieses = new ArrayList<Authorities>();
+
 	private Set<Comment> comments = new HashSet<Comment>(0);
 	private Set<Orders> orderses = new HashSet<Orders>(0);
 
