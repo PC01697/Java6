@@ -13,6 +13,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,12 +26,18 @@ import lombok.Data;
 @Table(name = "accounts", catalog = "normal_j6")
 public class Accounts implements java.io.Serializable {
 
+	
 	private Integer id;
+	@NotBlank(message = "")
 	private String username;
+	@NotBlank(message = "")
 	private String password;
+	@NotBlank(message = "")
 	private String fullname;
+	@NotBlank(message = "")
+	@Email(message = "")
 	private String email;
-	private String photo;
+	private String photo = null;
 
 //$2a$10$en7LTVLgqWTXt.RakZtlT.KSoe8y0Hwjmhcv0ub8M5nFbWkwSRq5C
 

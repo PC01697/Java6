@@ -63,7 +63,7 @@ public class AccountServiceImpl implements AccountsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-	   
+//	   BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
 			Accounts account = accountsRepository.findByUsername(username);
 
 			String pass = account.getPassword();
@@ -74,7 +74,7 @@ public class AccountServiceImpl implements AccountsService{
 			for (String string : roles) {
 				getRoles = string;
 			}
-			UserDetails user = 	User.withUsername(account.getUsername()).password(account.getPassword()).roles(getRoles).build();
+			UserDetails user = 	User.withUsername(account.getUsername()).password(pass).roles(getRoles).build();
 			return user;
 
 
