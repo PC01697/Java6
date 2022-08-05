@@ -11,7 +11,8 @@ public interface CategoryService {
 	
 	Category saveCategoryService(Category category);
 	
-	Page<Category> findAllCategoryService(Optional<Integer> page, Optional<String> sortBy, Optional<Integer> entry);
+//	Page<Category> findAllCategoryService(Optional<Integer> page, Optional<String> sortBy, Optional<Integer> entry);
+	List<Category> findAllCategoryService();
 	
 	List<Category> findCategoryByNameService(String categoryName);
 	
