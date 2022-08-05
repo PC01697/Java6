@@ -6,14 +6,14 @@
 <title th:text="#{product.title}"></title>
 
 </head>
-<body>
+<body >
  <div class="breadcrumb-area mt-30">
             <div class="container">
                 <div class="breadcrumb">
                     <ul class="d-flex align-items-center">
-                        <li><a href="trangchu">Trang chủ</a></li>
-                        <li><a href="shop">Shop</a></li>
-                        <li class="active"><a href="chitiet">Chi tiết</a></li>
+                        <li><a th:href="@{/index}">Trang chủ</a></li>
+                        <li><a th:href="@{|/shop/${product.category.id }|}">Shop</a></li>
+                        <li class="active"><a th:href="@{|/chitiet/${product.id }|}">Sản phẩm</a></li>
                     </ul>
                 </div>
             </div>
@@ -30,22 +30,13 @@
                             <!-- Thumbnail Large Image start -->
                             <div class="tab-content">
                                 <div id="thumb1" class="tab-pane fade show active">
-                                    <a data-fancybox="images" href="img/products/${product.image1 }"><img src="img/products/${product.image1 }" alt="product-view"></a>
+                                    <a ><img th:src="@{|/img/products/${product.image}|}"  alt="product-view"></a>
                                 </div>
-                                <div id="thumb2" class="tab-pane fade">
-                                    <a data-fancybox="images" href="img/products/${product.image2 }"><img src="img/products/${product.image2 }"alt="product-view"></a>
-                                </div>
-                            
+                                
                             </div>
                             <!-- Thumbnail Large Image End -->
                             <!-- Thumbnail Image End -->
-                            <div class="product-thumbnail mt-15">
-                                <div class="thumb-menu owl-carousel nav tabs-area" role="tablist">
-                                    <a class="active" data-toggle="tab" href="#thumb1"><img th:src="@{i/img/products/${product.image}}" alt="product-thumbnail"></a>
-                                    <a data-toggle="tab" href="#thumb2"><img src="img/products/${product.image2 }" alt="product-thumbnail"></a>
-
-                                </div>
-                            </div>
+                           
                             <!-- Thumbnail image end -->
                         </div>
                         <!-- Main Thumbnail Image End -->
@@ -55,13 +46,13 @@
                                 <h3 class="product-header">[[${product.name }]]</h3>
                      
                                 <div class="pro-price mtb-30">
-                                    <p class="d-flex align-items-center"><span class="price">${product.price }₫</span></p>
+                                    <p class="d-flex align-items-center"><span class="price">[[${product.unitPrice }]]₫</span></p>
                                 </div>
                          
-                                <p class="mb-20 pro-desc-details">${product.description }</p>
+                                <p class="mb-20 pro-desc-details">[[${product.description }]]</p>
                                 <div class="product-size mb-20 clearfix">
-                                    <label>Size</label>
-                                   <p>${product.size }</p>
+                       <!-- <label>Size</label>
+                                   <p>${product.size }</p>-->
                                 </div>
                             
                                 <div class="box-quantity d-flex hot-product2">
@@ -79,10 +70,10 @@
                                 <div class="socila-sharing mt-25">
                                     <ul class="d-flex">
                                         <li>Chia sẻ</li>
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus-official" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+                                        <li><a><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                        <li><a><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                        <li><a ><i class="fa fa-google-plus-official" aria-hidden="true"></i></a></li>
+                                        <li><a ><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -107,7 +98,7 @@
                         <!-- Product Thumbnail Tab Content Start -->
                         <div class="tab-content thumb-content border-default">
                             <div id="dtail" class="tab-pane fade show active">
- <p>${product.description }</p>                            </div>
+                                  <p>[[${product.description }]]</p></div>
                           
                         </div>
                         <!-- Product Thumbnail Tab Content End -->

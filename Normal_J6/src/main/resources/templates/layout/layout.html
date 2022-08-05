@@ -24,7 +24,8 @@
     <script th:src="@{\js\vendor\modernizr-3.5.0.min.js}"></script>
     
 </head>
-<body>
+<body  ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
+
     <!--[if lte IE 9]>
 		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
 	<![endif]-->
@@ -73,8 +74,8 @@
                                   </div>
 
  										<div th:unless="${#request.remoteUser}">
-                                                 <li><a href="../login" th:text="#{lo.mn.login}" ></a></li>
-                                    <li><a href="../dangky" th:text="#{lo.mn.register}"></a></li>
+                                                 <li><a th:href="@{/login}" th:text="#{lo.mn.login}" ></a></li>
+                                    <li><a th:href="@{/register}" th:text="#{lo.mn.register}"></a></li>
                                     <li><a href="../quenmk" th:text="#{lo.mn.forgot}"></a></li>
                                             </div>
                                 </ul>
@@ -162,13 +163,13 @@
                         <div class="col-xl-9 col-lg-8 col-md-12 ">
                             <nav class="d-none d-lg-block">
                                 <ul class="header-bottom-list d-flex">
-                                    <li><a href="trangchu" th:text="#{lo.mn.home}"></a></li>
+                                    <li><a th:href="@{/index}" th:text="#{lo.mn.home}"></a></li>
                                     <li> <a href="#"  th:text="#{lo.mn.page}"><i class="fa fa-angle-down"></i></a>
                                         <!-- Home Version Dropdown Start -->
                                         <ul class="ht-dropdown dropdown-style-two">
-                                            <li><a href="dangky" th:text="#{lo.mn.register}"></a></li>
-                                            <li><a href="dangnhap"  th:text="#{lo.mn.login}"></a></li>
-                                            <li><a href="quenmk" th:text="#{lo.mn.forgot}"></a></li>
+                                            <li><a th:href="@{/register}" th:text="#{lo.mn.register}"></a></li>
+                                            <li><a th:href="@{/login}"  th:text="#{lo.mn.login}"></a></li>
+                                            <li><a th:href="@{/forgotPass}" th:text="#{lo.mn.forgot}"></a></li>
                          
                                         </ul>
                                         <!-- Home Version Dropdown End -->
@@ -199,13 +200,8 @@
                                    <div th:each="HoLy:${item}">
                      
                                       <br>
-                                           <li ><a th:href="@{|/shop/${HoLy.id}|}">[[${HoLy.name}]]</a>
-                                         
-                                    </li>
-                        
-                               
-                                    
-                           
+                                           <li ><a th:href="@{|/shop/${HoLy.id}|}">[[${HoLy.name}]]</a></li>
+</div>
                                             <!-- Single Column End -->
                                         </ul>
                                         <!-- Vertical Mega-Menu End --> 
@@ -418,7 +414,7 @@
         <!-- Quick View Content End -->
     </div>
     <!-- Main Wrapper End Here -->
-
+ <script src="/js/shopping-cart-app.js"></script>
   <!-- jquery 3.2.1 -->
     <script src="..\js\vendor\jquery-3.2.1.min.js"></script>
     <!-- Countdown js -->
@@ -445,5 +441,7 @@
     <script src="..\js\plugins.js"></script>
     <!-- Main activaion js -->
     <script src="..\js\main.js"></script>
+    
+     
 </body>
 </html>

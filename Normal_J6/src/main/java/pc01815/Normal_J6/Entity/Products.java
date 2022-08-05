@@ -52,16 +52,14 @@ public class Products implements java.io.Serializable {
 	private boolean avaible;
 	private int quantity;
 	private String description;
-	private float discount;
-	private int viewCount;
-	private boolean special;
+
 	private Set<Comment> comments = new HashSet<Comment>(0);
 
 	public Products() {
 	}
 
 	public Products(Category category, String name, float unitPrice, String image, Date productDate, boolean avaible,
-			int quantity, String description, float discount, int viewCount, boolean special) {
+			int quantity, String description) {
 		this.category = category;
 		this.name = name;
 		this.unitPrice = unitPrice;
@@ -70,9 +68,7 @@ public class Products implements java.io.Serializable {
 		this.avaible = avaible;
 		this.quantity = quantity;
 		this.description = description;
-		this.discount = discount;
-		this.viewCount = viewCount;
-		this.special = special;
+
 	}
 
 
@@ -162,32 +158,11 @@ public class Products implements java.io.Serializable {
 		this.description = description;
 	}
 
-	@Column(name = "Discount", nullable = false, precision = 12, scale = 0)
-	public float getDiscount() {
-		return this.discount;
-	}
 
-	public void setDiscount(float discount) {
-		this.discount = discount;
-	}
 
-	@Column(name = "ViewCount", nullable = false)
-	public int getViewCount() {
-		return this.viewCount;
-	}
 
-	public void setViewCount(int viewCount) {
-		this.viewCount = viewCount;
-	}
 
-	@Column(name = "Special", nullable = false)
-	public boolean isSpecial() {
-		return this.special;
-	}
 
-	public void setSpecial(boolean special) {
-		this.special = special;
-	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "products")
 	public Set<Comment> getComments() {
