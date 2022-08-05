@@ -2,9 +2,22 @@ package pc01815.Normal_J6.Controller.TaiKhoan;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -32,8 +45,7 @@ import pc01815.Normal_J6.Services.AccountsService;
 
 @Controller
 public class taiKhoan {
-	@Autowired
-	AccountsService accountService;
+	
 	@Autowired
 	HttpServletRequest req;
 	@Autowired
@@ -44,6 +56,11 @@ public class taiKhoan {
     AuthoritiesRepository authDAO;
     @Autowired
     RolesRepository rolesDAO;
+	static String mail;
+    
+    static int  randomInt;
+    static int  passmoi;
+    static String name;
 	@RequestMapping("/login")
 	public String login() {
 
@@ -103,5 +120,108 @@ public class taiKhoan {
 		}
 
 		return "TaiKhoan/SignUp";
+	}
+	
+	@GetMapping("/fogetPass")
+	public String forgetPass() {
+		
+		return "TaiKhoan/FogetPass";
+	}
+	public void Mail(Model m,String email,String nd) {
+		Properties props = new Properties(); 
+		props.setProperty("mail.smtp.auth", "true");
+		props.setProperty("mail.smtp.starttls.enable", "true"); 
+		props.setProperty("mail.smtp.host", "smtp.gmail.com"); 
+		props.setProperty("mail.smtp.ssl.trust","smtp.gmail.com");
+		props.setProperty("mail.smtp.ssl.protocols","TLSv1.2");
+		props.setProperty("mail.smtp.port", "587");
+		
+		Session session = Session.getInstance(props, new Authenticator() { 
+			protected PasswordAuthentication getPasswordAuthentication() {
+		
+			String username = "trungttpc01815@fpt.edu.vn";
+			String password = "zmmfwwffwgcdfnss";
+			return new PasswordAuthentication(username, password);
+			}
+		});
+		
+		MimeMessage mime = new MimeMessage(session);
+		
+		try {
+			Multipart mailmultipart = new MimeMultipart();
+			
+			MimeBodyPart bodytext = new MimeBodyPart();
+			
+			
+			bodytext.setText(nd,"utf-8");
+			
+			
+			mailmultipart.addBodyPart(bodytext);
+	
+			mime.setFrom(new InternetAddress("trungttpc01815@fpt.edu.vn"));
+			mime.setRecipients(Message.RecipientType.TO,email);
+			mime.setSubject("Mã OTP","utf-8");
+			mime.setReplyTo(mime.getFrom());
+			mime.setContent(mailmultipart);
+			
+			Transport.send(mime);
+			m.addAttribute("tbforgotPassword", "Vui lòng kiểm Email!");
+			
+			
+		} catch (AddressException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			m.addAttribute("tbforgotPassword", "Gửi Mã thất bại");
+			
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			m.addAttribute("tbforgotPassword", "Gửi Mã thất bại");
+			
+		}	
+	}
+	@PostMapping("/fogetPass")
+	public String forgetPass(Model m,@RequestParam("username")String username,@RequestParam("email") String email) {
+		Accounts acc = accountDAO.findByUsername(username);
+		m.addAttribute("username", username);
+		m.addAttribute("email", email);
+		if(acc != null && acc.getEmail().equalsIgnoreCase(email)) {
+			
+			for(int i=0;i<1;i++) {
+	            double random = Math.random();		             
+	           random =random *1000000;   
+	              randomInt =(int) random;                
+		}
+			String nd ="Nhập mã "+randomInt+" để xác nhận đổi mật khẩu";
+			this.Mail(m,email,nd);
+			name = username;
+			mail = email;
+		}else {
+			m.addAttribute("tbForget","Tên đăng nhập hoặc email không chính xác");
+		}
+		return "TaiKhoan/MaOTP";
+	}
+	
+	@PostMapping("/XacThuc")
+	public String xacThuc(Model m,@RequestParam("otp") int maXN ) {
+		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
+		m.addAttribute("maXN", maXN);
+		if(maXN != randomInt) {
+			m.addAttribute("tbforgotPassword","Mã xác nhận không đúng!");
+		 System.out.println("mã:"+randomInt);
+		}else {
+			Accounts acc = accountDAO.findByUsername(name);
+			for(int i=0;i<1;i++) {
+	            double random = Math.random();		             
+	           random =random *1000000;   
+	              randomInt =(int) random;                
+		}
+			String nd ="Mật khẩu của bạn là:"+randomInt;
+			this.Mail(m,mail,nd);
+			acc.setPassword(pe.encode(randomInt+""));
+			accountDAO.save(acc);
+			
+		}
+		return "TaiKhoan/MaOTP";
 	}
 }
