@@ -59,8 +59,8 @@ public class CategoryRestController {
 			@RequestParam("entry") Optional<Integer> entry,
 			@RequestParam("sortBy") Optional<String> sortBy
 			){
-		return new ResponseEntity<List<Category>>(categoryService.findAllCategoryService(page,sortBy, entry).stream().collect(Collectors.toList()),HttpStatus.OK);
-		
+//		return new ResponseEntity<List<Category>>(categoryService.findAllCategoryService(page,sortBy, entry).stream().collect(Collectors.toList()),HttpStatus.OK);
+		return new ResponseEntity<List<Category>>(categoryService.findAllCategoryService().stream().collect(Collectors.toList()),HttpStatus.OK);
 	}
 	
 	
