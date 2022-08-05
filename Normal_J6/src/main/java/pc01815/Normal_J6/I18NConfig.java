@@ -1,4 +1,4 @@
-package pc01815.Normal_J6.Util;
+package pc01815.Normal_J6;
 
 import java.util.Locale;
 
