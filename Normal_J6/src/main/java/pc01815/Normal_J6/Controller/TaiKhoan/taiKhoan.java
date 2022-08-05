@@ -220,7 +220,7 @@ public class taiKhoan {
 			this.Mail(m,mail,nd);
 			acc.setPassword(pe.encode(randomInt+""));
 			accountDAO.save(acc);
-			
+			//abc
 		}
 		return "TaiKhoan/MaOTP";
 	}
