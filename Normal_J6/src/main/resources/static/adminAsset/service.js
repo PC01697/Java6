@@ -2,6 +2,7 @@ app.factory("categoryFactory", ($http) => {
   var service = {};
   service.GetAll = GetAll;
   service.CreatCategory = CreatCategory;
+  service.DeleteCategory = DeleteCategory;
   function GetAll() {
     return $http
       .get("/api/categories");
@@ -10,6 +11,10 @@ app.factory("categoryFactory", ($http) => {
   function CreatCategory(categoryObject){
 	 return $http
     .post("/api/categories",categoryObject);
+}
+function DeleteCategory(idCategory){
+	 return $http
+    .delete("/api/categories/" + idCategory);
 }
 
 	/* custom handle 
@@ -33,6 +38,10 @@ app.service("categoryService", function (categoryFactory) {
   };
   this.categoryCreate =(categoryObject) =>{
 	return categoryFactory.CreatCategory(categoryObject);
+	};
+	
+  this.categoryDelete = (idCategory) =>{
+	return categoryFactory.DeleteCategory(idCategory);
 	};
 });
 
