@@ -1,7 +1,7 @@
 app.factory("categoryFactory", ($http) => {
   var service = {};
   service.GetAll = GetAll;
-  service.CreatCategory = CreatCategory;
+  service.CreatCategory =  CreatCategory;
   service.UpdateCategory = UpdateCategory;
   service.DeleteCategory = DeleteCategory;
   function GetAll() {
@@ -58,3 +58,57 @@ app.service("handleMsgService", function (checkMsgShow) {
     return checkMsgShow.checkMsg(id, msg);
   };
 });
+
+
+
+
+//Account--------------------------------------------------------------------
+
+
+
+
+app.factory("accountFactory", ($http) => {
+  var service = {};
+  service.GetAll = GetAll;
+  service.CreateAccount = CreateAccount;
+
+  service.DeleteAccount = DeleteAccount;
+  function GetAll() {
+    return $http.get("/api/accounts");
+  }
+
+ 
+function CreateAccount(accountObject) {
+    return $http.post("/api/accounts", accountObject);
+  }
+ 
+
+
+ function DeleteAccount(idAccount) {
+    return $http.delete("/api/accounts/" + idAccount);
+  }
+  return service;
+});
+
+app.service("accountService", function (accountFactory) {
+  this.accountGetAll = () => {
+    return accountFactory.GetAll();
+  };
+  
+this.accountCreate = (accountObject) => {
+    return accountFactory.CreateAccount(accountObject);
+  };
+  
+  
+    this.accountDelete = (idAccount) => {
+    return accountFactory.DeleteAccount(idAccount);
+  };
+});
+
+app.service("handleMsgService", function (checkMsgShow) {
+  this.handleMsg = (id, msg) => {
+    return checkMsgShow.checkMsg(id, msg);
+  };
+});
+
+
