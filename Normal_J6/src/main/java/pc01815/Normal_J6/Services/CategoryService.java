@@ -19,4 +19,6 @@ public interface CategoryService {
 	void deleteCategoryById(int id);
 	
 	Optional<Category> findByIdCategory(int id);
+	
+	int checkCategoryName(String name);
 }

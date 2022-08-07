@@ -41,10 +41,14 @@ public class CategoryRestController {
 	
 	@PostMapping(value = "/categories", consumes = "application/json")
 	public ResponseEntity<Category> saveCategory(@RequestBody @Valid Category category){
-		return new ResponseEntity<Category>(categoryService.saveCategoryService(category),HttpStatus.CREATED);
+		if(categoryService.checkCategoryName(category.getName())> 0) {
+			return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
+		}else {
+			return new ResponseEntity<Category>(categoryService.saveCategoryService(category),HttpStatus.CREATED);
+		}
 	}
 	
-	@PutMapping(value = "/categories/{id}", consumes = "application/json")
+	@PutMapping(value = "/categories/{id}")
 	public ResponseEntity<Category> updateCategory(@PathVariable("id") int id, @RequestBody Category category){
 			Optional<Category> categoryOption = categoryService.findByIdCategory(id);
 			return (ResponseEntity<Category>) categoryOption.map(c -> {

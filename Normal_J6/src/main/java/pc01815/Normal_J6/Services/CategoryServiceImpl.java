@@ -44,6 +44,11 @@ public class CategoryServiceImpl implements CategoryService{
 		return list;
 	}
 
+	@Override
+	public int checkCategoryName(String name) {
+		return categoryRepository.IsExitCategory(name);
+	}
+
 	
 	
 	

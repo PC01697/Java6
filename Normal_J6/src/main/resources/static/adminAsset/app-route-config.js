@@ -1,24 +1,24 @@
-app.config(function ($stateProvider,$urlRouterProvider,$locationProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
   var productState = {
     name: "products",
     url: "/products",
     templateUrl: "../adminAsset/components/products.html",
-	data:{
-		label:'Products'
-	}
+    data: {
+      label: "Products",
+    },
   };
-  
+
   var accountState = {
     name: "accounts",
     url: "/accounts",
-    templateUrl: "../adminAsset/components/accounts.html"
+    templateUrl: "../adminAsset/components/accounts.html",
   };
-  
-   var categoryState = {
+
+  var categoryState = {
     name: "categories",
     url: "/categories",
     templateUrl: "../adminAsset/components/categories.html",
-    controller: "categoryCrt"
+    controller: "categoryCrt",
   };
 
   $stateProvider.state(productState);
@@ -27,6 +27,6 @@ app.config(function ($stateProvider,$urlRouterProvider,$locationProvider) {
   $urlRouterProvider.otherwise("/");
   $locationProvider.html5Mode({
     enabled: true,
-    requireBase: false
-});
+    requireBase: false,
+  });
 });

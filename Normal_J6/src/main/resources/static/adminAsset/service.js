@@ -2,22 +2,25 @@ app.factory("categoryFactory", ($http) => {
   var service = {};
   service.GetAll = GetAll;
   service.CreatCategory = CreatCategory;
+  service.UpdateCategory = UpdateCategory;
   service.DeleteCategory = DeleteCategory;
   function GetAll() {
-    return $http
-      .get("/api/categories");
+    return $http.get("/api/categories");
   }
-  
-  function CreatCategory(categoryObject){
-	 return $http
-    .post("/api/categories",categoryObject);
-}
-function DeleteCategory(idCategory){
-	 return $http
-    .delete("/api/categories/" + idCategory);
-}
 
-	/* custom handle 
+  function CreatCategory(categoryObject) {
+    return $http.post("/api/categories", categoryObject);
+  }
+
+  function UpdateCategory(idCategory, nameCategory) {
+    return $http.put("/api/categories/" + idCategory, nameCategory);
+  }
+
+  function DeleteCategory(idCategory) {
+    return $http.delete("/api/categories/" + idCategory);
+  }
+
+  /* custom handle 
 	
 	function handleSuccess(res) {
      return res.data;
@@ -28,25 +31,30 @@ function DeleteCategory(idCategory){
       return { success: false, message: error};
     };
   }*/
-		
+
   return service;
 });
 
 app.service("categoryService", function (categoryFactory) {
- 	this.categoryGetAll = () => {
+  this.categoryGetAll = () => {
     return categoryFactory.GetAll();
   };
-  this.categoryCreate =(categoryObject) =>{
-	return categoryFactory.CreatCategory(categoryObject);
-	};
-	
-  this.categoryDelete = (idCategory) =>{
-	return categoryFactory.DeleteCategory(idCategory);
-	};
+
+  this.categoryCreate = (categoryObject) => {
+    return categoryFactory.CreatCategory(categoryObject);
+  };
+
+  this.categoryUpdate = (idCategory, nameCategory) => {
+    return categoryFactory.UpdateCategory(idCategory, nameCategory);
+  };
+
+  this.categoryDelete = (idCategory) => {
+    return categoryFactory.DeleteCategory(idCategory);
+  };
 });
 
-app.service('handleMsgService', function(checkMsgShow){
-  this.handleMsg = (id,msg) =>{
-    return checkMsgShow.checkMsg(id,msg);
-  }
-})
+app.service("handleMsgService", function (checkMsgShow) {
+  this.handleMsg = (id, msg) => {
+    return checkMsgShow.checkMsg(id, msg);
+  };
+});
