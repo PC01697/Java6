@@ -89,4 +89,15 @@ public class AccountServiceImpl implements AccountsService{
 		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(auth);
 	}
+
+	@Override
+	public void deleteAccountById(int id) {
+		accountsRepository.deleteById(id);
+		
+	}
+
+	@Override
+	public int checkAccountName(String username) {
+		return accountsRepository.IsExitAccount(username);
+	}
 }

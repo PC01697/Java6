@@ -119,3 +119,126 @@ app.controller("categoryCrt", function ($scope, categoryService) {
     clearForm();
   };
 });
+
+//--------------------------------------------------------------------------
+
+app.controller("accountsCrt", function ($scope, accountService) {
+  $scope.account = [];
+  $scope.alertError = [];
+  $scope.closeAlert = function (index) {
+    $scope.alertError.splice(index, 1);
+  };
+  $scope.id;
+  $scope.username;
+  $scope.password;
+  $scope.fullname;
+  $scope.email;
+  $scope.photo;
+  //pagination for ui boostrap
+  $scope.currentPage = 1;
+  $scope.pageSize = 5;
+
+  function reloadTable() {
+    setTimeout(function () {
+      $scope.$apply(function () {
+        accountService.accountGetAll().then(function (response) {
+          $scope.account = response.data;
+        });
+      });
+      // AngularJS unaware of update to $scope
+    }, 100),
+      function (respone) {
+        console.log(respone);
+      };
+  }
+  $scope.show = false;
+
+  // clear form
+  function clearForm() {
+  $scope.id = null;
+  $scope.username = null;
+  $scope.password = null;
+  $scope.fullname = null;
+  $scope.email = null;
+  $scope.photo = null;
+  $scope.show = false;
+  }
+
+  //for load table
+  accountService.accountGetAll().then(function (response) {
+    $scope.account = response.data;
+  });
+
+  
+ $scope.accountCreate = function () {
+    var accountEntity = {
+      id: $scope.id,
+      username: $scope.username,
+      password:$scope.password,
+      fullname:$scope.fullname,
+      email:$scope.email,
+      photo: $scope.photo,
+    };
+
+    //console.log(categoryEntity.name)
+    accountService.accountCreate(JSON.stringify(accountEntity)).then(
+      function successCallback(response) {
+        console.log(response.status);
+        if (response.status == 201) {
+          $scope.alertError = [
+            {
+              type: "success",
+              msg: "Bạn đã thêm thành công: " + accountEntity.username,
+            },
+          ];
+          clearForm();
+          accountEntity.length = 0;
+        }
+      },
+      function errorCallback(response) {
+        //console.log(response.data.errors)
+        if (response.status == 502) {
+          $scope.alertError = [
+            {
+              type: "danger",
+              msg: "Username đã tồn tại, vui lòng nhập username khác",
+            },
+          ];
+        }
+      }
+    );
+    reloadTable();
+  };
+
+  //for edit
+  $scope.editAccount = function (id,username,password,fullname,email,photo) {
+  $scope.id = id;
+  $scope.username = username;
+  $scope.password = password;
+  $scope.fullname = fullname;
+  $scope.email = email;
+  $scope.photo  = photo;
+  $scope.show = true;
+    //console.log($scope.test)
+  };
+
+ 
+  $scope.deleteAccount = function (id) {
+    accountService.accountDelete(id).then(function successCallback(response) {
+      $scope.alertError = [
+        { type: "success", msg: "Bạn đã xóa thành công" },
+      ];
+    });
+    clearForm();
+    reloadTable();
+  };
+
+  //for backToCreate
+  $scope.backToCreate = function () {
+    clearForm();
+  };
+});
+
+
+
+

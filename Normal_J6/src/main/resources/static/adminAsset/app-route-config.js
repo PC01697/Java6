@@ -12,13 +12,15 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     name: "accounts",
     url: "/accounts",
     templateUrl: "../adminAsset/components/accounts.html",
+    controller: "accountsCrt",
+    
   };
 
   var categoryState = {
     name: "categories",
     url: "/categories",
     templateUrl: "../adminAsset/components/categories.html",
-    controller: "categoryCrt",
+    controller: "categoryCrt"
   };
 
   $stateProvider.state(productState);
