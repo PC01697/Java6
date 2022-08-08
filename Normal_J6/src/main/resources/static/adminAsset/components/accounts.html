@@ -1,5 +1,6 @@
 <div class="content-wrapper" style="min-height: 956.275px;">
     <!-- Content Header (Page header) -->
+     <div uib-alert ng-repeat="alert in alertError" close="closeAlert($index)">{{alert.msg}}</div>
     <section class="content-header">
       <h1>
         Accounts Manager
@@ -42,12 +43,7 @@
                   <label for="exampleInputFullname">Email</label>
                   <input ng-model="email" type="email" class="form-control" id="exampleInputEmail" placeholder="Enter Email">
                 </div>
-                <div class="form-group">
-                  <label for="exampleInputFile">File input</label>
-                  <input ng-model="photo" type="file" id="exampleInputFile">
-
-                  <p class="help-block">Example block-level help text here.</p>
-                </div>
+                
                 
               </div>
               <!-- /.box-body -->

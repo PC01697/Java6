@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Collection;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -39,7 +40,7 @@ public class AccountServiceImpl implements AccountsService{
 	
 	@Autowired
 	AuthoritiesRepository authRepo;
-	
+
 	@Autowired
 	RolesRepository roleRepo;
    
@@ -92,6 +93,7 @@ public class AccountServiceImpl implements AccountsService{
 
 	@Override
 	public void deleteAccountById(int id) {
+		
 		accountsRepository.deleteById(id);
 		
 	}
@@ -99,5 +101,16 @@ public class AccountServiceImpl implements AccountsService{
 	@Override
 	public int checkAccountName(String username) {
 		return accountsRepository.IsExitAccount(username);
+	}
+
+	@Override
+	public List<Accounts> findAllAccountService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Optional<Accounts> findByIdAccount(int id) {
+		return accountsRepository.findById(id);
 	}
 }

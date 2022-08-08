@@ -71,7 +71,7 @@ app.factory("accountFactory", ($http) => {
   var service = {};
   service.GetAll = GetAll;
   service.CreateAccount = CreateAccount;
-
+  service.UpdateAccount = UpdateAccount;
   service.DeleteAccount = DeleteAccount;
   function GetAll() {
     return $http.get("/api/accounts");
@@ -82,7 +82,10 @@ function CreateAccount(accountObject) {
     return $http.post("/api/accounts", accountObject);
   }
  
-
+function UpdateAccount(idAccount, usernameAccount,passwordAccount,fullnameAccount,emailAccount) {
+	
+    return $http.put("/api/accounts/" + idAccount, usernameAccount,passwordAccount,fullnameAccount,emailAccount);
+  }
 
  function DeleteAccount(idAccount) {
     return $http.delete("/api/accounts/" + idAccount);
@@ -99,7 +102,10 @@ this.accountCreate = (accountObject) => {
     return accountFactory.CreateAccount(accountObject);
   };
   
-  
+  this.accountUpdate = (idAccount,usernameAccount,passwordAccount,fullnameAccount,emailAccount) => {
+    return accountFactory.UpdateAccount(idAccount, usernameAccount,passwordAccount,fullnameAccount,emailAccount);
+    
+  };
     this.accountDelete = (idAccount) => {
     return accountFactory.DeleteAccount(idAccount);
   };
