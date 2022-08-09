@@ -24,13 +24,16 @@ public class ProductsServiceImpl implements ProductsService{
 		return productsRepository.save(products);
 	}
 
-	@Override
-	public Page<Products> findAllCProductsService(Optional<Integer> page, Optional<String> sortBy,
-			Optional<Integer> entry) {
-		return productsRepository.findAll(
-				PageRequest.of(page.orElse(0), entry.orElse(3), Sort.Direction.ASC, sortBy.orElse("name"))
-		);
-	}
+//	@Override
+//	public Page<Products> findAllCProductsService(Optional<Integer> page, Optional<String> sortBy,
+//			Optional<Integer> entry) {
+//		return productsRepository.findAll(
+//				PageRequest.of(page.orElse(0), entry.orElse(3), Sort.Direction.ASC, sortBy.orElse("name"))
+//		);
+//	}
+	
+	
+	
 
 	@Override
 	public List<Products> findProductsByNameService(String productName) {
@@ -45,6 +48,11 @@ public class ProductsServiceImpl implements ProductsService{
 	@Override
 	public Optional<Products> findByIdProducts(int id) {
 		return productsRepository.findById(id);
+	}
+
+	@Override
+	public List<Products> findAllProductService() {
+		return productsRepository.findAll();
 	}
 
 }

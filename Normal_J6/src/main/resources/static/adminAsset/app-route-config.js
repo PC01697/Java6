@@ -6,6 +6,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     data: {
       label: "Products",
     },
+    controller: "productCrt"
   };
 
   var accountState = {

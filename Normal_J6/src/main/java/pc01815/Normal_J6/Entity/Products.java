@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -45,11 +46,13 @@ public class Products implements java.io.Serializable {
 
 	private Integer id;
 	private Category category;
+	@NotEmpty(message = "Không được để trống Name Product")
 	private String name;
 	private float unitPrice;
 	private String image;
 	private Date productDate = new Date();
 	private boolean avaible;
+	
 	private int quantity;
 	private String description;
 
@@ -94,6 +97,7 @@ public class Products implements java.io.Serializable {
 		this.category = category;
 	}
 
+	
 	@Column(name = "Name", nullable = false, length = 50)
 	public String getName() {
 		return this.name;
@@ -157,12 +161,6 @@ public class Products implements java.io.Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-
-
-
-
-
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "products")
 	public Set<Comment> getComments() {

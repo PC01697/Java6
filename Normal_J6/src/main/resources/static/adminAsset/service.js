@@ -117,4 +117,23 @@ app.service("handleMsgService", function (checkMsgShow) {
   };
 });
 
+//---------------------------------------- product factory------------------------------------
+app.factory("productFactory", ($http) => {
+  var service = {};
+  service.GetAllProduct = GetAllProduct;
+  
+  
+  function GetAllProduct(){
+	return $http.get("/api/products");
+}
+  
+ 
+  return service;
+});
+
+app.service("productService", function (productFactory) {
+  this.productGetAll = () => {
+    return productFactory.GetAllProduct();
+  };
+});
 

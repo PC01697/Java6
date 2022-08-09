@@ -258,6 +258,33 @@ app.controller("accountsCrt", function ($scope, accountService) {
   };
 });
 
+//---------------------------------------------Product controler --------------------------------------------------------
+app.controller("productCrt", function ($scope, productService) {
+  $scope.product = [];
+  $scope.alertError = [];
+  $scope.closeAlert = function (index) {
+    $scope.alertError.splice(index, 1);
+  };
+  $scope.id;
+  $scope.name;
+  //pagination for ui boostrap
+  $scope.currentPage = 1;
+  $scope.pageSize = 5;
+
+ 
+
+ console.log("product work")
+ productService.productGetAll().then(function (resp) {
+    $scope.product = resp.data;
+    console.log($scope.product)
+  });
+
+
+  
+});
+
+
+
 
 
 
