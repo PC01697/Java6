@@ -23,4 +23,8 @@ public interface CategoryRepository extends JpaRepository<Category, Integer>{
 	@Query(value = "select count(id) from category where name LIKE :name", nativeQuery = true)
 	int IsExitCategory(@Param("name") String name);
 	
+	@Query(value = "SELECT COUNT(category.id)"
+			+ "FROM category INNER JOIN products ON category.id = products.CategoryId WHERE category.id =:idCategory", nativeQuery = true)
+	int checkProductExitInCategory(@Param("idCategory") int idCategory);
+	
 }

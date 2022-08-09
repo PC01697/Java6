@@ -8,6 +8,12 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     },
     controller: "productCrt"
   };
+  
+  var productCreateState = {
+	name: "createdProduct",
+	url : "/test",
+	templateUrl: "../adminAsset/components/test.html",
+};
 
   var accountState = {
     name: "accounts",
@@ -24,6 +30,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     controller: "categoryCrt"
   };
 
+$stateProvider.state(productCreateState);
   $stateProvider.state(productState);
   $stateProvider.state(accountState);
   $stateProvider.state(categoryState);

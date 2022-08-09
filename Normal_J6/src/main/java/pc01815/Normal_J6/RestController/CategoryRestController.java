@@ -80,7 +80,14 @@ public class CategoryRestController {
 	
 	@DeleteMapping("/categories/{idCategory}")
 	public ResponseEntity<HttpStatus> deleteCategoryById(@PathVariable("idCategory") int id){
-		categoryService.deleteCategoryById(id);
-		return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+		
+		if(categoryService.checkProductExitInCategory(id) > 0) {
+			return new ResponseEntity<HttpStatus>(HttpStatus.BAD_GATEWAY);
+		}else {
+			categoryService.deleteCategoryById(id);
+			return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+		}
+		
+		
 	}
 }

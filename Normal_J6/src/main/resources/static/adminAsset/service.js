@@ -121,10 +121,14 @@ app.service("handleMsgService", function (checkMsgShow) {
 app.factory("productFactory", ($http) => {
   var service = {};
   service.GetAllProduct = GetAllProduct;
-  
+  service.DeleteProduct = DeleteProduct;
   
   function GetAllProduct(){
 	return $http.get("/api/products");
+}
+
+function DeleteProduct(idProduct){
+	return $http.delete("/api/products/" + idProduct)
 }
   
  
@@ -135,5 +139,9 @@ app.service("productService", function (productFactory) {
   this.productGetAll = () => {
     return productFactory.GetAllProduct();
   };
+  
+  this.productDelete = (id) =>{
+	return productFactory.DeleteProduct(id);
+}
 });
 
