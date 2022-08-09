@@ -21,7 +21,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" > 
     <link rel="stylesheet" th:href="@{/css/responsive.css}" >
   
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script th:src="@{\js\vendor\modernizr-3.5.0.min.js}"></script>
     
 </head>
@@ -119,16 +119,16 @@
                                    
                                     </li>
 
-                                     <li><a href="/login"><i class="lnr lnr-user"></i><span class="my-cart"><span>  
+                                     <li><a ><i class="lnr lnr-user"></i><span class="my-cart"><span>  
 						            
                                     </li>
 
                                        
-                                         <div th:if="${#request.remoteUser}">
+                                         <div  th:if="${#request.remoteUser}">
                                                    [[${#request.remoteUser}]]
                                             </div>
-                                            <div th:unless="${#request.remoteUser}">
-                                                  <strong th:text="#{lo.mn.login}"></strong>
+                                            <div  th:unless="${#request.remoteUser}">
+                                               <a href="/login"  > <strong th:text="#{lo.mn.login}"></strong></a>
                                             </div>
                                             
                                     </span></a>
