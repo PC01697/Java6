@@ -133,7 +133,7 @@ app.controller("accountsCrt", function ($scope, accountService) {
   $scope.password;
   $scope.fullname;
   $scope.email;
-  $scope.photo;
+  
   //pagination for ui boostrap
   $scope.currentPage = 1;
   $scope.pageSize = 5;
@@ -160,7 +160,7 @@ app.controller("accountsCrt", function ($scope, accountService) {
   $scope.password = null;
   $scope.fullname = null;
   $scope.email = null;
-  $scope.photo = null;
+  
   $scope.show = false;
   }
 
@@ -172,15 +172,15 @@ app.controller("accountsCrt", function ($scope, accountService) {
   
  $scope.accountCreate = function () {
     var accountEntity = {
-      id: $scope.id,
+    
       username: $scope.username,
       password:$scope.password,
       fullname:$scope.fullname,
-      email:$scope.email,
-      photo: $scope.photo,
+      email:$scope.email
     };
+    
 
-    //console.log(categoryEntity.name)
+    console.log(accountEntity)
     accountService.accountCreate(JSON.stringify(accountEntity)).then(
       function successCallback(response) {
         console.log(response.status);
@@ -205,19 +205,19 @@ app.controller("accountsCrt", function ($scope, accountService) {
             },
           ];
         }
+        console.log(response)
       }
     );
     reloadTable();
   };
 
   //for edit
-  $scope.editAccount = function (id,username,password,fullname,email,photo) {
+  $scope.editAccount = function (id,username,password,fullname,email) {
   $scope.id = id;
   $scope.username = username;
   $scope.password = password;
   $scope.fullname = fullname;
   $scope.email = email;
-  $scope.photo  = photo;
   $scope.show = true;
     //console.log($scope.test)
   };
@@ -230,6 +230,25 @@ app.controller("accountsCrt", function ($scope, accountService) {
       ];
     });
     clearForm();
+    reloadTable();
+  };
+
+   //for update category
+  $scope.updateAccount = function () {
+	
+	
+    accountService
+      .accountUpdate($scope.id, JSON.stringify($scope.username,$scope.password,$scope.fullname,$scope.email))
+      .then(function successCallback(response) {
+	 
+        if (response.status == 200) {
+          $scope.alertError = [
+            { type: "success", msg: "Bạn đã cập nhật thành công" },
+          ];
+        }
+      
+      });
+  
     reloadTable();
   };
 

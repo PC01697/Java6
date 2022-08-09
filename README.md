@@ -4,7 +4,9 @@
 > Võ Đăng Khoa,
 > Nguyễn Thành Trung,
 > Dương Gia Bảo,
-> Nguyễn Hải Sang,
-> Nguyễn Trọng Nhân
+> Đinh Nguyễn Hải Sang,
+> Nguyễn Trọng Nhân,
+> Trần Đăng Khôi,
+> Nguyễn Hồng Đăng
 ###### Công nghệ sử dụng:
 >**Angular**, **Spring Boot API**, **SQL Server**

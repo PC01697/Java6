@@ -14,6 +14,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,8 +27,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import pc01815.Normal_J6.Entity.Accounts;
+import pc01815.Normal_J6.Entity.Authorities;
 import pc01815.Normal_J6.Entity.Category;
 import pc01815.Normal_J6.Services.AccountsService;
+import pc01815.Normal_J6.Services.AuthoritiesService;
 import pc01815.Normal_J6.Util.FileUploadUtil;
 
 @RestController
@@ -37,7 +40,8 @@ public class AccountsRestController {
 	@Autowired
 	AccountsService accountsService;
 
-	
+	@Autowired
+	AuthoritiesService AuthService;
 	@GetMapping(value = "/accounts")
 	public List<Accounts> getAll(){
 	
@@ -51,17 +55,33 @@ public class AccountsRestController {
 	
 	@PostMapping(value = "/accounts", consumes = "application/json")
 	public ResponseEntity<Accounts> saveAccount(@RequestBody @Valid Accounts account){
+		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
 		if(accountsService.checkAccountName(account.getUsername())> 0) {
 			return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
 		}else {
+			account.setPassword(pe.encode(account.getPassword()));
 			return new ResponseEntity<Accounts>(accountsService.saveAccountService(account),HttpStatus.CREATED);
 		}
 	}
-	
+	@PutMapping(value = "/accounts/{id}")
+	public ResponseEntity<Accounts> updateAccount(@PathVariable("id") int id, @RequestBody Accounts account){
+			Optional<Accounts> accountOption = accountsService.findByIdAccount(id);
+			return (ResponseEntity<Accounts>) accountOption.map(c -> {
+				account.setId(c.getId());
+				return new ResponseEntity<>(accountsService.saveAccountService(account),HttpStatus.OK);
+			}).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
 	
 	@DeleteMapping("/accounts/{idAccount}")
 	public ResponseEntity<HttpStatus> deleteAccountById(@PathVariable("idAccount") int id){
+		Authorities findAuthoriesByIdAccount = AuthService.authService(id);
+		
+		if(findAuthoriesByIdAccount != null) {
+			System.err.println("ABCCC"+findAuthoriesByIdAccount.getAccounts().getFullname());
+			AuthService.delete(findAuthoriesByIdAccount);
+		}
 		accountsService.deleteAccountById(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+	
 }

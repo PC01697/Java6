@@ -37,7 +37,7 @@ public class Accounts implements java.io.Serializable {
 	@NotBlank(message = "")
 	@Email(message = "")
 	private String email;
-	private String photo = null;
+	
 
 
 	private List<Authorities> authoritieses = new ArrayList<Authorities>();
@@ -48,21 +48,21 @@ public class Accounts implements java.io.Serializable {
 	public Accounts() {
 	}
 
-	public Accounts(String username, String password, String fullname, String email, String photo) {
+	public Accounts(String username, String password, String fullname, String email) {
 		this.username = username;
 		this.password = password;
 		this.fullname = fullname;
 		this.email = email;
-		this.photo = photo;
+		
 	}
 
-	public Accounts(String username, String password, String fullname, String email, String photo,
+	public Accounts(String username, String password, String fullname, String email,
 			List<Authorities> authoritieses, Set<Comment> comments, Set<Orders> orderses) {
 		this.username = username;
 		this.password = password;
 		this.fullname = fullname;
 		this.email = email;
-		this.photo = photo;
+		
 		this.authoritieses = authoritieses;
 		this.comments = comments;
 		this.orderses = orderses;
@@ -116,14 +116,7 @@ public class Accounts implements java.io.Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "photo", nullable = false, length = 100)
-	public String getPhoto() {
-		return this.photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
+	
 
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accounts")
