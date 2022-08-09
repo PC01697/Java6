@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns= "http://www.thymeleaf.org"
+   th:replace="~{/layout/layout::dynamic(~{::title},~{::body})}">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{porder.title}"></title>
+</head>
+<body>
+ <div class="breadcrumb-area mt-30">
+            <div class="container">
+                <div class="breadcrumb">
+                    <ul class="d-flex align-items-center">
+                        <li><a href="trangchu">Trang chủ</a></li>
+                        <li><a href="giohang">Giỏ hàng</a></li>
+                        <li class="active"><a href="giohang">Đặt hàng</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Container End -->
+        </div>
+        <br><br><br><br><br><br><br>
+    
+ <h3 style="color:red;text-align: center;"><mark>${message}</mark></h3><br>
+                            <div class="table-content table-responsive mb-45">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="product-thumbnail">Hình</th>
+                                            <th class="product-name">Sản phẩm</th>
+                                              <th class="product-name">Kích thước</th>
+                                            <th class="product-price">Giá</th>
+                                            <th class="product-quantity">Số lượng</th>
+                                            <th class="product-subtotal">Tổng</th>
+                                          
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                   
+                                    <c:forEach var="HoLy" items="${cartsession}">
+                                     <form action="/update" method="post">
+                                    <input type="hidden" name="id" value="${HoLy.id}">
+                              
+                                        <tr>
+                                            <td class="product-thumbnail">
+                                                <a href="#"><img src="img/products/${HoLy.image}" alt="cart-image"></a>
+                                            </td>
+                                            <td class="product-name"><a href="#">${HoLy.name}</a></td>
+                                            <td class="product-name"><a >${HoLy.size}</a></td>
+                                            <td class="product-price"><span class="amount">${HoLy.price}₫</span></td>
+                                            <td class="product-price"><a name="qty" value="${HoLy.qty}" >${HoLy.qty}</a></td>
+                                            <td class="product-subtotal">${HoLy.price * HoLy.qty}₫</td>
+                               
+                                        </tr>
+                                        </form>
+                                        </c:forEach>
+                                    
+                                    </tbody>
+                                </table>
+                                      <div class="row">
+                               <!-- Cart Button Start -->
+                                <div class="col-md-8 col-sm-12">
+                        
+                                </div>
+                                <!-- Cart Button Start -->
+                                <!-- Cart Totals Start -->
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="cart_totals float-md-right text-md-right">
+                                        <h2>Tổng giỏ hàng</h2>
+                                        <br>
+                                        <table class="float-md-right">
+                                            <tbody>
+                                          
+                                                <tr class="order-total">
+                                                    <th>Tổng tiền</th>
+                                                    <td>
+                                                        <strong><span class="amount">${tongtien}₫</span></strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="wc-proceed-to-checkout">
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Cart Totals End -->
+                            </div>
+                                <center>
+                                  <form action="" method="POST"   enctype="multipart/data">
+                                ${sessionScope.user.fullname}<br>
+                                <input type="hidden" name="account" value="${sessionScope.user.username}">
+                                 <input type="hidden" name="tongtien" value="${tongtien}">
+                                 <input class="nhap" name="sDT" type="text" placeholder="Số điện thoại" required="required" ><br><br>
+                                   <textarea style="width:500px;"  name ="address" required="required" placeholder="Địa chỉ" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <input type="hidden" name="status" value="Đã đặt">
+                                   <br>
+                                <button class="btn btn-primary" formaction="../dathang/create"><h5>Đặt hàng</h5></button></a>
+                     </form>
+                        </center>
+                            </div>
+                            
+</body>
+</html>

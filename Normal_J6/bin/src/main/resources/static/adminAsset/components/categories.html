@@ -1,0 +1,118 @@
+<div class="content-wrapper" style="min-height: 956.275px;">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<h1>Categories Manager</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li><a href="#">Forms</a></li>
+			<li class="active">General Elements</li>
+		</ol>
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- left column -->
+			<div class="col-md-12">
+				<!-- general form elements -->
+				<div class="box box-primary">
+					<!-- /.box-header -->
+					<!-- form start -->
+					  <div uib-alert ng-repeat="alert in alertError" close="closeAlert($index)">{{alert.msg}}</div>
+					<form role="form">
+						<div class="box-body">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Category Name</label> <input
+									type="text" class="form-control" id="exampleInputEmail1"
+									placeholder="Enter name of category" ng-model="name">
+							</div>
+						</div>
+						<!-- /.box-body -->
+						<div class="box-footer">
+							<button type="submit" class="btn btn-primary" ng-click="categoryCreate()" ng-hide="show">Create</button>
+							<button type="submit" class="btn btn-primary" ng-click="updateCategory()" ng-hide="!show">Update</button>
+							<button type="submit" class="btn btn-danger" ng-click="backToCreate()" ng-hide="!show">Back To Create</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.box -->
+				<section class="content">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="box">
+								<div class="box-header">
+									<h3 class="box-title">Categories Data Table</h3>
+								</div>
+								<!-- /.box-header -->
+								<div class="box-body">
+									<div id="example2_wrapper"
+										class="dataTables_wrapper form-inline dt-bootstrap">
+										<div class="row">
+											<div class="col-sm-6"></div>
+											<div class="col-sm-6"></div>
+										</div>
+										<div class="row">
+											<div class="col-sm-12">
+												<table id="example2"
+													class="table table-bordered table-hover dataTable"
+													role="grid" aria-describedby="example2_info">
+													<thead>
+														<tr role="row">
+															<th class="sorting_asc" tabindex="0"
+																aria-controls="example2" rowspan="1" colspan="1"
+																aria-sort="ascending"
+																aria-label="Rendering engine: activate to sort column descending">Id Category</th>
+															<th class="sorting" tabindex="0" aria-controls="example2"
+																rowspan="1" colspan="1"
+																aria-label="Browser: activate to sort column ascending">Category Name</th>
+															<th class="sorting" tabindex="0" aria-controls="example2"
+																rowspan="1" colspan="1"
+																aria-label="Platform(s): activate to sort column ascending">Action</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr role="row" class="odd" ng-repeat="ctg in category | startForm:(currentPage-1) * pageSize| limitTo: pageSize">
+															<td class="sorting_1">{{ctg.id}}</td>
+															<td>{{ctg.name}}</td>
+															<td>
+															<a href="" ng-click="editCategory(ctg.id, ctg.name)">Edit</a>
+																|
+															<a href="" ng-click="deleteCategory(ctg.id)">Delete</a>
+															
+															</td>
+														</tr>
+													
+													</tbody>
+													
+												</table>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-5">
+												
+											</div>
+											<div class="col-sm-7">
+												<div class="dataTables_paginate paging_simple_numbers"
+													id="example2_paginate">
+													<uib-pagination total-items="category.length" ng-model="currentPage" items-per-page="pageSize" class="pagination-sm"></uib-pagination>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /.box-body -->
+							</div>
+							<!-- /.box -->
+
+						</div>
+						<!-- /.col -->
+					</div>
+					<!-- /.row -->
+				</section>
+			</div>
+		</div>
+		<!-- /.row -->
+	</section>
+	<!-- /.content -->
+</div>
+

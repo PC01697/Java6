@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html xmlns= "http://www.thymeleaf.org"
+   th:replace="~{/layout/layout::dynamic(~{::title},~{::body})}">
+
+<head>
+
+
+<meta charset="UTF-8">
+<title th:text="#{home.title}"></title>
+</head>
+<body ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
+ <div class="col-xl-9 col-lg-8 slider_box">
+                        <div class="slider-wrapper theme-default">
+                            <!-- Slider Background  Image Start-->
+                            <div id="slider" class="nivoSlider">
+                                <a href="shop"><img th:src="@{\img\slider\1.1.jpg}" data-thumb="img/slider/1.1.jpg" alt="" title="#htmlcaption"></a>
+                                <a href="shop"><img th:src="@{\img\slider\1.2.jpg}" data-thumb="img/slider/1.2.jpg" alt="" title="#htmlcaption2"></a>
+                            </div>
+                            <!-- Slider Background  Image Start-->
+                        </div>
+                    </div>
+                    <!-- Slider Area End Here -->
+                </div>
+                <!-- Row End -->
+            </div>
+            <!-- Container End -->
+        </div>
+
+        <div class="hot-deal-products off-white-bg pb-90 pb-sm-50">
+            <div class="container">
+               <!-- Product Title Start -->
+               <div class="post-title pb-30">
+                   <h2>Ưu đãi lớn</h2>
+               </div>
+               <!-- Product Title End -->
+                <!-- Hot Deal Product Activation Start -->
+                <div class="hot-deal-active owl-carousel">
+                    <!-- Single Product Start -->
+                      <c:forEach var="HoLy" items="${page.content}">
+                    <div class="single-product">
+                        <!-- Product Image Start -->
+                        <div class="pro-img">
+                            <a href="chitiet?id=${HoLy.id}">
+                                <img class="primary-img" src="img/products/${HoLy.image1 }" alt="single-product">
+                                <img class="secondary-img" src="img/products/${HoLy.image2 }" alt="single-product">
+                            </a>
+                            <div class="countdown" data-countdown="2023/05/25"></div>
+                           
+                        </div>
+                        <!-- Product Image End -->
+                        <!-- Product Content Start -->
+                        <div class="pro-content">
+                            <div class="pro-info">
+                                <h4><a href="chitiet?id=${HoLy.id}">${HoLy.name }</a></h4>
+                                <p><span class="price">${HoLy.price }₫</span><del class="prev-price">${HoLy.price *100 /80}₫</del></p>
+                                <div class="label-product l_sale">-20<span class="symbol-percent">%</span></div>
+                            </div>
+                            <div class="pro-actions">
+                                <div class="actions-primary">
+                                    <a href="../add/${HoLy.id}" title="Thêm vào giỏ hàng"> + Thêm vào giỏ hàng</a>
+                                </div>
+                               
+                            </div>
+                        </div>
+                        <!-- Product Content End -->
+                    </div>
+                    </c:forEach>
+                   
+                      
+  
+                    </div>
+                    <!-- Single Product End -->
+                </div>
+                <!-- Hot Deal Product Active End -->
+
+            </div>
+            <!-- Container End -->
+        </div>
+        <!-- Hot Deal Products End Here -->
+        <!-- Hot Deal Products End Here -->
+
+        <!-- Big Banner Start Here -->
+      
+        <!-- Big Banner End Here -->
+        <!-- Arrivals Products Area Start Here -->
+        <div class="arrivals-product pb-85 pb-sm-45">
+            <div class="container">
+                <div class="main-product-tab-area">
+                    <div class="tab-menu mb-25">
+                        <div class="section-ttitle">
+                            <h2>Mới</h2>
+                       </div>
+                        <!-- Nav tabs -->
+                            
+
+                    </div> 
+
+                    <!-- Tab Contetn Start -->
+                    <div class="tab-content">
+                        <div id="fshion" class="tab-pane show active">
+                            <!-- Arrivals Product Activation Start Here -->
+                            <div class="electronics-pro-active owl-carousel">
+                                <!-- Double Product Start -->
+                                 <c:forEach var="HoLy" items="${page2.content}">
+                               
+                                    <!-- Single Product Start -->
+                                    
+                                    <div class="single-product">
+                                        <!-- Product Image Start -->
+                                        <div class="pro-img">
+                                            <a href="chitiet?id=${HoLy.id}">
+                                <img class="primary-img" src="img/products/${HoLy.image1 }" alt="single-product">
+                                <img class="secondary-img" src="img/products/${HoLy.image2 }" alt="single-product">
+                            </a>
+                                           
+                                        </div>
+                                        <!-- Product Image End -->
+                                        <!-- Product Content Start -->
+                                        <div class="pro-content">
+                                            <div class="pro-info">
+                                                <h4><a href="chitiet">${HoLy.name }</a></h4>
+                                                <p><span class="price">${HoLy.price }₫</span></p>
+                                               
+                                            </div>
+                                            <div class="pro-actions">
+                                                <div class="actions-primary">
+                                                      <a href="../add/${HoLy.id}" title="Thêm vào giỏ hàng"> + Thêm vào giỏ hàng</a>
+                                                </div>
+                                                <div class="actions-secondary">
+                                                  
+                                                  
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Product Content End -->
+                                        <span class="sticker-new">new</span>
+                                    </div>
+                                  
+                                    <!-- Single Product End -->
+                                     <!-- Single Product Start -->
+        
+                                  </c:forEach>
+                                <!-- Double Product End -->
+                                <!-- Double Product Start -->
+                               
+                                
+                                </div>
+                                <!-- Double Product End -->
+                                <!-- Double Product Start -->
+                                
+                            </div>
+                            <!-- Arrivals Product Activation End Here -->
+                        </div>
+                     
+
+
+                        <!-- #electronics End Here -->
+                    </div>
+                    <!-- Tab Content End -->
+                </div>
+                <!-- main-product-tab-area-->
+            </div>
+            <!-- Container End -->
+        </div>
+        <!-- Arrivals Products Area End Here -->
+        <!-- Arrivals Products Area Start Here -->
+        <div class="second-arrivals-product pb-45 pb-sm-5">
+            <div class="container">
+                <div class="main-product-tab-area">
+                    <div class="tab-menu mb-25">
+                        <div class="section-ttitle">
+                            <h2>Bán chạy</h2>
+                       </div>
+                        <!-- Nav tabs -->
+                        
+              
+                        
+                                       
+
+                    </div> 
+
+                    <!-- Tab Contetn Start -->
+                    <div class="tab-content">
+                        <div id="fshion2" class="tab-pane show active">
+                            <!-- Arrivals Product Activation Start Here -->
+                            <div class="best-seller-pro-active owl-carousel">
+                                    <!-- Single Product Start -->
+                                    <c:forEach var="HoLy" items="${page3.content}">
+                                    <div class="single-product">
+                                        <!-- Product Image Start -->
+                                        <div class="pro-img">
+                                           <a href="chitiet?id=${HoLy.id}">
+                                <img class="primary-img" src="img/products/${HoLy.image1 }" alt="single-product">
+                                <img class="secondary-img" src="img/products/${HoLy.image2 }" alt="single-product">
+                            </a>
+                                           
+                                        </div>
+                                        <!-- Product Image End -->
+                                        <!-- Product Content Start -->
+                                        <div class="pro-content">
+                                            <div class="pro-info">
+                                                 <h4><a href="chitiet">${HoLy.name }</a></h4>
+                                                <p><span class="price">${HoLy.price }₫</span></p>
+                                            </div>
+                                            <div class="pro-actions">
+                                                <div class="actions-primary">
+                                                   <a href="../add/${HoLy.id}" title="Thêm vào giỏ hàng"> + Thêm vào giỏ hàng</a>
+                                                </div>
+                                                <div class="actions-secondary">
+                                                  
+                                                  
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Product Content End -->
+                                    </div>
+                                    </c:forEach>
+                                    <!-- Single Product End -->
+                                     <!-- Single Product Start -->
+                                       
+                                    <
+                                   
+                                       
+                                       
+                                          
+                             
+                                    <!-- Single Product End -->
+                            </div>
+                            <!-- Arrivals Product Activation End Here -->
+                        </div>
+                        <!-- #fshion End Here -->
+                        
+                                
+                               
+                               
+                              
+                                
+                       
+                                <!-- Single Product End -->
+                            </div>
+                            <!-- Arrivals Product Activation End Here -->
+                        </div>
+                        
+                        
+               
+                
+                        <!-- #electronics End Here -->
+                    </div>
+                    <!-- Tab Content End -->
+                </div>
+                <!-- main-product-tab-area-->
+            </div>
+            <!-- Container End -->
+        </div>
+        <!-- Arrivals Products Area End Here -->
+        <!-- Like Products Area Start Here -->
+        <div class="like-product ptb-95 off-white-bg pt-sm-50 pb-sm-55 ">
+            <div class="container">
+                <div class="like-product-area"> 
+                    <h2 class="section-ttitle2 mb-30">Bạn có thể thích </h2>
+                    <!-- Arrivals Product Activation Start Here -->
+                    <div class="like-pro-active owl-carousel">
+                          <c:forEach var="HoLy" items="${page4.content}">
+                            <!-- Single Product Start -->
+                            <div class="single-product">
+                                <!-- Product Image Start -->
+                                <div class="pro-img">
+                                     <a href="chitiet?id=${HoLy.id}">
+                                <img class="primary-img" src="img/products/${HoLy.image1 }" alt="single-product">
+                                <img class="secondary-img" src="img/products/${HoLy.image2 }" alt="single-product">
+                            </a>
+                                           
+                                   
+                                </div>
+                                <!-- Product Image End -->
+                                <!-- Product Content Start -->
+                                <div class="pro-content">
+                                    <div class="pro-info">
+                                        <h4><a href="chitiet">${HoLy.name }</a></h4>
+                                                <p><span class="price">${HoLy.price }₫</span></p>
+                                    </div>
+                                    <div class="pro-actions">
+                                        <div class="actions-primary">
+                                             <a href="../add/${HoLy.id}" title="Thêm vào giỏ hàng"> + Thêm vào giỏ hàng</a>
+                                        </div>
+                                        <div class="actions-secondary">
+                                           
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Product Content End -->
+                            </div>
+                            </c:forEach>
+                            <!-- Single Product End -->
+                             <!-- Single Product Start -->
+     
+     
+     
+     
+     
+     
+                     
+                    
+                        
+                       
+                       
+                       
+                        
+                    </div>
+                    <!-- Arrivals Product Activation End Here -->
+                </div>
+                <!-- main-product-tab-area-->
+            </div>
+            <!-- Container End -->
+        </div>
+
+        <!-- Support Area Start Here -->
+
+</body>
+</html>
