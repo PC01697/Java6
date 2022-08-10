@@ -106,7 +106,7 @@ public class taiKhoan {
 				
 				
 				acc.setAuthoritieses(list);
-				acc.setPhoto("NULL");
+				
 				acc.setPassword(pe.encode(acc.getPassword()));
 				
 				accountDAO.save(acc);

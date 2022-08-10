@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +30,8 @@ import org.springframework.web.multipart.MultipartFile;
 import pc01815.Normal_J6.Entity.Accounts;
 import pc01815.Normal_J6.Entity.Authorities;
 import pc01815.Normal_J6.Entity.Category;
+import pc01815.Normal_J6.Entity.Roles;
+import pc01815.Normal_J6.Repository.RolesRepository;
 import pc01815.Normal_J6.Services.AccountsService;
 import pc01815.Normal_J6.Services.AuthoritiesService;
 import pc01815.Normal_J6.Util.FileUploadUtil;
@@ -39,12 +42,17 @@ public class AccountsRestController {
 
 	@Autowired
 	AccountsService accountsService;
-
+    @Autowired
+    RolesRepository roleRepository;
 	@Autowired
 	AuthoritiesService AuthService;
 	@GetMapping(value = "/accounts")
-	public List<Accounts> getAll(){
-	
+	public List<Accounts> getAll(Model m){
+	     List<Roles> roles = roleRepository.findAll();
+	     for (Roles roles2 : roles) {
+			System.err.println("Vt:"+roles2.getName());
+		}
+	     m.addAttribute("abc","TRUNG");
 		return accountsService.getAllService().stream().collect(Collectors.toList());
 	}
 
