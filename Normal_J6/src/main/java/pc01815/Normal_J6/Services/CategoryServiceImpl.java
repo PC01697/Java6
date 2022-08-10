@@ -49,6 +49,11 @@ public class CategoryServiceImpl implements CategoryService{
 		return categoryRepository.IsExitCategory(name);
 	}
 
+	@Override
+	public int checkProductExitInCategory(int id) {
+		return categoryRepository.checkProductExitInCategory(id);
+	}
+
 	
 	
 	

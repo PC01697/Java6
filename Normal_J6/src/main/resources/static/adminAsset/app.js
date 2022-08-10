@@ -94,7 +94,16 @@ app.controller("categoryCrt", function ($scope, categoryService) {
       $scope.alertError = [
         { type: "success", msg: "Bạn đã thêm xóa thành công" },
       ];
-    });
+    },function errorCallback(resp){
+		if(resp.status = 502){
+			 $scope.alertError = [
+            {
+              type: "danger",
+              msg: "Category đã tồn tại sản phẩm, vui lòng xóa sản phẩm trước",
+            },
+          ];	
+		}
+});
     clearForm();
     reloadTable();
   };
@@ -257,6 +266,44 @@ app.controller("accountsCrt", function ($scope, accountService) {
     clearForm();
   };
 });
+
+//---------------------------------------------Product controler --------------------------------------------------------
+app.controller("productCrt", function ($scope, productService) {
+  $scope.product = [];
+  $scope.alertError = [];
+  $scope.closeAlert = function (index) {
+    $scope.alertError.splice(index, 1);
+  };
+  //pagination for ui boostrap
+  $scope.currentPage = 1;
+  $scope.pageSize = 5;
+  
+  
+function reloadTable() {
+    setTimeout(function () {
+      $scope.$apply(function () {
+        productService.productGetAll().then(function (response) {
+          $scope.product = response.data;
+        });
+      });
+      // AngularJS unaware of update to $scope
+    }, 100),
+      function (respone) {
+        console.log(respone);
+      };
+  }
+
+
+// product get all
+ 	productService.productGetAll().then(function (resp) {
+    	$scope.product = resp.data;
+  	});
+
+	
+  
+});
+
+
 
 
 

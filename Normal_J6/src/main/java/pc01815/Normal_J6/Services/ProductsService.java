@@ -11,7 +11,8 @@ public interface ProductsService {
 
 	Products saveProductsService(Products products);
 	
-	Page<Products> findAllCProductsService(Optional<Integer> page, Optional<String> sortBy, Optional<Integer> entry);
+//	Page<Products> findAllCProductsService(Optional<Integer> page, Optional<String> sortBy, Optional<Integer> entry);
+	List<Products> findAllProductService();
 	
 	List<Products> findProductsByNameService(String productName);
 	
