@@ -2,17 +2,23 @@ package pc01815.Normal_J6.Util;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Random;
 
 import javax.servlet.ServletContext;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FileUploadUtil {
 	
-	private static String generateRandomPassword(int len) {
+	private static String generateRandomName(int len) {
 		String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijk"
           +"lmnopqrstuvwxyz!@#$%&";
 		Random rnd = new Random();
@@ -22,15 +28,44 @@ public class FileUploadUtil {
 		return sb.toString();
 	}
 	
-	public void saveFile(MultipartFile file, ServletContext test) throws IllegalStateException, IOException {
+	private String getFileNameForEntity;
+	
+	public void saveFile(MultipartFile file, ServletContext app) throws IllegalStateException, IOException {
 		if(!file.isEmpty()) {
 			String getFile = file.getOriginalFilename();
 			String getExtension = FilenameUtils.getExtension(getFile);
-			String filenamnRandom = generateRandomPassword(20);
+			String filenamnRandom = generateRandomName(20);
+			getFileNameForEntity = filenamnRandom;
 			String filename = filenamnRandom + "." + getExtension;
 			
-			File saveFile = new File(test.getRealPath("/docs/" + filename));
+			File saveFile = new File(app.getRealPath("/imgProducts/" + filename));
 			file.transferTo(saveFile);
+		}else {
+			File getDefaulImg = new File(app.getRealPath("/defaulImgProducts/default.png"));
+			String getExtenstionOfDefault = FilenameUtils.getExtension(getDefaulImg.getName());
+			String rdFileName = generateRandomName(20);
+			getFileNameForEntity = rdFileName;
+			String fileDefault = rdFileName + "." + getExtenstionOfDefault;
+			File saveFile = new File(app.getRealPath("/imgProducts/" + fileDefault));
+			FileUtils.copyFile(getDefaulImg, saveFile);
+//			System.err.println(getExtenstionOfDefault);
+//			System.err.println("đang null");
 		}
 	}
+	
+	public void saveFileNewVer(String filename, MultipartFile multipartFile,ServletContext app) throws IOException {
+		Path test = Paths.get(app.getRealPath("/imgProducts"));
+		try (InputStream ips = multipartFile.getInputStream()){
+			Path filePath = test.resolve(filename);
+			Files.copy(ips, filePath, StandardCopyOption.REPLACE_EXISTING);
+		} catch (Exception e) {
+			throw new IOException("lỗi",e);
+		}
+	}
+	
+
+	public String getGetFileNameForEntity() {
+		return getFileNameForEntity;
+	}
+	
 }

@@ -106,7 +106,10 @@ public class taiKhoan {
 				
 				
 				acc.setAuthoritieses(list);
+<<<<<<< HEAD
 				
+=======
+>>>>>>> branch 'master' of https://github.com/trung3/Normal_J6.git
 				acc.setPassword(pe.encode(acc.getPassword()));
 				
 				accountDAO.save(acc);
