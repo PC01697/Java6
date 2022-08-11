@@ -133,6 +133,7 @@ app.controller("categoryCrt", function ($scope, categoryService) {
 
 app.controller("accountsCrt", function ($scope, accountService) {
   $scope.account = [];
+  
   $scope.alertError = [];
   $scope.closeAlert = function (index) {
     $scope.alertError.splice(index, 1);
@@ -245,7 +246,6 @@ app.controller("accountsCrt", function ($scope, accountService) {
    //for update category
   $scope.updateAccount = function () {
 	
-	
     accountService
       .accountUpdate($scope.id, JSON.stringify($scope.username,$scope.password,$scope.fullname,$scope.email))
       .then(function successCallback(response) {
@@ -265,6 +265,10 @@ app.controller("accountsCrt", function ($scope, accountService) {
   $scope.backToCreate = function () {
     clearForm();
   };
+  $scope.roles = [
+	'TRUNG'
+];
+  
 });
 
 //---------------------------------------------Product controler --------------------------------------------------------

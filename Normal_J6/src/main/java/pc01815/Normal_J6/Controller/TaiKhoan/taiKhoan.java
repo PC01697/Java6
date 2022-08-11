@@ -102,10 +102,8 @@ public class taiKhoan {
 				
 				Roles roles = rolesDAO.findByName("USER");
 				
-				
-				
-				
 				acc.setAuthoritieses(list);
+
 				acc.setPassword(pe.encode(acc.getPassword()));
 				
 				accountDAO.save(acc);
