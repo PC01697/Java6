@@ -268,8 +268,9 @@ app.controller("accountsCrt", function ($scope, accountService) {
 });
 
 //---------------------------------------------Product controler --------------------------------------------------------
-app.controller("productCrt", function ($scope, productService) {
+app.controller("productCrt", function ($scope, productService,categoryService) {
   $scope.product = [];
+  $scope.category = [];
   $scope.alertError = [];
   $scope.closeAlert = function (index) {
     $scope.alertError.splice(index, 1);
@@ -279,7 +280,7 @@ app.controller("productCrt", function ($scope, productService) {
   $scope.pageSize = 5;
   
   
-function reloadTable() {
+	function reloadTable() {
     setTimeout(function () {
       $scope.$apply(function () {
         productService.productGetAll().then(function (response) {
@@ -298,7 +299,27 @@ function reloadTable() {
  	productService.productGetAll().then(function (resp) {
     	$scope.product = resp.data;
   	});
+  	
+// category get all
+	categoryService.categoryGetAll().then(function (response) {
+    $scope.category = response.data;
+  });
+  
+// create category
+$scope.createProduct = function (){
+	
+}
+	
 
+// delete product
+	$scope.deleteProduct = function (id){
+		productService.productDelete(id).then(function successCallback(resp){
+			 $scope.alertError = [
+        { type: "success", msg: "Bạn đã xóa thành công" },
+      		];
+		});
+		reloadTable();
+	}
 	
   
 });

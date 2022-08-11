@@ -56,6 +56,7 @@ public class ProductsRestController {
 		return new ResponseEntity<List<Products>>(productsService.findAllProductService().stream().collect(Collectors.toList()),HttpStatus.OK);
 	}
 	
+	
 	@GetMapping("/products/{productsName}")
 	public ResponseEntity<List<Products>> findProductsByName(@PathVariable("productsName") String productsName){
 		List<Products> list = productsService.findProductsByNameService("%" + productsName + "%");
@@ -66,15 +67,13 @@ public class ProductsRestController {
 		}
 	}
 	
-//	@PostMapping(value = "/products", consumes = "multipart/form-data")
-//	public ResponseEntity<Products> saveCategory(@RequestParam(value = "fileProduct") MultipartFile file,@RequestBody Products products) throws IllegalStateException, IOException{
-//		FileUploadUtil fileUtil = new FileUploadUtil();
-//		fileUtil.saveFile(file, app);
-////		return new ResponseEntity<Products>(productsService.saveProductsService(products),HttpStatus.CREATED);
-//		return new ResponseEntity<Products>(products,HttpStatus.CREATED);
-//	}
-
 	
+	@PostMapping("/test")
+	public String test(@RequestPart("x") String x) {
+		return "test thử" + x;
+	}
+	
+
 	@PostMapping(value = "/products", consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE})
 	public ResponseEntity<Products> saveCategory(@RequestPart(value = "fileProduct") MultipartFile file,@RequestPart(value = "product") @Valid Products products) throws IllegalStateException, IOException{
 //		String filename = StringUtils.cleanPath(file.getOriginalFilename());
