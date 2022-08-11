@@ -113,7 +113,8 @@
                         <div class="col-lg-4 col-md-12">
                             <div class="cart-box mt-all-30">
                                 <ul class="d-flex justify-content-lg-end justify-content-center align-items-center">
-                                    <li><a href="../giohang"><i class="lnr lnr-cart"></i><span class="my-cart"><span class="total-pro">${soluong}</span><span  th:text="#{lo.mn.cart}" ></span></span></a>
+                                
+                                    <li><a href="../giohang"><i class="lnr lnr-cart"></i><span class="my-cart"><span class="total-pro">{{cart.count}}</span><span  th:text="#{lo.mn.cart}" ></span></span></a>
                                         
                                     </li>
                                    
@@ -415,7 +416,7 @@
         <!-- Quick View Content End -->
     </div>
     <!-- Main Wrapper End Here -->
- <script src="/js/shopping-cart-app.js"></script>
+ <script src="/js/cart/shopping-cart-app.js"></script>
   <!-- jquery 3.2.1 -->
     <script src="..\js\vendor\jquery-3.2.1.min.js"></script>
     <!-- Countdown js -->
