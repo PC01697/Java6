@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -43,7 +43,7 @@ public class AccountServiceImpl implements AccountsService{
 
 	@Autowired
 	RolesRepository roleRepo;
-   
+	
 	@Override
 	public List<Accounts> getAllService() {
 		List<Accounts> listAccount = accountsRepository.findAll();
@@ -64,7 +64,7 @@ public class AccountServiceImpl implements AccountsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//	   BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
+	   BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
 			Accounts account = accountsRepository.findByUsername(username);
 
 			String pass = account.getPassword();

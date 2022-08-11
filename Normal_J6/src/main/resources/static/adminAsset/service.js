@@ -82,9 +82,9 @@ function CreateAccount(accountObject) {
     return $http.post("/api/accounts", accountObject);
   }
  
-function UpdateAccount(idAccount, usernameAccount,passwordAccount,fullnameAccount,emailAccount) {
+function UpdateAccount(idAccount, entity) {
 	
-    return $http.put("/api/accounts/" + idAccount, usernameAccount,passwordAccount,fullnameAccount,emailAccount);
+    return $http.put("/api/accounts/" + idAccount,entity);
   }
 
  function DeleteAccount(idAccount) {
@@ -102,8 +102,8 @@ this.accountCreate = (accountObject) => {
     return accountFactory.CreateAccount(accountObject);
   };
   
-  this.accountUpdate = (idAccount,usernameAccount,passwordAccount,fullnameAccount,emailAccount) => {
-    return accountFactory.UpdateAccount(idAccount, usernameAccount,passwordAccount,fullnameAccount,emailAccount);
+  this.accountUpdate = (idAccount,entity) => {
+    return accountFactory.UpdateAccount(idAccount, entity);
     
   };
     this.accountDelete = (idAccount) => {
