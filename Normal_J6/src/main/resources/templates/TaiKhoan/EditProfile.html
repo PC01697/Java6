@@ -19,19 +19,19 @@
 <!--header start here-->
 <div class="header">
 		<div class="header-main">
-		       <h2 style="color:white;text-align:center;font-size: 50px;padding-bottom: 0.8em">CẬP NHẬT TÀI KHOẢN</h2>
+		       <h2 style="color:white;text-align:center;font-size:40px;padding-bottom: 0.8em">CẬP NHẬT TÀI KHOẢN</h2>
 		       <center><span style="color:red" th:text="${tb}"></span></center>
 			<div class="header-bottom">
 				<div class="header-right w3agile">
 					
 			<div class="header-left-bottom agileinfo">
 						
-	<form action="/changePass" method="post">
+	<form action="/editProfile" method="post">
 					  
 		<input type="text"name="username" th:value="${username}" placeholder="Username"readonly/>
-		<input type="password"name="password" th:value="${password}" placeholder="Password"/>			
-		<input type="text"name="fullname" th:value="${username}" placeholder="Username"readonly/>
-			   
+		<input type="password"name="password" th:value="${pass}" placeholder="Password"/>			
+		<input type="text"name="fullname" th:value="${fullname}" placeholder="Username"/>
+		<input type="text"name="email" th:value="${email}" placeholder="Email"/>	   
 	<input type="submit" value="Gửi">
   </form>	
 					

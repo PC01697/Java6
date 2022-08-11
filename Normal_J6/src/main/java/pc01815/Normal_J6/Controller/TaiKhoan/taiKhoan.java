@@ -267,4 +267,40 @@ public class taiKhoan {
 		return "TaiKhoan/ChangePass";
 	}
 	
+	@GetMapping("/editProfile")
+	public String edit(Model m) {
+		m.addAttribute("username",req.getRemoteUser());
+		Accounts acc = accountDAO.findByUsername(req.getRemoteUser());
+		if(acc != null) {
+			m.addAttribute("pass",acc.getPassword());
+			m.addAttribute("fullname",acc.getFullname());
+			m.addAttribute("email", acc.getEmail());
+		}
+		return "TaiKhoan/EditProfile";
+	}
+	
+	@PostMapping("/editProfile")
+	public String edit(Model m,@RequestParam("password") String pass,@RequestParam("fullname") String fullname,
+			@RequestParam("email") String email
+			) {
+		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
+		m.addAttribute("username",req.getRemoteUser());
+		Accounts acc = accountDAO.findByUsername(req.getRemoteUser());
+		if(acc != null) {
+			m.addAttribute("pass",acc.getPassword());
+			m.addAttribute("fullname",acc.getFullname());
+			m.addAttribute("email",acc.getEmail());
+			if(!pass.isEmpty() && !fullname.isEmpty() && !email.isEmpty()) {
+				acc.setPassword(pe.encode(pass));
+				acc.setFullname(fullname);
+				acc.setEmail(email);
+				accountDAO.save(acc);
+				m.addAttribute("tb","Cập nhật thành công");
+				
+			}else {
+				m.addAttribute("tb","Cập nhật thất bại");
+			}
+		}
+		return "TaiKhoan/EditProfile";
+	}
 }
