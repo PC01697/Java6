@@ -94,16 +94,7 @@ app.controller("categoryCrt", function ($scope, categoryService) {
       $scope.alertError = [
         { type: "success", msg: "Bạn đã thêm xóa thành công" },
       ];
-    },function errorCallback(resp){
-		if(resp.status = 502){
-			 $scope.alertError = [
-            {
-              type: "danger",
-              msg: "Category đã tồn tại sản phẩm, vui lòng xóa sản phẩm trước",
-            },
-          ];	
-		}
-});
+    });
     clearForm();
     reloadTable();
   };
@@ -133,6 +124,7 @@ app.controller("categoryCrt", function ($scope, categoryService) {
 
 app.controller("accountsCrt", function ($scope, accountService) {
   $scope.account = [];
+  
   $scope.alertError = [];
   $scope.closeAlert = function (index) {
     $scope.alertError.splice(index, 1);
@@ -228,7 +220,13 @@ app.controller("accountsCrt", function ($scope, accountService) {
   $scope.fullname = fullname;
   $scope.email = email;
   $scope.show = true;
-    //console.log($scope.test)
+  $scope.accountEntity = {
+	username:username,
+	password:password,
+	fullname:fullname,
+	email:email
+}
+   console.log(JSON.stringify($scope.accountEntity))
   };
 
  
@@ -242,21 +240,30 @@ app.controller("accountsCrt", function ($scope, accountService) {
     reloadTable();
   };
 
-   //for update category
+   //for update account
   $scope.updateAccount = function () {
-	
-	
+	  var accountEntity1 = {
+    
+      username: $scope.username,
+      password:$scope.password,
+      fullname:$scope.fullname,
+      email:$scope.email
+    };
+	var x= JSON.parse(JSON.stringify(accountEntity1))
     accountService
-      .accountUpdate($scope.id, JSON.stringify($scope.username,$scope.password,$scope.fullname,$scope.email))
+      .accountUpdate($scope.id, accountEntity1)
       .then(function successCallback(response) {
 	 
         if (response.status == 200) {
           $scope.alertError = [
             { type: "success", msg: "Bạn đã cập nhật thành công" },
           ];
+
         }
       
-      });
+      },function errorCallback(resp){
+			console.log(resp.data);
+			});
   
     reloadTable();
   };
@@ -265,45 +272,11 @@ app.controller("accountsCrt", function ($scope, accountService) {
   $scope.backToCreate = function () {
     clearForm();
   };
-});
-
-//---------------------------------------------Product controler --------------------------------------------------------
-app.controller("productCrt", function ($scope, productService) {
-  $scope.product = [];
-  $scope.alertError = [];
-  $scope.closeAlert = function (index) {
-    $scope.alertError.splice(index, 1);
-  };
-  //pagination for ui boostrap
-  $scope.currentPage = 1;
-  $scope.pageSize = 5;
-  
-  
-function reloadTable() {
-    setTimeout(function () {
-      $scope.$apply(function () {
-        productService.productGetAll().then(function (response) {
-          $scope.product = response.data;
-        });
-      });
-      // AngularJS unaware of update to $scope
-    }, 100),
-      function (respone) {
-        console.log(respone);
-      };
-  }
-
-
-// product get all
- 	productService.productGetAll().then(function (resp) {
-    	$scope.product = resp.data;
-  	});
-
-	
+  $scope.roles = [
+	'TRUNG'
+];
   
 });
-
-
 
 
 

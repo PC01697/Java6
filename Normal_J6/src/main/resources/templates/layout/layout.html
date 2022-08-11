@@ -62,8 +62,8 @@
                                 
 
                                   <div th:if="${#request.remoteUser}">
-                                       <li><a href="../doimk" th:text="#{lo.mn.changepass}" ></a></li>
-                                        <li><a href="../capnhattk" th:text="#{lo.mn.updateacc}"  ></a></li>
+                                       <li><a href="/changePass" th:text="#{lo.mn.changepass}" ></a></li>
+                                        <li><a href="/editProfile" th:text="#{lo.mn.updateacc}"  ></a></li>
                                            <li><a href="../lichsu/${sessionScope.user.username}"  th:text="#{lo.mn.history}"></a></li>
 
                                       <li><a th:href="@{/security/logout}" th:text="#{lo.mn.logout}"></a></li>

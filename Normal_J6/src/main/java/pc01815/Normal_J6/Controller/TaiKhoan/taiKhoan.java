@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,8 +57,9 @@ public class taiKhoan {
     AuthoritiesRepository authDAO;
     @Autowired
     RolesRepository rolesDAO;
+//    @Autowired
+//	BCryptPasswordEncoder pe;
 	static String mail;
-    
     static int  randomInt;
     static int  passmoi;
     static String name;
@@ -66,7 +68,7 @@ public class taiKhoan {
 
 		return "TaiKhoan/login";
 	}
-
+	
 	@GetMapping("/register")
 	public String register(Model m) {
 		Accounts acc = new Accounts();
@@ -102,10 +104,8 @@ public class taiKhoan {
 				
 				Roles roles = rolesDAO.findByName("USER");
 				
-				
-				
-				
 				acc.setAuthoritieses(list);
+
 				acc.setPassword(pe.encode(acc.getPassword()));
 				
 				accountDAO.save(acc);
@@ -222,5 +222,85 @@ public class taiKhoan {
 			//abc
 		}
 		return "TaiKhoan/MaOTP";
+	}
+
+	@GetMapping("/changePass")
+	public String changePass(Model m) {
+		m.addAttribute("username",req.getRemoteUser());
+		return "TaiKhoan/ChangePass";
+	}
+	@PostMapping("/changePass")
+	public String changePass(Model m,@RequestParam("passwordcu") String passCu,
+			@RequestParam("passwordMoi") String passMoi,@RequestParam("passwordXN") String XNPass) {
+		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
+		
+		m.addAttribute("username",req.getRemoteUser());
+		Accounts acc = accountDAO.findByUsername(req.getRemoteUser());
+		if(acc != null) {
+			if(passMoi.isEmpty() || passMoi.isEmpty() || XNPass.isEmpty()) {
+				m.addAttribute("tb","Các dòng đang trống");
+			}else {
+				if(pe.matches(passCu,acc.getPassword())) {
+					if(pe.matches(passMoi,acc.getPassword())) {
+						m.addAttribute("tb","Mật khẩu này đã đổi trước đó");
+					}else {
+						if(passMoi.equals(XNPass)) {
+							acc.setPassword(pe.encode(passMoi));
+							accountDAO.save(acc);
+							m.addAttribute("tb","Đổi mật khẩu thành công");
+						}else {
+							m.addAttribute("tb","Xác nhận mật khẩu không đúng");
+						}
+					}
+					
+				
+				}else {
+					m.addAttribute("tb","Mật khẩu cũ không đúng");
+				}
+			}
+			
+			
+		}else {
+			m.addAttribute("tb","Username không tồn tại");
+		
+		}
+		return "TaiKhoan/ChangePass";
+	}
+	
+	@GetMapping("/editProfile")
+	public String edit(Model m) {
+		m.addAttribute("username",req.getRemoteUser());
+		Accounts acc = accountDAO.findByUsername(req.getRemoteUser());
+		if(acc != null) {
+			m.addAttribute("pass",acc.getPassword());
+			m.addAttribute("fullname",acc.getFullname());
+			m.addAttribute("email", acc.getEmail());
+		}
+		return "TaiKhoan/EditProfile";
+	}
+	
+	@PostMapping("/editProfile")
+	public String edit(Model m,@RequestParam("password") String pass,@RequestParam("fullname") String fullname,
+			@RequestParam("email") String email
+			) {
+		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
+		m.addAttribute("username",req.getRemoteUser());
+		Accounts acc = accountDAO.findByUsername(req.getRemoteUser());
+		if(acc != null) {
+			m.addAttribute("pass",acc.getPassword());
+			m.addAttribute("fullname",acc.getFullname());
+			m.addAttribute("email",acc.getEmail());
+			if(!pass.isEmpty() && !fullname.isEmpty() && !email.isEmpty()) {
+				acc.setPassword(pe.encode(pass));
+				acc.setFullname(fullname);
+				acc.setEmail(email);
+				accountDAO.save(acc);
+				m.addAttribute("tb","Cập nhật thành công");
+				
+			}else {
+				m.addAttribute("tb","Cập nhật thất bại");
+			}
+		}
+		return "TaiKhoan/EditProfile";
 	}
 }
