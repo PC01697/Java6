@@ -23,38 +23,38 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            <form role="form" enctype="multipart/form-data" method="post" ng-submit="createProduct()">
        			<div class="box-body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Name Product</label>
-                  <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Name Product">
+                  <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Name Product" ng-model="nameProduct">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Price</label>
-                  <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Price" min="1">
+                  <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Price" min="1" ng-model="priceProduct">
                 </div>
                 
                 <div class="form-group">
                   <label>Select</label>
-                  <select class="form-control" ng-repeat= "ctg in category">
-                   <option>---Chọn category ----</option>
-                    <option>{{ctg.name}}</option>
+                  <select class="form-control" ng-model="categoryId">
+                  <option value="">-Chọn category -</option>
+                    <option value="{{ctg.id}}" ng-repeat= "ctg in category">{{ctg.name}}</option>
                   </select>
                 </div>
                 
                 <div class="form-group">
                   <label for="exampleInputPassword1">Quantity</label>
-                  <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Quantity">
+                  <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Quantity" ng-model="quantity">
                 </div>
                 
                 <div class="form-group">
                   <label>Description</label>
-                  <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                  <textarea class="form-control" rows="3" placeholder="Enter ..." ng-model="description"></textarea>
                 </div>
                 
                 <div class="form-group">
                   <label for="exampleInputFile">File input</label>
-                  <input type="file" id="exampleInputFile">
+                  <input type="file" id="exampleInputFile" file-model="myFile">
                 </div>
               </div>
               <div class="box-footer">

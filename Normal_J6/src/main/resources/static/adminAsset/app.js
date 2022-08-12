@@ -283,7 +283,6 @@ app.controller("productCrt", function ($scope, productService,categoryService) {
   $scope.currentPage = 1;
   $scope.pageSize = 5;
   
-  
 	function reloadTable() {
     setTimeout(function () {
       $scope.$apply(function () {
@@ -311,8 +310,24 @@ app.controller("productCrt", function ($scope, productService,categoryService) {
   
 // create category
 $scope.createProduct = function (){
+	 var formProduct = {
+		name: $scope.nameProduct,
+		unitPrice: $scope.priceProduct,
+		category:{
+			id: $scope.categoryId
+		},
+		quantity: $scope.quantity,
+		description: $scope.description
+	}
+
 	
-}
+	productService.productCreateProduct(formProduct).then(function successCallback(resp){
+		if(resp == 200){
+			console.log("ok")
+		}
+	})
+	console.log(JSON.stringify(formProduct))
+	}
 	
 
 // delete product

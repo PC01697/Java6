@@ -74,16 +74,27 @@ public class ProductsRestController {
 	}
 	
 
-	@PostMapping(value = "/products", consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE})
-	public ResponseEntity<Products> saveCategory(@RequestPart(value = "fileProduct") MultipartFile file,@RequestPart(value = "product") @Valid Products products) throws IllegalStateException, IOException{
+	@PostMapping(value = "/products", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+	public ResponseEntity<Products> saveProduct(@RequestPart(value = "product") @Valid Products products) throws IllegalStateException, IOException{
 //		String filename = StringUtils.cleanPath(file.getOriginalFilename());
-		FileUploadUtil fileUtil = new FileUploadUtil();
-		fileUtil.saveFile(file, app);
-		products.setImage(fileUtil.getGetFileNameForEntity());
-		System.err.println(products.getClass().getTypeName());
-//		productsService.saveProductsService(products);
-		return new ResponseEntity<Products>(productsService.saveProductsService(products),HttpStatus.CREATED);
+		if(products.getCategory() == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}else {
+			
+			products.setAvaible(true);
+			products.setComments(null);
+			System.err.println(products.getClass().getTypeName());
+//			productsService.saveProductsService(products);
+			return new ResponseEntity<Products>(productsService.saveProductsService(products),HttpStatus.CREATED);
+		}
 	}
+	
+//	@PostMapping(value = "/products", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+//	public ResponseEntity<Products> saveProduct(@RequestPart(value = "product") @Valid Products products) throws IllegalStateException, IOException{
+////		String filename = StringUtils.cleanPath(file.getOriginalFilename());
+//		products.setAvaible(true);
+//		return new ResponseEntity<Products>(productsService.saveProductsService(products),HttpStatus.CREATED);
+//	}
 	
 	
 	
