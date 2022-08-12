@@ -33,7 +33,7 @@ public class ProductsServiceImpl implements ProductsService{
 //	}
 	
 	
-	
+
 
 	@Override
 	public List<Products> findProductsByNameService(String productName) {
@@ -44,7 +44,11 @@ public class ProductsServiceImpl implements ProductsService{
 	public void deleteProductsById(int id) {
 		 productsRepository.deleteById(id);
 	}
-
+	@Override
+	public Products findById(Integer id) {
+		
+		return  productsRepository.findById(id).get();
+	}
 	@Override
 	public Optional<Products> findByIdProducts(int id) {
 		return productsRepository.findById(id);

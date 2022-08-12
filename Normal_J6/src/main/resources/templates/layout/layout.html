@@ -21,7 +21,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" > 
     <link rel="stylesheet" th:href="@{/css/responsive.css}" >
   
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script th:src="@{\js\vendor\modernizr-3.5.0.min.js}"></script>
     
 </head>
@@ -62,8 +62,8 @@
                                 
 
                                   <div th:if="${#request.remoteUser}">
-                                       <li><a href="../doimk" th:text="#{lo.mn.changepass}" ></a></li>
-                                        <li><a href="../capnhattk" th:text="#{lo.mn.updateacc}"  ></a></li>
+                                       <li><a href="/changePass" th:text="#{lo.mn.changepass}" ></a></li>
+                                        <li><a href="/editProfile" th:text="#{lo.mn.updateacc}"  ></a></li>
                                            <li><a href="../lichsu/${sessionScope.user.username}"  th:text="#{lo.mn.history}"></a></li>
 
                                       <li><a th:href="@{/security/logout}" th:text="#{lo.mn.logout}"></a></li>
@@ -113,22 +113,23 @@
                         <div class="col-lg-4 col-md-12">
                             <div class="cart-box mt-all-30">
                                 <ul class="d-flex justify-content-lg-end justify-content-center align-items-center">
-                                    <li><a href="../giohang"><i class="lnr lnr-cart"></i><span class="my-cart"><span class="total-pro">${soluong}</span><span  th:text="#{lo.mn.cart}" ></span></span></a>
+                                
+                                    <li><a href="../giohang"><i class="lnr lnr-cart"></i><span class="my-cart"><span class="total-pro">{{cart.count}}</span><span  th:text="#{lo.mn.cart}" ></span></span></a>
                                         
                                     </li>
                                    
                                     </li>
 
-                                     <li><a href="/login"><i class="lnr lnr-user"></i><span class="my-cart"><span>  
+                                     <li><a ><i class="lnr lnr-user"></i><span class="my-cart"><span>  
 						            
                                     </li>
 
                                        
-                                         <div th:if="${#request.remoteUser}">
+                                         <div  th:if="${#request.remoteUser}">
                                                    [[${#request.remoteUser}]]
                                             </div>
-                                            <div th:unless="${#request.remoteUser}">
-                                                  <strong th:text="#{lo.mn.login}"></strong>
+                                            <div  th:unless="${#request.remoteUser}">
+                                               <a href="/login"  > <strong th:text="#{lo.mn.login}"></strong></a>
                                             </div>
                                             
                                     </span></a>
@@ -415,7 +416,7 @@
         <!-- Quick View Content End -->
     </div>
     <!-- Main Wrapper End Here -->
- <script src="/js/shopping-cart-app.js"></script>
+ <script src="/js/cart/shopping-cart-app.js"></script>
   <!-- jquery 3.2.1 -->
     <script src="..\js\vendor\jquery-3.2.1.min.js"></script>
     <!-- Countdown js -->

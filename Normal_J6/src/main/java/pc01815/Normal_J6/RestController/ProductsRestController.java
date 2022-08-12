@@ -49,14 +49,18 @@ public class ProductsRestController {
 //			){
 //		return new ResponseEntity<List<Products>>(productsService.findAllCProductsService(page,sortBy, entry).stream().collect(Collectors.toList()),HttpStatus.OK);
 //	}
-	
+
 	
 	@GetMapping(value = "/products", produces = "application/json")
 	public ResponseEntity<List<Products>> findAllCategory(){
 		return new ResponseEntity<List<Products>>(productsService.findAllProductService().stream().collect(Collectors.toList()),HttpStatus.OK);
 	}
-	
-	
+
+	@GetMapping("/product/{id}")
+	public Products getOne (@PathVariable("id") Integer id) {
+		return productsService.findById(id);
+	}
+
 	@GetMapping("/products/{productsName}")
 	public ResponseEntity<List<Products>> findProductsByName(@PathVariable("productsName") String productsName){
 		List<Products> list = productsService.findProductsByNameService("%" + productsName + "%");
