@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,7 @@ import pc01815.Normal_J6.Entity.Products;
 import pc01815.Normal_J6.Services.ProductsService;
 import pc01815.Normal_J6.Util.FileUploadUtil;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("api")
 @Validated
