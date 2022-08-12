@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class dashboardAdmin {
 
 	
-	@RequestMapping(value = {"/admin","/admin/products","/admin/accounts","/admin/categories"})
+	@RequestMapping(value = {"/admin","/admin/products","/admin/authorities","/admin/accounts","/admin/categories"})
 	public String adminPage() {
 
 		return "admin/dashboard";

@@ -38,6 +38,7 @@ public class AccountServiceImpl implements AccountsService{
 	@Autowired
 	AccountsRepository accountsRepository;
 	
+	
 	@Autowired
 	AuthoritiesRepository authRepo;
 
@@ -112,5 +113,11 @@ public class AccountServiceImpl implements AccountsService{
 	@Override
 	public Optional<Accounts> findByIdAccount(int id) {
 		return accountsRepository.findById(id);
+	}
+
+	@Override
+	public Accounts findByEmailService(String email) {
+		
+		return accountsRepository.findByUsername(email);
 	}
 }

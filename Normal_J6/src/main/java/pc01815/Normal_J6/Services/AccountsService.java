@@ -21,7 +21,8 @@ public interface AccountsService extends UserDetailsService {
 	Accounts saveAccountService(Accounts accounts);
 	
 	Accounts findByUsernameService(String username);
-
+     
+	Accounts findByEmailService(String email);
 	void deleteAccountById(int id);
 
 	int checkAccountName(String username);

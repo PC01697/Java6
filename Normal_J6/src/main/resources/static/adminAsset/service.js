@@ -116,7 +116,56 @@ app.service("handleMsgService", function (checkMsgShow) {
     return checkMsgShow.checkMsg(id, msg);
   };
 });
+//-----------------------------------------------authrizing------------------------------------
+app.factory("authoritiesFactory", ($http) => {
+  var service = {};
+  service.GetAll = GetAll;
+  service.CreateAuthorities = CreateAuthorities;
+  service.UpdateAuthorities = UpdateAuthorities;
+  service.DeleteAuthorities = DeleteAuthorities;
+  function GetAll() {
+    return $http.get("/api/authorities");
+  }
 
+ 
+function CreateAuthrizing(AuthrizingObject) {
+    return $http.post("/api/authorities", AuthrizingObject);
+  }
+ 
+function UpdateAuthrizing(idAuthrizing, entity) {
+	
+    return $http.put("/api/authorities/" + idAuthrizing,entity);
+  }
+
+ function DeleteAuthrizing(idAuthrizing) {
+    return $http.delete("/api/authorities/" + idAuthrizing);
+  }
+  return service;
+});
+
+app.service("authoritiesService", function (authoritiesFactory) {
+  this.authrizingFactoryGetAll = () => {
+    return authoritiesFactory.GetAll();
+  };
+  
+this.AuthoritiesCreate = (authoritiesObject) => {
+    return authoritiesFactory.CreateAuthorities(authoritiesObject);
+  };
+  
+  this.AuthoritiesUpdate = (idAuthrizing,entity) => {
+    return AuthrizingFactory.UpdateAuthrizing(idAuthrizing, entity);
+    
+  };
+    this.AuthrizingDelete = (idAuthrizing) => {
+    return AuthrizingFactory.DeleteAuthrizing(idAuthrizing);
+  };
+});
+
+app.service("handleMsgService", function (checkMsgShow) {
+  this.handleMsg = (id, msg) => {
+    return checkMsgShow.checkMsg(id, msg);
+  };
+});
 //---------------------------------------- product factory------------------------------------
 app.factory("productFactory", ($http) => {
   var service = {};

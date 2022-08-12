@@ -24,5 +24,11 @@ public class AuthoritiesServiceImpl implements AuthoritiesService {
 		
 	}
 
+	@Override
+	public Authorities saveAuthoritiesService(Authorities authorities) {
+		
+		return authRepo.save(authorities);
+	}
+
 	
 }

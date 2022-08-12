@@ -120,7 +120,7 @@ app.controller("categoryCrt", function ($scope, categoryService) {
   };
 });
 
-//--------------------------------------------------------------------------
+// ACCOUNT--------------------------------------------------------------------------
 
 app.controller("accountsCrt", function ($scope, accountService) {
   $scope.account = [];
@@ -134,6 +134,7 @@ app.controller("accountsCrt", function ($scope, accountService) {
   $scope.password;
   $scope.fullname;
   $scope.email;
+  
   
   //pagination for ui boostrap
   $scope.currentPage = 1;
@@ -172,12 +173,14 @@ app.controller("accountsCrt", function ($scope, accountService) {
 
   
  $scope.accountCreate = function () {
+    
     var accountEntity = {
     
       username: $scope.username,
       password:$scope.password,
       fullname:$scope.fullname,
-      email:$scope.email
+      email:$scope.email,
+     
     };
     
 
@@ -272,11 +275,28 @@ app.controller("accountsCrt", function ($scope, accountService) {
   $scope.backToCreate = function () {
     clearForm();
   };
-  $scope.roles = [
-	'TRUNG'
-];
+ 
   
 });
+
+// Authrizing--------------------------------------------------------------------------
+
+app.controller("authoritiesCrt", function ($scope,$http) {
+       $http.get("/api/authorities").then(resp =>{
+	$scope.db = resp.data;
+	console.log(resp.data)
+  })
+  
+  $scope.index_of = function(username,role){
+	return $scope.db.authorities
+	.findIndex(a => a.accounts.username == username && role.id == role);
+}
+
+   
+});
+
+
+
 
 
 

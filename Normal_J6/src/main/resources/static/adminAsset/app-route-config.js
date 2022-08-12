@@ -23,6 +23,13 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     
   };
 
+   var authoritiesState = {
+    name: "authorities",
+    url: "/authorities",
+    templateUrl: "../adminAsset/components/authrizing.html",
+    controller: "authoritiesCrt",
+    
+  };
   var categoryState = {
     name: "categories",
     url: "/categories",
@@ -33,6 +40,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 $stateProvider.state(productCreateState);
   $stateProvider.state(productState);
   $stateProvider.state(accountState);
+  $stateProvider.state(authoritiesState);
   $stateProvider.state(categoryState);
   $urlRouterProvider.otherwise("/");
   $locationProvider.html5Mode({

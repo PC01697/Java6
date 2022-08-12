@@ -48,11 +48,7 @@ public class AccountsRestController {
 	AuthoritiesService AuthService;
 	@GetMapping(value = "/accounts")
 	public List<Accounts> getAll(Model m){
-	     List<Roles> roles = roleRepository.findAll();
-	     for (Roles roles2 : roles) {
-			System.err.println("Vt:"+roles2.getName());
-		}
-	     m.addAttribute("abc","TRUNG");
+	    
 		return accountsService.getAllService().stream().collect(Collectors.toList());
 	}
 
@@ -69,6 +65,7 @@ public class AccountsRestController {
 		}else {
 			account.setPassword(pe.encode(account.getPassword()));
 			return new ResponseEntity<Accounts>(accountsService.saveAccountService(account),HttpStatus.CREATED);
+			 
 		}
 	}
 	@PutMapping(value = "/accounts/{id}")

@@ -43,6 +43,7 @@ import pc01815.Normal_J6.Repository.AccountsRepository;
 import pc01815.Normal_J6.Repository.AuthoritiesRepository;
 import pc01815.Normal_J6.Repository.RolesRepository;
 import pc01815.Normal_J6.Services.AccountsService;
+import pc01815.Normal_J6.Services.AuthoritiesService;
 
 @Controller
 public class taiKhoan {
@@ -52,9 +53,9 @@ public class taiKhoan {
 	@Autowired
 	HttpServletResponse resp;
 	@Autowired
-	AccountsRepository accountDAO;
+	AccountsService accountService;
     @Autowired
-    AuthoritiesRepository authDAO;
+    AuthoritiesService authoritiesService;
     @Autowired
     RolesRepository rolesDAO;
 //    @Autowired
@@ -85,12 +86,12 @@ public class taiKhoan {
 
 		} else {
 			Integer kt = 0;
-			Accounts account = accountDAO.findByUsername(acc.getUsername());
+			Accounts account = accountService.findByUsernameService(acc.getUsername());
 			if (account != null) {
 				kt++;
 				m.addAttribute("ktTonTai", "User đã tồn tại.");
 			}
-			if (accountDAO.findByEmail(acc.getEmail()) != null) {
+			if (accountService.findByEmailService(acc.getEmail()) != null) {
 				kt++;
 				m.addAttribute("ktEmail", "Email đã tồn tại");
 			}
@@ -108,11 +109,11 @@ public class taiKhoan {
 
 				acc.setPassword(pe.encode(acc.getPassword()));
 				
-				accountDAO.save(acc);
+				accountService.saveAccountService(acc);
 				Authorities auth = new Authorities();
 				auth.setAccounts(acc);
 				auth.setRoles(roles);
-				authDAO.save(auth);
+				authoritiesService.saveAuthoritiesService(auth);
 				m.addAttribute("tb","Đăng ký thành công");
 			}
 
@@ -181,7 +182,7 @@ public class taiKhoan {
 	}
 	@PostMapping("/fogetPass")
 	public String forgetPass(Model m,@RequestParam("username")String username,@RequestParam("email") String email) {
-		Accounts acc = accountDAO.findByUsername(username);
+		Accounts acc = accountService.findByUsernameService(username);
 		m.addAttribute("username", username);
 		m.addAttribute("email", email);
 		if(acc != null && acc.getEmail().equalsIgnoreCase(email)) {
@@ -209,7 +210,7 @@ public class taiKhoan {
 			m.addAttribute("tbforgotPassword","Mã xác nhận không đúng!");
 		 System.out.println("mã:"+randomInt);
 		}else {
-			Accounts acc = accountDAO.findByUsername(name);
+			Accounts acc = accountService.findByUsernameService(name);
 			for(int i=0;i<1;i++) {
 	            double random = Math.random();		             
 	           random =random *1000000;   
@@ -218,7 +219,7 @@ public class taiKhoan {
 			String nd ="Mật khẩu của bạn là:"+randomInt;
 			this.Mail(m,mail,nd);
 			acc.setPassword(pe.encode(randomInt+""));
-			accountDAO.save(acc);
+			accountService.saveAccountService(acc);
 			//abc
 		}
 		return "TaiKhoan/MaOTP";
@@ -235,7 +236,7 @@ public class taiKhoan {
 		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
 		
 		m.addAttribute("username",req.getRemoteUser());
-		Accounts acc = accountDAO.findByUsername(req.getRemoteUser());
+		Accounts acc = accountService.findByUsernameService(req.getRemoteUser());
 		if(acc != null) {
 			if(passMoi.isEmpty() || passMoi.isEmpty() || XNPass.isEmpty()) {
 				m.addAttribute("tb","Các dòng đang trống");
@@ -246,7 +247,7 @@ public class taiKhoan {
 					}else {
 						if(passMoi.equals(XNPass)) {
 							acc.setPassword(pe.encode(passMoi));
-							accountDAO.save(acc);
+							accountService.saveAccountService(acc);
 							m.addAttribute("tb","Đổi mật khẩu thành công");
 						}else {
 							m.addAttribute("tb","Xác nhận mật khẩu không đúng");
@@ -270,7 +271,7 @@ public class taiKhoan {
 	@GetMapping("/editProfile")
 	public String edit(Model m) {
 		m.addAttribute("username",req.getRemoteUser());
-		Accounts acc = accountDAO.findByUsername(req.getRemoteUser());
+		Accounts acc = accountService.findByUsernameService(req.getRemoteUser());
 		if(acc != null) {
 			m.addAttribute("pass",acc.getPassword());
 			m.addAttribute("fullname",acc.getFullname());
@@ -285,7 +286,7 @@ public class taiKhoan {
 			) {
 		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
 		m.addAttribute("username",req.getRemoteUser());
-		Accounts acc = accountDAO.findByUsername(req.getRemoteUser());
+		Accounts acc = accountService.findByUsernameService(req.getRemoteUser());
 		if(acc != null) {
 			m.addAttribute("pass",acc.getPassword());
 			m.addAttribute("fullname",acc.getFullname());
@@ -294,7 +295,7 @@ public class taiKhoan {
 				acc.setPassword(pe.encode(pass));
 				acc.setFullname(fullname);
 				acc.setEmail(email);
-				accountDAO.save(acc);
+				accountService.saveAccountService(acc);
 				m.addAttribute("tb","Cập nhật thành công");
 				
 			}else {
