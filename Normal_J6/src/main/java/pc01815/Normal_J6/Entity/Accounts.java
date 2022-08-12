@@ -26,7 +26,7 @@ import lombok.Data;
 @Table(name = "accounts", catalog = "normal_j6")
 public class Accounts implements java.io.Serializable {
 
-	
+	//abc
 	private Integer id;
 	@NotBlank(message = "")
 	private String username;
