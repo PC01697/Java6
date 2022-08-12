@@ -279,6 +279,7 @@ app.controller("accountsCrt", function ($scope, accountService) {
   
 });
 
+
 // Authrizing--------------------------------------------------------------------------
 
 app.controller("authoritiesCrt", function ($scope,$http) {
@@ -296,6 +297,79 @@ app.controller("authoritiesCrt", function ($scope,$http) {
 });
 
 
+
+
+//---------------------------------------------Product controler --------------------------------------------------------
+app.controller("productCrt", function ($scope, productService,categoryService) {
+  $scope.product = [];
+  $scope.category = [];
+  $scope.alertError = [];
+  $scope.closeAlert = function (index) {
+    $scope.alertError.splice(index, 1);
+  };
+  //pagination for ui boostrap
+  $scope.currentPage = 1;
+  $scope.pageSize = 5;
+  
+	function reloadTable() {
+    setTimeout(function () {
+      $scope.$apply(function () {
+        productService.productGetAll().then(function (response) {
+          $scope.product = response.data;
+        });
+      });
+      // AngularJS unaware of update to $scope
+    }, 100),
+      function (respone) {
+        console.log(respone);
+      };
+  }
+
+
+// product get all
+ 	productService.productGetAll().then(function (resp) {
+    	$scope.product = resp.data;
+  	});
+  	
+// category get all
+	categoryService.categoryGetAll().then(function (response) {
+    $scope.category = response.data;
+  });
+  
+// create category
+$scope.createProduct = function (){
+	 var formProduct = {
+		name: $scope.nameProduct,
+		unitPrice: $scope.priceProduct,
+		category:{
+			id: $scope.categoryId
+		},
+		quantity: $scope.quantity,
+		description: $scope.description
+	}
+
+	
+	productService.productCreateProduct(formProduct).then(function successCallback(resp){
+		if(resp == 200){
+			console.log("ok")
+		}
+	})
+	console.log(JSON.stringify(formProduct))
+	}
+	
+
+// delete product
+	$scope.deleteProduct = function (id){
+		productService.productDelete(id).then(function successCallback(resp){
+			 $scope.alertError = [
+        { type: "success", msg: "Bạn đã xóa thành công" },
+      		];
+		});
+		reloadTable();
+	}
+	
+  
+});
 
 
 
