@@ -103,53 +103,16 @@ public class ProductsRestController {
 			getProduct.setImage(fileUtil.getGetFileNameForEntity());
 			getProduct.setAvaible(true);
 			getProduct.setComments(null);
-			System.err.println(products.getClass().getTypeName());
 //			productsService.saveProductsService(products);
 			return new ResponseEntity<Products>(productsService.saveProductsService(getProduct),HttpStatus.CREATED);
 		}
 	
 	}
-//	
-//	String test;
-//	@PostMapping(value = "/products/saveImgProduct",consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-//	public String saveImgProdcut(@RequestPart(value = "fileProduct", required = false) MultipartFile file) throws IllegalStateException, IOException{
-//		FileUploadUtil fileUtil = new FileUploadUtil();
-//		test = fileUtil.getGetFileNameForEntity();
-//		fileUtil.saveFile(file, app);
-//		return test;
-//	}
-//	
-//	@PostMapping(value = "/products/saveProduct", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-//	public ResponseEntity<Products> saveProduct(@RequestPart(value = "product") @Valid Products products) throws IllegalStateException, IOException {
-//		FileUploadUtil fileUtil = new FileUploadUtil();
-//		products.setImage();
-//		return new ResponseEntity<Products>(productsService.saveProductsService(products),HttpStatus.CREATED);
-
-//	@PostMapping(value = "/products", consumes = "multipart/form-data")
-//	public ResponseEntity<Products> saveCategory(@RequestParam(value = "fileProduct") MultipartFile file,@RequestBody Products products) throws IllegalStateException, IOException{
-//		FileUploadUtil fileUtil = new FileUploadUtil();
-//		fileUtil.saveFile(file, app);
-////		return new ResponseEntity<Products>(productsService.saveProductsService(products),HttpStatus.CREATED);
-//		return new ResponseEntity<Products>(products,HttpStatus.CREATED);
-//	}
-
-	
-	@PostMapping(value = "/products", consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE})
-	public ResponseEntity<Products> saveCategory(@RequestPart(value = "fileProduct") MultipartFile file,@RequestPart(value = "product") @Valid Products products) throws IllegalStateException, IOException{
-//		String filename = StringUtils.cleanPath(file.getOriginalFilename());
-		FileUploadUtil fileUtil = new FileUploadUtil();
-		fileUtil.saveFile(file, app);
-		products.setImage(fileUtil.getGetFileNameForEntity());
-		System.err.println(products.getClass().getTypeName());
-//		productsService.saveProductsService(products);
-		return new ResponseEntity<Products>(productsService.saveProductsService(products),HttpStatus.CREATED);
-	}
-	
 	
 	
 	@DeleteMapping("/products/{idProducts}")
-	public ResponseEntity<HttpStatus> deleteProductsById(@PathVariable("idProducts") int id){
-		productsService.deleteProductsById(id);
+	public ResponseEntity<HttpStatus> deleteProductsById(@PathVariable("idProducts") String id){
+		productsService.deleteProductsById(Integer.parseInt(id));
 		return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
 	}
 	
