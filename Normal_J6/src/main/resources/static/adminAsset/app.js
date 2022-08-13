@@ -286,6 +286,7 @@ app.controller("accountsCrt", function ($scope, accountService) {
   
 });
 
+<<<<<<< HEAD
 //---------------------------------------------Product controler --------------------------------------------------------
 app.controller("productCrt", function ($scope, productService,categoryService) {
   $scope.product = [];
@@ -364,6 +365,8 @@ $scope.createProduct = function (){
   
 });
 
+=======
+>>>>>>> refs/remotes/origin/master
 
 
 

@@ -9,12 +9,11 @@ $scope.cart = {
 	add(id){
 
 		var item = this.items.find(item => item.id == id);
-		console.log(id);
 		if(item){
 			item.qty++;
 			this.saveToLocalStorage();
 		}else{	
-			$http.get('/api/product/4').then(resp => {
+			$http.get('/api/product/2').then(resp => {
 				resp.data.qty = 1;
 				this.items.push(resp.data);
 				this.saveToLocalStorage();
@@ -58,4 +57,38 @@ $scope.cart = {
 	},
 }
 $scope.cart.loadFromLocalStorage();
+
+
+//Đặt hàng--------------------------------------------
+
+
+$scope.order = {
+	createDate : new Date(),
+	address: "",
+	account: {username: $("#username").text()},
+	get orderDtails(){
+		return $scope.cart.items.map(item =>{
+			
+			return{
+				product:{id: item.id},
+				price: item.price,
+				quantity: item.qty
+			}
+		});
+	},
+	purchase(){
+		var order = angular.copy(this);
+		
+		$http.post("/api/orders",order).then(resp =>{
+			alert("Đặt hàng thành công!");
+			$scope.cart.clear();
+			location.href = "/order/detail/" + resp.data.id;
+	
+		}).catch(error =>{
+			alert("Đặt hàng lỗi")
+			console.log("Lỗi: "+error)
+		})
+	}
+	
+}
 }) 

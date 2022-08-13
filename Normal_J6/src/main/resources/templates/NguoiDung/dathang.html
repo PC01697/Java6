@@ -3,7 +3,7 @@
    th:replace="~{/layout/layout::dynamic(~{::title},~{::body})}">
 <head>
 <meta charset="UTF-8">
-<title th:text="#{porder.title}"></title>
+<title th:text="#{order.title}"></title>
 </head>
 <body>
  <div class="breadcrumb-area mt-30">
@@ -20,83 +20,67 @@
         </div>
         <br><br><br><br><br><br><br>
     
- <h3 style="color:red;text-align: center;"><mark>${message}</mark></h3><br>
+
                             <div class="table-content table-responsive mb-45">
                                 <table>
                                     <thead>
                                         <tr>
+                                            <th class="product-thumbnail">Id</th>
                                             <th class="product-thumbnail">Hình</th>
                                             <th class="product-name">Sản phẩm</th>
-                                              <th class="product-name">Kích thước</th>
                                             <th class="product-price">Giá</th>
                                             <th class="product-quantity">Số lượng</th>
                                             <th class="product-subtotal">Tổng</th>
-                                          
+                                                                      
                                         </tr>
                                     </thead>
                                     <tbody>
                                    
-                                    <c:forEach var="HoLy" items="${cartsession}">
-                                     <form action="/update" method="post">
-                                    <input type="hidden" name="id" value="${HoLy.id}">
-                              
-                                        <tr>
+                                    <tr  ng-repeat="item in cart.items">
+                                           <td><span class="amount"><a >{{item.id}}</a></span></td>
                                             <td class="product-thumbnail">
-                                                <a href="#"><img src="img/products/${HoLy.image}" alt="cart-image"></a>
+                                                <a href="#"><img th:src="@{|/img/products/{{item.image}}|}" alt="cart-image"></a>
                                             </td>
-                                            <td class="product-name"><a href="#">${HoLy.name}</a></td>
-                                            <td class="product-name"><a >${HoLy.size}</a></td>
-                                            <td class="product-price"><span class="amount">${HoLy.price}₫</span></td>
-                                            <td class="product-price"><a name="qty" value="${HoLy.qty}" >${HoLy.qty}</a></td>
-                                            <td class="product-subtotal">${HoLy.price * HoLy.qty}₫</td>
-                               
+                                          
+                                            <td><span class="amount"><a href="#">{{item.name}}</a></span></td>                                       
+                                            <td><span class="amount">{{item.unitPrice | number:0}}₫</span></td>
+                                             <td><span class="amount">{{item.qty}}</span></td>
+                                      
+                                            <td><span class="amount">{{item.unitPrice * item.qty | number:0}}₫</span></td>
+                                         
                                         </tr>
-                                        </form>
-                                        </c:forEach>
                                     
                                     </tbody>
                                 </table>
-                                      <div class="row">
-                               <!-- Cart Button Start -->
-                                <div class="col-md-8 col-sm-12">
-                        
+                                <br> <br>
+                                <div class ="panel panel-primary">
+                                <div class ="panel-heading">ĐẶT HÀNG</div>
+                                <br><br>
+                                <div class=" panel-body">
+                                <div class ="row">
+                                <div class="form-group col-sm 6">
+                                <div>Người mua:</div>
+                                <div class ="form-control" id="username">[[${#request.remoteUser}]]</div>
                                 </div>
-                                <!-- Cart Button Start -->
-                                <!-- Cart Totals Start -->
-                                <div class="col-md-4 col-sm-12">
-                                    <div class="cart_totals float-md-right text-md-right">
-                                        <h2>Tổng giỏ hàng</h2>
-                                        <br>
-                                        <table class="float-md-right">
-                                            <tbody>
-                                          
-                                                <tr class="order-total">
-                                                    <th>Tổng tiền</th>
-                                                    <td>
-                                                        <strong><span class="amount">${tongtien}₫</span></strong>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <div class="wc-proceed-to-checkout">
-                                           
-                                        </div>
-                                    </div>
+                                   <div class="form-group col-sm 6">
+                                <div>Ngày đặt hàng:</div>
+                                <div class ="form-control">{{orders.oderDate | date:'dd-MM-yyyy'}}</div>
                                 </div>
-                                <!-- Cart Totals End -->
-                            </div>
-                                <center>
-                                  <form action="" method="POST"   enctype="multipart/data">
-                                ${sessionScope.user.fullname}<br>
-                                <input type="hidden" name="account" value="${sessionScope.user.username}">
-                                 <input type="hidden" name="tongtien" value="${tongtien}">
-                                 <input class="nhap" name="sDT" type="text" placeholder="Số điện thoại" required="required" ><br><br>
-                                   <textarea style="width:500px;"  name ="address" required="required" placeholder="Địa chỉ" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                    <input type="hidden" name="status" value="Đã đặt">
-                                   <br>
-                                <button class="btn btn-primary" formaction="../dathang/create"><h5>Đặt hàng</h5></button></a>
-                     </form>
-                        </center>
+                                </div>
+                                <div class="row">
+                                
+                                 <div class="form-group col-sm 12">
+                                 <div>Địa chỉ:</div>
+                                 <textarea ng-model="order.address" class="form-control"></textarea>
+                                 </div>
+                                </div>
+                                </div>
+                                <div class="panel-footer text-right">
+                                <button ng-click="order.purchase()" class="btn btn-success">Đặt hàng</button>
+                                </div>
+                                </div>
+                                     
+ 
                             </div>
                             
 </body>

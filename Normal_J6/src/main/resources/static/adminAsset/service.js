@@ -13,11 +13,7 @@ app.factory("categoryFactory", ($http) => {
   }
 
   function UpdateCategory(idCategory, nameCategory) {
-    return $http.put("/api/categories/" + idCategory, nameCategory,{
-		headers:{
-			'Content-Type': 'application/json'
-		}
-});
+    return $http.put("/api/categories/" + idCategory, nameCategory);
   }
 
   function DeleteCategory(idCategory) {
@@ -125,12 +121,13 @@ app.service("handleMsgService", function (checkMsgShow) {
 app.factory("productFactory", ($http) => {
   var service = {};
   service.GetAllProduct = GetAllProduct;
-  service.CreateProduct = CreateProduct;
   service.DeleteProduct = DeleteProduct;
+  
   function GetAllProduct(){
 	return $http.get("/api/products");
 }
 
+<<<<<<< HEAD
 
 function CreateProduct (file, product){
 	var formData = new FormData();
@@ -141,6 +138,8 @@ function CreateProduct (file, product){
 	});
 }
 
+=======
+>>>>>>> refs/remotes/origin/master
 function DeleteProduct(idProduct){
 	return $http.delete("/api/products/" + idProduct)
 }
@@ -154,28 +153,16 @@ app.service("productService", function (productFactory) {
     return productFactory.GetAllProduct();
   };
   
+<<<<<<< HEAD
 
  this.productCreateProduct = (file,products)=>{
 	return productFactory.CreateProduct(file,products);
 }
   
+=======
+>>>>>>> refs/remotes/origin/master
   this.productDelete = (id) =>{
 	return productFactory.DeleteProduct(id);
 }
 });
-
-app.directive('fileModel', ['$parse', function ($parse) { 
-    return { 
-        restrict: 'A', 
-        link: function(scope, element, attrs) {
-            var model = $parse(attrs.fileModel); 
-            var modelSetter = model.assign;
-            element.bind('change', function(){ 
-                scope.$apply(function(){
-                  modelSetter(scope, element[0].files[0]);
-                }); 
-            }); 
-        } 
-    }; 
-}]);
 
