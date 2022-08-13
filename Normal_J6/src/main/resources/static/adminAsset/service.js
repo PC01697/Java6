@@ -131,15 +131,13 @@ app.factory("productFactory", ($http) => {
 	return $http.get("/api/products");
 }
 
-function CreateProduct(products){
-	
+
+function CreateProduct (file, product){
 	var formData = new FormData();
-	formData.append('product',JSON.stringify(products))
-	
-	return $http.post("/api/products",formData, {
+	formData.append("fileProduct",file)
+	return $http.post("/api/products?product="+JSON.stringify(product)  +"",formData, {
 		headers: {'Content-Type': undefined},
-		transformRequest: angular.identity
-		
+		transformRequest: angular.identity 
 	});
 }
 
@@ -156,8 +154,9 @@ app.service("productService", function (productFactory) {
     return productFactory.GetAllProduct();
   };
   
-  this.productCreateProduct = (products)=>{
-	return productFactory.CreateProduct(products);
+
+ this.productCreateProduct = (file,products)=>{
+	return productFactory.CreateProduct(file,products);
 }
   
   this.productDelete = (id) =>{

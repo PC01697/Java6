@@ -75,7 +75,15 @@ app.controller("categoryCrt", function ($scope, categoryService) {
               msg: "Category đã tồn tại, vui lòng nhập tên khác",
             },
           ];
-        }
+        }else if(response.status == 400){
+		 $scope.alertError = [
+            {
+              type: "danger",
+              msg: response.data.errors,
+            },
+          ];
+		}
+        console.log(response)
       }
     );
     reloadTable();
@@ -326,15 +334,20 @@ $scope.createProduct = function (){
 		quantity: $scope.quantity,
 		description: $scope.description
 	}
-
+	var file = $scope.myFile;	
 	
-	productService.productCreateProduct(formProduct).then(function successCallback(resp){
-		if(resp == 200){
-			console.log("ok")
+	productService.productCreateProduct(file,formProduct).then(function successCallback(resp){
+		if(resp.status == 201){
+			 $scope.alertError = [
+            { type: "success", msg: "Bạn thêm thành công thành công" },
+          ];
 		}
+		reloadTable();
 	})
-	console.log(JSON.stringify(formProduct))
-	}
+	
+	console.log(formProduct)
+	console.log(file)
+}
 	
 
 // delete product
@@ -344,6 +357,7 @@ $scope.createProduct = function (){
         { type: "success", msg: "Bạn đã xóa thành công" },
       		];
 		});
+		
 		reloadTable();
 	}
 	

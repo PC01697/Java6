@@ -23,7 +23,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" enctype="multipart/form-data" method="post" ng-submit="createProduct()">
+            <form role="form"  method="POST">
        			<div class="box-body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Name Product</label>
@@ -58,7 +58,7 @@
                 </div>
               </div>
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary" ng-click="createProduct()">Create</button>
               </div>
             </form>
           </div>

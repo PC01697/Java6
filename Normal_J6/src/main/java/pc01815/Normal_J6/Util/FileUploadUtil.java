@@ -31,7 +31,7 @@ public class FileUploadUtil {
 	private String getFileNameForEntity;
 	
 	public void saveFile(MultipartFile file, ServletContext app) throws IllegalStateException, IOException {
-		if(!file.isEmpty()) {
+		if(file != null) {
 			String getFile = file.getOriginalFilename();
 			String getExtension = FilenameUtils.getExtension(getFile);
 			String filenamnRandom = generateRandomName(20);
