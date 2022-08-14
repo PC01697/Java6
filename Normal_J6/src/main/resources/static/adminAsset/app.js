@@ -75,7 +75,15 @@ app.controller("categoryCrt", function ($scope, categoryService) {
               msg: "Category đã tồn tại, vui lòng nhập tên khác",
             },
           ];
-        }
+        }else if(response.status == 400){
+		 $scope.alertError = [
+            {
+              type: "danger",
+              msg: response.data.errors,
+            },
+          ];
+		}
+        console.log(response)
       }
     );
     reloadTable();
@@ -278,6 +286,84 @@ app.controller("accountsCrt", function ($scope, accountService) {
   
 });
 
+
+//---------------------------------------------Product controler --------------------------------------------------------
+app.controller("productCrt", function ($scope, productService,categoryService) {
+  $scope.product = [];
+  $scope.category = [];
+  $scope.alertError = [];
+  $scope.closeAlert = function (index) {
+    $scope.alertError.splice(index, 1);
+  };
+  //pagination for ui boostrap
+  $scope.currentPage = 1;
+  $scope.pageSize = 5;
+  
+	function reloadTable() {
+    setTimeout(function () {
+      $scope.$apply(function () {
+        productService.productGetAll().then(function (response) {
+          $scope.product = response.data;
+        });
+      });
+      // AngularJS unaware of update to $scope
+    }, 100),
+      function (respone) {
+        console.log(respone);
+      };
+  }
+
+
+// product get all
+ 	productService.productGetAll().then(function (resp) {
+    	$scope.product = resp.data;
+  	});
+  	
+// category get all
+	categoryService.categoryGetAll().then(function (response) {
+    $scope.category = response.data;
+  });
+  
+// create category
+$scope.createProduct = function (){
+	 var formProduct = {
+		name: $scope.nameProduct,
+		unitPrice: $scope.priceProduct,
+		category:{
+			id: $scope.categoryId
+		},
+		quantity: $scope.quantity,
+		description: $scope.description
+	}
+	var file = $scope.myFile;	
+	
+	productService.productCreateProduct(file,formProduct).then(function successCallback(resp){
+		if(resp.status == 201){
+			 $scope.alertError = [
+            { type: "success", msg: "Bạn thêm thành công thành công" },
+          ];
+		}
+		reloadTable();
+	})
+	
+	console.log(formProduct)
+	console.log(file)
+}
+	
+
+// delete product
+	$scope.deleteProduct = function (id){
+		productService.productDelete(id).then(function successCallback(resp){
+			 $scope.alertError = [
+        { type: "success", msg: "Bạn đã xóa thành công" },
+      		];
+		});
+		
+		reloadTable();
+	}
+	
+  
+});
 
 
 

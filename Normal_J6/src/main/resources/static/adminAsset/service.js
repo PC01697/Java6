@@ -121,11 +121,24 @@ app.service("handleMsgService", function (checkMsgShow) {
 app.factory("productFactory", ($http) => {
   var service = {};
   service.GetAllProduct = GetAllProduct;
+  service.CreateProduct=CreateProduct
   service.DeleteProduct = DeleteProduct;
   
   function GetAllProduct(){
 	return $http.get("/api/products");
 }
+
+
+
+function CreateProduct (file, product){
+	var formData = new FormData();
+	formData.append("fileProduct",file)
+	return $http.post("/api/products?product="+JSON.stringify(product)  +"",formData, {
+		headers: {'Content-Type': undefined},
+		transformRequest: angular.identity 
+	});
+}
+
 
 function DeleteProduct(idProduct){
 	return $http.delete("/api/products/" + idProduct)
@@ -140,8 +153,29 @@ app.service("productService", function (productFactory) {
     return productFactory.GetAllProduct();
   };
   
+
+ this.productCreateProduct = (file,products)=>{
+	return productFactory.CreateProduct(file,products);
+}
+
   this.productDelete = (id) =>{
 	return productFactory.DeleteProduct(id);
 }
 });
 
+
+ app.directive('fileModel', ['$parse', function ($parse) {
+            return {
+               restrict: 'A',
+               link: function(scope, element, attrs) {
+                  var model = $parse(attrs.fileModel);
+                  var modelSetter = model.assign;
+                  
+                  element.bind('change', function() {
+                     scope.$apply(function() {
+                        modelSetter(scope, element[0].files[0]);
+                     });
+                  });
+               }
+            };
+         }]);
