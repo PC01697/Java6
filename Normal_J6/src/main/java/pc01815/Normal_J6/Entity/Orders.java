@@ -29,6 +29,7 @@ public class Orders implements java.io.Serializable {
 
 	private Integer id;
 	private Accounts accounts;
+	private String username;
 	private Date oderDate;
 
 	private String address;
@@ -40,18 +41,20 @@ public class Orders implements java.io.Serializable {
 	public Orders() {
 	}
 
-	public Orders(Accounts accounts, Date oderDate, int telephone, String address, float amount, String description,
+	public Orders(Accounts accounts,String username, Date oderDate, int telephone, String address, float amount, String description,
 			boolean status) {
 		this.accounts = accounts;
+		this.username = username;
 		this.oderDate = oderDate;
 		this.address = address;
 
 
 	}
 
-	public Orders(Accounts accounts, Date oderDate, int telephone, String address, float amount, String description,
+	public Orders(Accounts accounts,String username, Date oderDate, int telephone, String address, float amount, String description,
 			boolean status, Set<Orderdetails> orderDtails) {
 		this.accounts = accounts;
+		this.username = username;
 		this.oderDate = oderDate;
 		this.address = address;
 		this.orderDtails = orderDtails;
@@ -91,7 +94,7 @@ public class Orders implements java.io.Serializable {
 
 
 
-	@Column(name = "address", nullable = false, length = 60)
+	@Column(name = "address", nullable = false, length = 200)
 	public String getAddress() {
 		return this.address;
 	}
@@ -100,6 +103,14 @@ public class Orders implements java.io.Serializable {
 		this.address = address;
 	}
 
+	@Column(name = "Username", nullable = false, length = 20)
+	public String getUsername() {
+		return this.username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 
 

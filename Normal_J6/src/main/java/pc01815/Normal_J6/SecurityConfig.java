@@ -74,7 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.authorizationEndpoint()
 			    .baseUri("/oauth2/authorization");
 
-	/////////
+	
 
 	}
 //	

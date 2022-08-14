@@ -66,6 +66,7 @@ $scope.order = {
 	oderDate : new Date(),
 	address: "",
 	accounts: {id: $("#id").text()},
+	username: $("#username").text(),
 	get orderDtails(){
 		return $scope.cart.items.map(item =>{
 			
@@ -83,7 +84,7 @@ $scope.order = {
 			alert("Đặt hàng thành công!");
 			$scope.cart.clear();
 			location.href = "/order/detail/" + resp.data.id;
-	
+		
 		}).catch(error =>{
 			alert("Đặt hàng lỗi")
 			console.log("Lỗi: "+error)

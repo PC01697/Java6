@@ -198,9 +198,11 @@ app.controller("accountsCrt", function ($scope, accountService) {
             {
               type: "success",
               msg: "Bạn đã thêm thành công: " + accountEntity.username,
+              
             },
           ];
           clearForm();
+    reloadTable();
           accountEntity.length = 0;
         }
       },
@@ -217,7 +219,7 @@ app.controller("accountsCrt", function ($scope, accountService) {
         console.log(response)
       }
     );
-    reloadTable();
+     reloadTable();
   };
 
   //for edit

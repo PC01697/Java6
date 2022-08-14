@@ -27,17 +27,8 @@
 </head>
 <body  ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
 
-    <!--[if lte IE 9]>
-		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-	<![endif]-->
 
-    <!-- Main Wrapper Start Here -->
     <div class="wrapper">
-        <!-- Banner Popup Start -->
-      
-        <!-- Banner Popup End -->
-       <!-- Newsletter Popup Start -->
-        <!-- Newsletter Popup End -->
         <!-- Main Header Area Start Here -->
         <header>
             <!-- Header Top Start Here -->
@@ -69,7 +60,7 @@
                                       <li><a th:href="@{/security/logout}" th:text="#{lo.mn.logout}"></a></li>
                                       
                                       <li th:if="${#request.isUserInRole('ADMIN')}">
-                                      	   <a th:href="@{admin}">Administration</a>
+                                      	   <a th:href="@{/admin/accounts}">Administration</a>
                                       </li>
 
                                   </div>
@@ -114,7 +105,7 @@
                             <div class="cart-box mt-all-30">
                                 <ul class="d-flex justify-content-lg-end justify-content-center align-items-center">
                                 
-                                    <li><a href="../giohang"><i class="lnr lnr-cart"></i><span class="my-cart"><span class="total-pro">{{cart.count}}</span><span  th:text="#{lo.mn.cart}" ></span></span></a>
+                                    <li><a th:href="@{/giohang}"><i class="lnr lnr-cart"></i><span class="my-cart"><span class="total-pro">{{cart.count}}</span><span  th:text="#{lo.mn.cart}" ></span></span></a>
                                         
                                     </li>
                                    
@@ -369,7 +360,7 @@
                                         </li>
                                     </ul>
                                     <div class="payment mt-25 bdr-top pt-30">
-                                        <a href="#"><img class="img" src="..\img\payment\1.png" alt="payment-image"></a>
+                                        <a href="#"><img class="img" th:src="@{\img\payment\1.png}" alt="payment-image"></a>
                                     </div>                                   
                                 </div>
                             </div>
@@ -390,8 +381,8 @@
                                 <li><a href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
                                 <li><a href="https://plus.google.com/"><i class="fa fa-google-plus"></i></a></li>
                                 <li><a href="https://www.linkedin.com/"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><img src="..\img\icon\social-img1.png" alt="google play"></a></li>
-                                <li><a href="#"><img src="..\img\icon\social-img2.png" alt="app store"></a></li>
+                                <li><a href="#"><img th:src="@{\img\icon\social-img1.png}" alt="google play"></a></li>
+                                <li><a href="#"><img th:src="@{\img\icon\social-img2.png}" alt="app store"></a></li>
                             </ul>
                     </div>
                 </div>

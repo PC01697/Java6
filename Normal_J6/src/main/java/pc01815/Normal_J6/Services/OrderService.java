@@ -9,5 +9,7 @@ import pc01815.Normal_J6.Entity.Orders;
 public interface OrderService {
 
 	Orders create(JsonNode orderData);
+
+	Orders findById(Integer id);
 	
 }

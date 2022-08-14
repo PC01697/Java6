@@ -39,4 +39,10 @@ public class OrderServiceImpl implements OrderService {
 		return order;
 	}
 
+	@Override
+	public Orders findById(Integer id) {
+		
+		return ordersRepository.findById(id).get();
+	}
+
 }

@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.io.FilenameUtils;
@@ -31,6 +32,7 @@ import pc01815.Normal_J6.Entity.Accounts;
 import pc01815.Normal_J6.Entity.Authorities;
 import pc01815.Normal_J6.Entity.Category;
 import pc01815.Normal_J6.Entity.Roles;
+import pc01815.Normal_J6.Repository.AccountsRepository;
 import pc01815.Normal_J6.Repository.RolesRepository;
 import pc01815.Normal_J6.Services.AccountsService;
 import pc01815.Normal_J6.Services.AuthoritiesService;
@@ -39,20 +41,21 @@ import pc01815.Normal_J6.Util.FileUploadUtil;
 @RestController
 @RequestMapping("api")
 public class AccountsRestController {
-
+	@Autowired
+	AccountsRepository accountDAO;
 	@Autowired
 	AccountsService accountsService;
     @Autowired
     RolesRepository roleRepository;
 	@Autowired
 	AuthoritiesService AuthService;
+	@Autowired
+	HttpServletRequest req;
 	@GetMapping(value = "/accounts")
 	public List<Accounts> getAll(Model m){
-	     List<Roles> roles = roleRepository.findAll();
-	     for (Roles roles2 : roles) {
-			System.err.println("Vt:"+roles2.getName());
-		}
-	     m.addAttribute("abc","TRUNG");
+		Accounts acc = accountDAO.findByUsername(req.getRemoteUser());
+		m.addAttribute("id",acc);
+
 		return accountsService.getAllService().stream().collect(Collectors.toList());
 	}
 
