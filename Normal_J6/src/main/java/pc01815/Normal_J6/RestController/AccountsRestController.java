@@ -58,7 +58,7 @@ public class AccountsRestController {
 
 		return accountsService.getAllService().stream().collect(Collectors.toList());
 	}
-
+//
 	@GetMapping("/accounts/{username}")
 	public Accounts getByUsername(@PathVariable("username") String username) {
 		return accountsService.findByUsernameService(username);
