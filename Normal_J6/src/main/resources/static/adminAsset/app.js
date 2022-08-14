@@ -346,6 +346,23 @@ $scope.createProduct = function (){
           ];
 		}
 		reloadTable();
+	},function errorCallback (resp){
+		if(resp.status == 400){
+			 $scope.alertError = [
+            {
+              type: "danger",
+              msg: Object.assign({},resp.data.errors)[0],
+            },
+          ];
+          console.log(Object.assign({},resp.data.errors))
+		}else if(resp.status == 500){
+			$scope.alertError = [
+            {
+              type: "danger",
+              msg: "Không được để trống category",
+            },
+          ];
+		}
 	})
 	
 	console.log(formProduct)

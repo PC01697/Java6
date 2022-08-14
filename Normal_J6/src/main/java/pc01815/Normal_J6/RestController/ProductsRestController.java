@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletContext;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -46,6 +48,7 @@ public class ProductsRestController {
 	@Autowired
 	ServletContext app;
 	
+	
 //	@GetMapping(value = "/products", produces = "application/json")
 //	public ResponseEntity<List<Products>> findAllCategory(
 //			@RequestParam("page") Optional<Integer> page,
@@ -76,37 +79,21 @@ public class ProductsRestController {
 		}
 	}
 	
-	
-//	@PostMapping(value = "/products", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-//	public ResponseEntity<Products> test(@RequestPart(value = "fileProduct", required = false) MultipartFile file,@RequestPart(value = "product", required = false) @Valid Products products) throws IllegalStateException, IOException {
-//		FileUploadUtil fileUtil = new FileUploadUtil();
-////		String filename = StringUtils.cleanPath(file.getOriginalFilename());
-////		System.err.println(filename);
-//		fileUtil.saveFile(file, app);
-//		products.setImage(fileUtil.getGetFileNameForEntity());
-//		return null;
-//	}
-//	
+
 
 	@PostMapping(value = "/products", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Products> saveProduct(
 			@RequestPart(value = "fileProduct", required = false) MultipartFile file,
 			@RequestParam("product") String products) throws IllegalStateException, IOException{
-//		String filename = StringUtils.cleanPath(file.getOriginalFilename());
-		Products getProduct = new ObjectMapper().readValue(products, Products.class);
-		if(getProduct.getCategory() == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}else {
-			
-			FileUploadUtil fileUtil = new FileUploadUtil();
-			fileUtil.saveFile(file, app);
-			getProduct.setImage(fileUtil.getGetFileNameForEntity());
-			getProduct.setAvaible(true);
-			getProduct.setComments(null);
-//			productsService.saveProductsService(products);
-			return new ResponseEntity<Products>(productsService.saveProductsService(getProduct),HttpStatus.CREATED);
-		}
-	
+		
+					Products getProduct = new ObjectMapper().readValue(products, Products.class);
+			 		FileUploadUtil fileUtil = new FileUploadUtil();
+					fileUtil.saveFile(file, app);
+					getProduct.setImage(fileUtil.getGetFileNameForEntity());
+					getProduct.setAvaible(true);
+					getProduct.setComments(null);
+					return new ResponseEntity<Products>(productsService.saveProductsService(getProduct),HttpStatus.CREATED);
+					
 	}
 	
 	

@@ -16,7 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -46,13 +48,16 @@ public class Products implements java.io.Serializable {
 
 	private Integer id;
 	private Category category;
-	@NotEmpty(message = "Không được để trống Name Product")
+	@NotEmpty(message = "Không được để trống tên sản phẩm")
 	private String name;
+	@NotNull(message = "Không được để trống giá sản phẩm")
+	@Min(value = 1000, message = "Giá phải lớn hơn 1.000")
 	private float unitPrice;
 	private String image;
 	private Date productDate = new Date();
 	private boolean avaible;
-	
+	@NotNull(message = "Không được để trống số lượng")
+	@Min(value = 1, message = "Số lượng phải lớn hơn 1")
 	private int quantity;
 	private String description;
 
