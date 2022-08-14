@@ -24,15 +24,15 @@
             <!-- /.box-header -->
             <!-- form start -->
 
-            <form role="form"  method="POST" enctype="multipart/form-data">
+            <form role="form"  method="POST" enctype="multipart/form-data" ng-submit="createProduct()">
        			<div class="box-body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Name Product</label>
-                  <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Name Product" ng-model="nameProduct">
+                  <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Name Product" ng-model="nameProduct"  ng-required="true">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Price</label>
-                  <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Price" min="1" ng-model="priceProduct">
+                  <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Price" ng-model="priceProduct" ng-required="true" min="1000">
                 </div>
                 
                 <div class="form-group">
@@ -45,12 +45,12 @@
                 
                 <div class="form-group">
                   <label for="exampleInputPassword1">Quantity</label>
-                  <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Quantity" ng-model="quantity">
+                  <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Quantity" ng-model="quantity" ng-required="true" ng-minlength="1">
                 </div>
                 
                 <div class="form-group">
                   <label>Description</label>
-                  <textarea class="form-control" rows="3" placeholder="Enter ..." ng-model="description"></textarea>
+                  <textarea class="form-control" rows="3" placeholder="Enter ..." ng-model="description" ng-required="true"></textarea>
                 </div>
                 
                 <div class="form-group">
@@ -60,7 +60,7 @@
               </div>
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary" ng-click="createProduct()">Create</button>
+                <button type="submit" class="btn btn-primary">Create</button>
              
               </div>
             </form>
