@@ -37,7 +37,8 @@ public class AccountServiceImpl implements AccountsService{
 
 	@Autowired
 	AccountsRepository accountsRepository;
-	
+//	@Autowired
+//	AccountsService accountService;
 	@Autowired
 	AuthoritiesRepository authRepo;
 
@@ -84,11 +85,25 @@ public class AccountServiceImpl implements AccountsService{
  
 	public void loginfromOAuth2(OAuth2AuthenticationToken oauth2) {
 		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
-		String email = oauth2.getPrincipal().getAttribute("name");
+		String name = oauth2.getPrincipal().getAttribute("name");
 		String pass = Long.toHexString(System.currentTimeMillis());
-		UserDetails user = User.withUsername(email).password(pe.encode(pass)).roles("User").build();
+		UserDetails user = User.withUsername(name).password(pe.encode(pass)).roles("User").build();
 		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(auth);
+		String id = oauth2.getPrincipal().getAttribute("id");
+		System.err.println(id);
+		System.err.println(name);
+		String email = oauth2.getPrincipal().getAttribute("email");
+		
+		if(accountsRepository.findByEmail(email) == null){
+			Accounts acc = new Accounts();
+			System.err.println("Chưa tồn tại");
+			acc.setFullname(name);
+			acc.setEmail(oauth2.getPrincipal().getAttribute("email"));
+			acc.setPassword(pe.encode("12345"));
+			acc.setUsername(name);
+			accountsRepository.save(acc);
+		}
 	}
 
 	@Override
