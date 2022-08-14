@@ -30,12 +30,12 @@ public class Orders implements java.io.Serializable {
 	private Integer id;
 	private Accounts accounts;
 	private Date oderDate;
-	private int telephone;
+
 	private String address;
-	private float amount;
-	private String description;
-	private boolean status;
-	private Set<Orderdetails> orderdetailses = new HashSet<Orderdetails>(0);
+
+	
+
+	private Set<Orderdetails> orderDtails = new HashSet<Orderdetails>();
 
 	public Orders() {
 	}
@@ -44,23 +44,17 @@ public class Orders implements java.io.Serializable {
 			boolean status) {
 		this.accounts = accounts;
 		this.oderDate = oderDate;
-		this.telephone = telephone;
 		this.address = address;
-		this.amount = amount;
-		this.description = description;
-		this.status = status;
+
+
 	}
 
 	public Orders(Accounts accounts, Date oderDate, int telephone, String address, float amount, String description,
-			boolean status, Set<Orderdetails> orderdetailses) {
+			boolean status, Set<Orderdetails> orderDtails) {
 		this.accounts = accounts;
 		this.oderDate = oderDate;
-		this.telephone = telephone;
 		this.address = address;
-		this.amount = amount;
-		this.description = description;
-		this.status = status;
-		this.orderdetailses = orderdetailses;
+		this.orderDtails = orderDtails;
 	}
 
 	@Id
@@ -95,14 +89,7 @@ public class Orders implements java.io.Serializable {
 		this.oderDate = oderDate;
 	}
 
-	@Column(name = "Telephone", nullable = false)
-	public int getTelephone() {
-		return this.telephone;
-	}
 
-	public void setTelephone(int telephone) {
-		this.telephone = telephone;
-	}
 
 	@Column(name = "address", nullable = false, length = 60)
 	public String getAddress() {
@@ -113,40 +100,18 @@ public class Orders implements java.io.Serializable {
 		this.address = address;
 	}
 
-	@Column(name = "Amount", nullable = false, precision = 12, scale = 0)
-	public float getAmount() {
-		return this.amount;
-	}
 
-	public void setAmount(float amount) {
-		this.amount = amount;
-	}
 
-	@Column(name = "Description", nullable = false, length = 5000)
-	public String getDescription() {
-		return this.description;
-	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
 
-	@Column(name = "Status", nullable = false)
-	public boolean isStatus() {
-		return this.status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orders")
-	public Set<Orderdetails> getOrderdetailses() {
-		return this.orderdetailses;
+	public Set<Orderdetails> getOrderDtails() {
+		return this.orderDtails;
 	}
 
-	public void setOrderdetailses(Set<Orderdetails> orderdetailses) {
-		this.orderdetailses = orderdetailses;
+	public void setOrderDtails(Set<Orderdetails> orderDtails) {
+		this.orderDtails = orderDtails;
 	}
 
 }

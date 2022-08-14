@@ -13,7 +13,7 @@ $scope.cart = {
 			item.qty++;
 			this.saveToLocalStorage();
 		}else{	
-			$http.get('/api/product/2').then(resp => {
+			$http.get('/api/product/'+id).then(resp => {
 				resp.data.qty = 1;
 				this.items.push(resp.data);
 				this.saveToLocalStorage();
@@ -63,16 +63,16 @@ $scope.cart.loadFromLocalStorage();
 
 
 $scope.order = {
-	createDate : new Date(),
+	oderDate : new Date(),
 	address: "",
-	account: {username: $("#username").text()},
+	accounts: {id: $("#id").text()},
 	get orderDtails(){
 		return $scope.cart.items.map(item =>{
 			
 			return{
-				product:{id: item.id},
-				price: item.price,
-				quantity: item.qty
+				idProduct:{id: item.id},
+				unitPrice: item.unitPrice,
+				quanlity: item.qty
 			}
 		});
 	},

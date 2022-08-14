@@ -235,6 +235,7 @@ public class taiKhoan {
 		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
 		
 		m.addAttribute("username",req.getRemoteUser());
+		
 		Accounts acc = accountDAO.findByUsername(req.getRemoteUser());
 		if(acc != null) {
 			if(passMoi.isEmpty() || passMoi.isEmpty() || XNPass.isEmpty()) {

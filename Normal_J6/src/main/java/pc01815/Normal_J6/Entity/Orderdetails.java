@@ -1,4 +1,4 @@
-package pc01815.Normal_J6.Entity;
+   package pc01815.Normal_J6.Entity;
 // Generated Jul 17, 2022, 5:56:00 PM by Hibernate Tools 4.3.6.Final
 
 import javax.persistence.Column;
@@ -23,20 +23,20 @@ public class Orderdetails implements java.io.Serializable {
 
 	private Integer id;
 	private Orders orders;
-	private int idProduct;
+	private Products idProduct;
 	private float unitPrice;
 	private int quanlity;
-	private float discount;
+
 
 	public Orderdetails() {
 	}
 
-	public Orderdetails(Orders orders, int idProduct, float unitPrice, int quanlity, float discount) {
+	public Orderdetails(Orders orders, Products idProduct, float unitPrice, int quanlity) {
 		this.orders = orders;
 		this.idProduct = idProduct;
 		this.unitPrice = unitPrice;
 		this.quanlity = quanlity;
-		this.discount = discount;
+
 	}
 
 	@Id
@@ -61,12 +61,13 @@ public class Orderdetails implements java.io.Serializable {
 		this.orders = orders;
 	}
 
-	@Column(name = "Id_product", nullable = false)
-	public int getIdProduct() {
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "Id_product", nullable = false)
+	public Products getIdProduct() {
 		return this.idProduct;
 	}
 
-	public void setIdProduct(int idProduct) {
+	public void setIdProduct(Products idProduct) {
 		this.idProduct = idProduct;
 	}
 
@@ -88,13 +89,6 @@ public class Orderdetails implements java.io.Serializable {
 		this.quanlity = quanlity;
 	}
 
-	@Column(name = "Discount", nullable = false, precision = 12, scale = 0)
-	public float getDiscount() {
-		return this.discount;
-	}
 
-	public void setDiscount(float discount) {
-		this.discount = discount;
-	}
 
 }

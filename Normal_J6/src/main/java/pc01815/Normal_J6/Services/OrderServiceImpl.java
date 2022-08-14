@@ -5,10 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-//import org.objectweb.asm.TypeReference;
-//import org.springframework.asm.TypeReference;
+
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.expression.spel.ast.TypeReference;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -19,7 +18,7 @@ import pc01815.Normal_J6.Entity.Orders;
 import pc01815.Normal_J6.Entity.Orderdetails;
 import pc01815.Normal_J6.Repository.OrderdetailsRepository;
 import pc01815.Normal_J6.Repository.OrdersRepository;
-
+@Service
 public class OrderServiceImpl implements OrderService {
 	@Autowired
 	OrdersRepository ordersRepository;
@@ -34,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
 		ordersRepository.save(order);
 		
 		TypeReference<List<Orderdetails>> type = new TypeReference<List<Orderdetails>>() {};
-		List<Orderdetails> details = mapper.convertValue(orderData.get("orderDetails"), type)
+		List<Orderdetails> details = mapper.convertValue(orderData.get("orderDtails"), type)
 				.stream().peek(d -> d.setOrders(order)).collect(Collectors.toList());
 		orderdetailsRepository.saveAll(details);
 		return order;
