@@ -1,6 +1,10 @@
 package pc01815.Normal_J6.RestController;
 
+
 import java.util.HashMap;
+
+
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -32,6 +36,7 @@ public class AuthoritiesRestController {
 	RolesRepository roles;
 	@Autowired
 	AccountsRepository acc;
+
 	@GetMapping("/authories")
 	public Map<String,Object> abc() {
 		Map<String,Object> data = new HashMap<>();
@@ -45,6 +50,8 @@ public class AuthoritiesRestController {
 		return data;
 		
 	}
+	
+
 
 	
 }

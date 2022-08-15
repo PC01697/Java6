@@ -9,17 +9,20 @@ import java.util.stream.Collectors;
 import javax.servlet.ServletContext;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
+import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -27,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,7 +43,7 @@ import pc01815.Normal_J6.Util.FileUploadUtil;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("api")
-@Validated
+
 public class ProductsRestController {
 
 	@Autowired
@@ -79,22 +83,43 @@ public class ProductsRestController {
 		}
 	}
 	
+	
 
-
-	@PostMapping(value = "/products", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,MediaType.APPLICATION_JSON_VALUE})
+//	@PostMapping(value = "/products", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,MediaType.APPLICATION_JSON_VALUE})
+//	public ResponseEntity<Products> saveProduct(
+//			@RequestPart(value = "fileProduct", required = false) MultipartFile file,
+//			@RequestParam("product") String products) throws IllegalStateException, IOException{
+//		Products getProduct = new ObjectMapper().readValue(products, Products.class);
+// 		FileUploadUtil fileUtil = new FileUploadUtil();
+//		fileUtil.saveFile(file, app);
+//		getProduct.setImage(fileUtil.getGetFileNameForEntity());
+//		getProduct.setAvaible(true);
+//		getProduct.setComments(null);
+//		return new ResponseEntity<Products>(productsService.saveProductsService(getProduct),HttpStatus.CREATED);
+//	}
+	
+	
+	@PostMapping(value = "/products", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<Products> saveProduct(
-			@RequestPart(value = "fileProduct", required = false) MultipartFile file,
-			@RequestParam("product") String products) throws IllegalStateException, IOException{
-		
-					Products getProduct = new ObjectMapper().readValue(products, Products.class);
-			 		FileUploadUtil fileUtil = new FileUploadUtil();
-					fileUtil.saveFile(file, app);
-					getProduct.setImage(fileUtil.getGetFileNameForEntity());
-					getProduct.setAvaible(true);
-			
-					return new ResponseEntity<Products>(productsService.saveProductsService(getProduct),HttpStatus.CREATED);
-					
+			@RequestPart(value = "fileProduct", required = false) MultipartFile file, @RequestPart @Valid Products products,
+			BindingResult result) throws IllegalStateException, IOException{
+		System.err.println(products.getQuantity());
+		System.err.println(products.getName());
+		System.err.println(products.getUnitPrice());
+		if(result.hasErrors()) {
+			System.err.println("ok");
+			return new ResponseEntity<Products>(productsService.saveProductsService(products),HttpStatus.CREATED);
+		}else {
+			FileUploadUtil fileUtil = new FileUploadUtil();
+			fileUtil.saveFile(file, app);
+			products.setImage(fileUtil.getGetFileNameForEntity());
+			products.setAvaible(true);
+//			products.setComments(null);
+			return new ResponseEntity<Products>(productsService.saveProductsService(products),HttpStatus.CREATED);
+		}
+
 	}
+	
 	
 	
 	@DeleteMapping("/products/{idProducts}")

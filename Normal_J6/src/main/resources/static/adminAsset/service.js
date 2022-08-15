@@ -130,10 +130,20 @@ app.factory("productFactory", ($http) => {
 
 
 
+//function CreateProduct (file, product){
+	//var formData = new FormData();
+	//formData.append("fileProduct",file)
+	//return $http.post("/api/products?product="+JSON.stringify(product)  +"",formData, {
+		//headers: {'Content-Type': undefined},
+		//transformRequest: angular.identity 
+	//});
+//}
+
 function CreateProduct (file, product){
 	var formData = new FormData();
 	formData.append("fileProduct",file)
-	return $http.post("/api/products?product="+JSON.stringify(product)  +"",formData, {
+	formData.append("products", new Blob([JSON.stringify(product)]),{type: "application/json"})
+	return $http.post("/api/products", formData,{
 		headers: {'Content-Type': undefined},
 		transformRequest: angular.identity 
 	});
