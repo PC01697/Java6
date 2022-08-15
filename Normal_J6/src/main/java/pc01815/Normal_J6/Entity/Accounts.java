@@ -42,7 +42,7 @@ public class Accounts implements java.io.Serializable {
 
 	private List<Authorities> authoritieses = new ArrayList<Authorities>();
 
-	private Set<Comment> comments = new HashSet<Comment>(0);
+
 	private Set<Orders> orderses = new HashSet<Orders>(0);
 
 	public Accounts() {
@@ -64,7 +64,7 @@ public class Accounts implements java.io.Serializable {
 		this.email = email;
 		
 		this.authoritieses = authoritieses;
-		this.comments = comments;
+
 		this.orderses = orderses;
 	}
 
@@ -128,14 +128,7 @@ public class Accounts implements java.io.Serializable {
 		this.authoritieses = authoritieses;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accounts")
-	public Set<Comment> getComments() {
-		return this.comments;
-	}
 
-	public void setComments(Set<Comment> comments) {
-		this.comments = comments;
-	}
 
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accounts")

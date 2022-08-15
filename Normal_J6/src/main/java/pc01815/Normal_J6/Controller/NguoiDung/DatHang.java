@@ -28,12 +28,13 @@ public class DatHang {
 	}
 	@RequestMapping("/order/list")
 	public String list(Model model) {
-		
-		return "NguoiDung/dathang";
+		String username= req.getRemoteUser();
+		model.addAttribute("orders", orderService.findByUsername(username));
+		return "NguoiDung/allhoadon";
 	}
 	@RequestMapping("/order/detail/{id}")
 	public String detail(Model model, @PathVariable("id") Integer id) {	
 		model.addAttribute("order", orderService.findById(id));
-		return "NguoiDung/hoadon";
+		return "NguoiDung/ttdonhang";
 	}
 }

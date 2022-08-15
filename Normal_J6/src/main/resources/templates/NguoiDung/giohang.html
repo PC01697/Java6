@@ -10,8 +10,8 @@
             <div class="container">
                 <div class="breadcrumb">
                     <ul class="d-flex align-items-center">
-                        <li><a href="trangchu">Trang chủ</a></li>
-                        <li class="active"><a href="giohang">Giỏ hàng</a></li>
+                          <li><a th:href="@{/index}">Trang chủ</a></li>
+                        <li class="active"><a th:href="@{/giohang}">Giỏ hàng</a></li>
                     </ul>
                 </div>
             </div>
@@ -65,8 +65,8 @@
                                     <div class="buttons-cart">
                                    
                                         <a href="#" ng-click="cart.clear()">Xóa tât cả sản phẩm</a>
-                                        <a href="../trangchu">Tiếp tục mua sắm</a>
-                                        <a style="float: right;" th:href="@{/order/dathang}">Kiểm tra đơn hàng</a>
+                                        <a th:href="@{/index}">Tiếp tục mua sắm</a>
+                                        <a  th:href="@{/order/dathang}">Kiểm tra đơn hàng</a>
                                     </div>
                                 </div>
                                

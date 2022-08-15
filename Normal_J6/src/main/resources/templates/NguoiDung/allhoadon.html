@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns= "http://www.thymeleaf.org"
+   th:replace="~{/layout/layout::dynamic(~{::title},~{::body})}">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{history.title}"></title>
+</head>
+<body>
+ <div class="breadcrumb-area mt-30">
+            <div class="container">
+                <div class="breadcrumb">
+                    <ul class="d-flex align-items-center">
+                        <li><a th:href="@{/index}">Trang chủ</a></li>
+                        <li class="active"><a th:href="@{/order/list}">Lịch sử đặt hàng</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Container End -->
+        </div>
+        <br><br><br><br><br><br><br>
+    
+
+                            <div class="table-content table-responsive mb-45">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="product-thumbnail"></th>
+                                            <th class="product-thumbnail">Mã hóa đơn</th>
+                                            <th class="product-name">Ngày đặt hàng</th>
+                                            <th class="product-price">Địa chỉ giao hàng</th>
+                                            <th class="product-subtotal"></th>
+                                                                      
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                   
+                                    <tr  th:each="order, state: ${orders}">
+                                           <td><span class="amount">[[${state.index+1}]]</span></td>
+                                            <td><span class="amount">[[${order.id}]]</span></td>                                       
+                                            <td><span class="amount">[[${order.oderDate}]]</span></td>
+                                             <td><span class="amount">[[${order.address}]]</span></td>
+                           
+                                         
+                                        </tr>
+                                    
+                                    </tbody>
+                                </table>
+                                <br> <br>
+                                
+                            </div>
+                            
+</body>
+</html>

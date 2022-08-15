@@ -3,8 +3,7 @@ package pc01815.Normal_J6.Controller.TaiKhoan;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.Set;
-import java.util.stream.Collectors;
+
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -20,14 +19,14 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,11 +41,10 @@ import pc01815.Normal_J6.Entity.Roles;
 import pc01815.Normal_J6.Repository.AccountsRepository;
 import pc01815.Normal_J6.Repository.AuthoritiesRepository;
 import pc01815.Normal_J6.Repository.RolesRepository;
-import pc01815.Normal_J6.Services.AccountsService;
+
 
 @Controller
 public class taiKhoan {
-	
 	@Autowired
 	HttpServletRequest req;
 	@Autowired

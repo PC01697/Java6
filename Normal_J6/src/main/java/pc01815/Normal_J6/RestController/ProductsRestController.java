@@ -114,9 +114,10 @@ public class ProductsRestController {
 			fileUtil.saveFile(file, app);
 			products.setImage(fileUtil.getGetFileNameForEntity());
 			products.setAvaible(true);
-			products.setComments(null);
+//			products.setComments(null);
 			return new ResponseEntity<Products>(productsService.saveProductsService(products),HttpStatus.CREATED);
 		}
+
 	}
 	
 	
