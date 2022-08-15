@@ -58,6 +58,12 @@ public class AccountsRestController {
 
 		return accountsService.getAllService().stream().collect(Collectors.toList());
 	}
+	public List<Accounts>getAccounts(@RequestParam("admin")Optional<Boolean>admin){
+		if(admin.orElse(false)) {
+			return accountsService.getAdministrators();
+		}
+		return accountsService.findAllAccountService();
+	}
 //
 	@GetMapping("/accounts/{username}")
 	public Accounts getByUsername(@PathVariable("username") String username) {

@@ -23,6 +23,14 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     
   };
 
+var authoriesState = {
+    name: "authories",
+    url: "/authories",
+    templateUrl: "../adminAsset/components/authrizing.html",
+    controller: "authoriesCrt",
+    
+  };
+  
   var categoryState = {
     name: "categories",
     url: "/categories",
@@ -33,6 +41,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 $stateProvider.state(productCreateState);
   $stateProvider.state(productState);
   $stateProvider.state(accountState);
+   $stateProvider.state(authoriesState);
   $stateProvider.state(categoryState);
   $urlRouterProvider.otherwise("/");
   $locationProvider.html5Mode({

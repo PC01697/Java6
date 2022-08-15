@@ -384,5 +384,13 @@ $scope.createProduct = function (){
   
 });
 
+//-------------------------authories------------------------
+ app.controller("authoriesCrt", function($scope,$http) {
+	   $http.get("/api/authories").then(resp => {
+		$scope.db = resp.data;
+		console.log(resp.data)
+	})
+	});
+
 
 

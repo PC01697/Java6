@@ -11,11 +11,13 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -56,13 +58,15 @@ public class AccountServiceImpl implements AccountsService{
 		
 		return accountsRepository.save(accounts);
 	}
-
+	
 	@Override
 	public Accounts findByUsernameService(String username) {
 		return accountsRepository.findByUsername(username);
 	}
 
-
+    public List<Accounts>getAdministrators(){
+    	return accountsRepository.getAdministrators();
+    }
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 	   BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
@@ -117,6 +121,7 @@ public class AccountServiceImpl implements AccountsService{
 	public int checkAccountName(String username) {
 		return accountsRepository.IsExitAccount(username);
 	}
+	
 
 	@Override
 	public List<Accounts> findAllAccountService() {
