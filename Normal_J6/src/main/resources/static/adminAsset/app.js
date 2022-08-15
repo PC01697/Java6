@@ -720,8 +720,8 @@ app.controller("productCrt", function ($scope, productService,categoryService) {
 // create category
 $scope.createProduct = function (){
 	 var formProduct = {
-		name: $scope.nameProduct,
-		unitPrice: $scope.priceProduct,
+		name: $scope.name,
+		unitPrice: $scope.unitPrice,
 		category:{
 			id: $scope.categoryId
 		},
