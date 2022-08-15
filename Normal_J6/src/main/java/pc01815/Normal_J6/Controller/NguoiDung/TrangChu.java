@@ -31,6 +31,7 @@ CategoryRepository categoryDao;
 	public String form(Model model) {
 		List<Category> item = categoryDao.findAll();
 		model.addAttribute("item", item);
+		
         return "NguoiDung/trangchu";
 	}
 	

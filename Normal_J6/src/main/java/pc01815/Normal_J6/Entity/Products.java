@@ -61,7 +61,7 @@ public class Products implements java.io.Serializable {
 	private int quantity;
 	private String description;
 
-	private Set<Comment> comments = new HashSet<Comment>(0);
+
 
 	public Products() {
 	}
@@ -167,13 +167,6 @@ public class Products implements java.io.Serializable {
 		this.description = description;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "products")
-	public Set<Comment> getComments() {
-		return this.comments;
-	}
 
-	public void setComments(Set<Comment> comments) {
-		this.comments = comments;
-	}
 
 }

@@ -91,7 +91,7 @@ public class ProductsRestController {
 					fileUtil.saveFile(file, app);
 					getProduct.setImage(fileUtil.getGetFileNameForEntity());
 					getProduct.setAvaible(true);
-					getProduct.setComments(null);
+			
 					return new ResponseEntity<Products>(productsService.saveProductsService(getProduct),HttpStatus.CREATED);
 					
 	}

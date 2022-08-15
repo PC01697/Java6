@@ -45,4 +45,10 @@ public class OrderServiceImpl implements OrderService {
 		return ordersRepository.findById(id).get();
 	}
 
+	@Override
+	public List<Orders> findByUsername(String username) {
+		
+		 return ordersRepository.findByUsername(username);
+	}
+
 }
