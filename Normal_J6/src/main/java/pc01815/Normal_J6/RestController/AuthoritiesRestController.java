@@ -1,5 +1,6 @@
 package pc01815.Normal_J6.RestController;
 
+import java.util.HashMap;
 //import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,19 +33,19 @@ public class AuthoritiesRestController {
 	RolesRepository roles;
 	@Autowired
 	AccountsRepository acc;
-//	@GetMapping("/authories")
-//	public Map<String,Object> abc() {
-//		Map<String,Object> data = new HashMap<>();
-//		
-//		data.put("roles",roles.findAll());
-//		
-//		data.put("accounts",acc.findAll());
-//		
-//		data.put("authories", auth.findAll());
-//		
-//		return data;
-//		
-//	}
+	@GetMapping("/authories")
+	public Map<String,Object> abc() {
+		Map<String,Object> data = new HashMap<>();
+		
+		data.put("roles",roles.findAll());
+		
+		data.put("accounts",acc.findAll());
+		
+		data.put("authories", auth.findAll());
+		
+		return data;
+		
+	}
 
 	
 }
