@@ -26,4 +26,6 @@ public interface AccountsService extends UserDetailsService {
 
 	int checkAccountName(String username);
 	Optional<Accounts> findByIdAccount(int id);
+	
+	
 }

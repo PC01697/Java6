@@ -15,4 +15,6 @@ public interface AccountsRepository extends JpaRepository<Accounts, Integer>{
 	Accounts findByEmail(String email);
 	@Query(value = "select count(id) from accounts where username LIKE :username", nativeQuery = true)
 	int IsExitAccount(@Param("username") String username);
+//	@Query("SELECT DISTINCT ar.account FROM authorities ar WHERE ar.role.id in ('USER','ADMIN')")
+//	List<Accounts>getAdministrators();
 }

@@ -34,7 +34,7 @@ CategoryRepository categoryDao;
 		List<Category> item = categoryDao.findAll();
 		model.addAttribute("item", item);
 		
-//
+
 		Pageable pageable = PageRequest.of(0, 6);
 		Page<Products> page = productDao.findAll(pageable);
 		model.addAttribute("page", page);
