@@ -329,8 +329,8 @@ app.controller("productCrt", function ($scope, productService,categoryService) {
 // create category
 $scope.createProduct = function (){
 	 var formProduct = {
-		name: $scope.nameProduct,
-		unitPrice: $scope.priceProduct,
+		name: $scope.name,
+		unitPrice: $scope.unitPrice,
 		category:{
 			id: $scope.categoryId
 		},
@@ -338,6 +338,7 @@ $scope.createProduct = function (){
 		description: $scope.description
 	}
 	var file = $scope.myFile;	
+	
 	
 	productService.productCreateProduct(file,formProduct).then(function successCallback(resp){
 		if(resp.status == 201){
@@ -365,7 +366,7 @@ $scope.createProduct = function (){
 		}
 	})
 	
-	console.log(formProduct)
+	console.log(JSON.stringify(formProduct))
 	console.log(file)
 }
 	

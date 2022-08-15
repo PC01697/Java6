@@ -16,6 +16,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -50,6 +51,7 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	
 	@ExceptionHandler({ ConstraintViolationException.class })
+	@ResponseBody
 	public ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException ex, WebRequest request) {
 		List<String> errors = new ArrayList<String>();
 		for (ConstraintViolation<?> violation : ex.getConstraintViolations()) {
