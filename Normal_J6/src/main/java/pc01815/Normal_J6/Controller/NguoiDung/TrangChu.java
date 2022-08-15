@@ -42,8 +42,7 @@ CategoryRepository categoryDao;
 		Pageable pageable2 = PageRequest.of(0, 13);
 		Page<Products> page2 = productDao.findAll(pageable2);
 		model.addAttribute("page2", page2);
-//		
-//
+
 		Pageable pageable3 = PageRequest.of(0, 8);
 		Page<Products> page3 = productDao.findByShop(2,pageable3);
 		model.addAttribute("page3", page3);
