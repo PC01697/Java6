@@ -39,8 +39,11 @@
                                             <td><span class="amount">[[${order.id}]]</span></td>                                       
                                             <td><span class="amount">[[${order.oderDate}]]</span></td>
                                              <td><span class="amount">[[${order.address}]]</span></td>
-                           
-                                         
+                           <td>
+                                         <a th:href="@{|/order/detail/${order.id}|}" class="btn btn-default">
+                                      <button><i class="lnr lnr-magnifier"></i></button>  
+                                         </a>
+                                         </td>
                                         </tr>
                                     
                                     </tbody>

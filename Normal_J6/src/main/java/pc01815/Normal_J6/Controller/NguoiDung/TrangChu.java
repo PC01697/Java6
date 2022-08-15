@@ -39,18 +39,18 @@ CategoryRepository categoryDao;
 		Page<Products> page = productDao.findAll(pageable);
 		model.addAttribute("page", page);
 //		
-//		Pageable pageable2 = PageRequest.of(0, 13);
-//		Page<Products> page2 = productDao.findAll(pageable2);
-//		model.addAttribute("page2", page2);
+		Pageable pageable2 = PageRequest.of(0, 13);
+		Page<Products> page2 = productDao.findAll(pageable2);
+		model.addAttribute("page2", page2);
 //		
 //
-//		Pageable pageable3 = PageRequest.of(0, 8);
-//		Page<Products> page3 = productDao.findByShop(1,pageable3);
-//		model.addAttribute("page3", page3);
+		Pageable pageable3 = PageRequest.of(0, 8);
+		Page<Products> page3 = productDao.findByShop(2,pageable3);
+		model.addAttribute("page3", page3);
 //		
-//		Pageable pageable4 = PageRequest.of(0, 8);
-//		Page<Products> page4 = productDao.findByShop(4,pageable4);
-//		model.addAttribute("page4", page4);
+		Pageable pageable4 = PageRequest.of(0, 8);
+		Page<Products> page4 = productDao.findByShop(3,pageable4);
+		model.addAttribute("page4", page4);
         return "NguoiDung/trangchu";
 	}
 	
