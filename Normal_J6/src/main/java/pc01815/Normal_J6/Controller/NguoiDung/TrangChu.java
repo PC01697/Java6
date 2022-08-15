@@ -35,9 +35,9 @@ CategoryRepository categoryDao;
 		model.addAttribute("item", item);
 		
 //
-//		Pageable pageable = PageRequest.of(0, 6);
-//		Page<Products> page = productDao.findAll(pageable);
-//		model.addAttribute("page", page);
+		Pageable pageable = PageRequest.of(0, 6);
+		Page<Products> page = productDao.findAll(pageable);
+		model.addAttribute("page", page);
 //		
 //		Pageable pageable2 = PageRequest.of(0, 13);
 //		Page<Products> page2 = productDao.findAll(pageable2);
