@@ -36,10 +36,12 @@ public class AuthoritiesRestController {
 	public Map<String,Object> abc() {
 		Map<String,Object> data = new HashMap<>();
 		
+		data.put("roles",roles.findAll());
 		
 		data.put("accounts",acc.findAll());
+		
 		data.put("authories", auth.findAll());
-		data.put("roles",roles.findAll());
+		
 		return data;
 		
 	}

@@ -6,15 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//@CrossOrigin("*")
-//@RestController
-//@RequestMapping("/rest/roles")
+@CrossOrigin("*")
+@RestController
+@RequestMapping("/rest/roles")
 
-//public class RoleRestController {
-//	@Autowired
-//	RoleService roleService;
-//@GetMapping
-//public List<Role>getAll(){
-//	return roleService.findAll();
-//}
-//}
+public class RoleRestController {
+	
+}
