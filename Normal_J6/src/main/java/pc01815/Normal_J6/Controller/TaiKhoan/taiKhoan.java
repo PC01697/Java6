@@ -137,7 +137,7 @@ public class taiKhoan {
 			protected PasswordAuthentication getPasswordAuthentication() {
 		
 			String username = "trungttpc01815@fpt.edu.vn";
-			String password = "zmmfwwffwgcdfnss";
+			String password = "zloucbkhuqdcuwfd";
 			return new PasswordAuthentication(username, password);
 			}
 		});
@@ -194,7 +194,7 @@ public class taiKhoan {
 			name = username;
 			mail = email;
 		}else {
-			m.addAttribute("tbForget","Tên đăng nhập hoặc email không chính xác");
+			m.addAttribute("tbforgotPassword","Tên đăng nhập hoặc email không chính xác");
 		}
 		return "TaiKhoan/MaOTP";
 	}
@@ -242,6 +242,7 @@ public class taiKhoan {
 				if(pe.matches(passCu,acc.getPassword())) {
 					if(pe.matches(passMoi,acc.getPassword())) {
 						m.addAttribute("tb","Mật khẩu này đã đổi trước đó");
+						
 					}else {
 						if(passMoi.equals(XNPass)) {
 							acc.setPassword(pe.encode(passMoi));

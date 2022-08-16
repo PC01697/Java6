@@ -68,7 +68,7 @@
  										<div th:unless="${#request.remoteUser}">
                                                  <li><a th:href="@{/login}" th:text="#{lo.mn.login}" ></a></li>
                                     <li><a th:href="@{/register}" th:text="#{lo.mn.register}"></a></li>
-                                    <li><a href="../quenmk" th:text="#{lo.mn.forgot}"></a></li>
+                                    <li><a th:href="@{/fogetPass}" th:text="#{lo.mn.forgot}"></a></li>
                                             </div>
                                 </ul>
                                 <!-- Dropdown End -->

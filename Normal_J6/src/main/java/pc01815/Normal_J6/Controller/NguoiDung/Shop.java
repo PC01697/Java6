@@ -30,10 +30,13 @@ CategoryRepository categoryDao;
 			@RequestParam("p") Optional<Integer> p) {
 		List<Category> item = categoryDao.findAll();
 		model.addAttribute("item", item);
+		
 		Pageable pageable = PageRequest.of(p.orElse(0), 9);
 		Page<Products> page = productDao.findByShop(id,pageable);
-
 		model.addAttribute("page", page);
+		
+		Category cate = categoryDao.findById(id).get();
+		model.addAttribute("cate", cate);
 		return "NguoiDung/shop";
 	//	
 	}
