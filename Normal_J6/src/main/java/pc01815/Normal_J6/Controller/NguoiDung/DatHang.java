@@ -32,7 +32,7 @@ public class DatHang {
 		model.addAttribute("orders", orderService.findByUsername(username));
 		return "NguoiDung/allhoadon";
 	}
-	@RequestMapping("/order/detail/{id}")
+	@RequestMapping("/order/{id}")
 	public String detail(Model model, @PathVariable("id") Integer id) {	
 		model.addAttribute("order", orderService.findById(id));
 		return "NguoiDung/ttdonhang";
