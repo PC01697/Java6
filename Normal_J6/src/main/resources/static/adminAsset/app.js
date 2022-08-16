@@ -781,6 +781,11 @@ $scope.createProduct = function (){
 		$scope.db = resp.data;
 		console.log(resp.data)
 	})
+	
+	$scope.index_of = function(username,role){
+		return $scope.db.authories
+		.findIndex(a => a.accounts.username == username && a.role.id == role);
+	}
 	});
 
 

@@ -18,6 +18,8 @@ public interface AuthoritiesRepository extends JpaRepository<Authorities, Intege
 	@Query(value = "SELECT * FROM authorities WHERE idAccounts=:id",nativeQuery = true)
 	Authorities findByIdAcc(@Param("id")int id);
 	
+	
+	
 //	@Query(value = "DELETE FROM authorities WHERE idAccounts=:id",nativeQuery = true)
 //	Authorities deleteByIdAcc(@Param("id")int id);
 //	@Query("SELECT DISTINCT a FROM Authorities a WHERE a.account IN ?1 ")

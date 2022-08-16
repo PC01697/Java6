@@ -1,8 +1,10 @@
 package pc01815.Normal_J6.Entity;
 // Generated Jul 17, 2022, 5:56:00 PM by Hibernate Tools 4.3.6.Final
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,7 +38,7 @@ public class Orders implements java.io.Serializable {
 
 	
 
-	private Set<Orderdetails> orderDtails = new HashSet<Orderdetails>();
+	private List<Orderdetails> orderDtails = new ArrayList<Orderdetails>();
 
 	public Orders() {
 	}
@@ -52,7 +54,7 @@ public class Orders implements java.io.Serializable {
 	}
 
 	public Orders(Accounts accounts,String username, Date oderDate, int telephone, String address, float amount, String description,
-			boolean status, Set<Orderdetails> orderDtails) {
+			boolean status, List<Orderdetails> orderDtails) {
 		this.accounts = accounts;
 		this.username = username;
 		this.oderDate = oderDate;
@@ -117,11 +119,11 @@ public class Orders implements java.io.Serializable {
 
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orders")
-	public Set<Orderdetails> getOrderDtails() {
+	public List<Orderdetails> getOrderDtails() {
 		return this.orderDtails;
 	}
 
-	public void setOrderDtails(Set<Orderdetails> orderDtails) {
+	public void setOrderDtails(List<Orderdetails> orderDtails) {
 		this.orderDtails = orderDtails;
 	}
 
