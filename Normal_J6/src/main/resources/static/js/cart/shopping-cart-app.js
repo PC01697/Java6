@@ -40,7 +40,16 @@ $scope.cart = {
 		.map(item => item.qty)
 		.reduce((total, qty) => total += qty,0);
 	},
-	
+	check(soluong){
+		if(soluong!=0){
+			location.href = "/order/dathang";
+ 		
+		}else{
+		$http.get('/giohang').then(resp => {
+		alert("Chưa có sản phẩm để đặt hàng!!");
+			})
+		}
+	},
 	get amount(){
 		return this.items
 		.map(item => item.qty * item.unitPrice)

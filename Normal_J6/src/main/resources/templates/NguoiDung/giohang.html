@@ -62,11 +62,11 @@
                             <div class="row">
                                <!-- Cart Button Start -->
                                 <div class="col-md-12 col-sm-12">
-                                    <div class="buttons-cart">
+                                    <div class="buttons-cart" >
                                    
                                         <a href="#" ng-click="cart.clear()">Xóa tât cả sản phẩm</a>
                                         <a th:href="@{/index}">Tiếp tục mua sắm</a>
-                                        <a  th:href="@{/order/dathang}">Kiểm tra đơn hàng</a>
+                                        <a  href="" ng-click="cart.check(cart.count)" >Kiểm tra đơn hàng</a>
                                     </div>
                                 </div>
                                
