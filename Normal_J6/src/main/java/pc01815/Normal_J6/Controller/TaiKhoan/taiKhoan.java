@@ -124,7 +124,7 @@ public class taiKhoan {
 		
 		return "TaiKhoan/FogetPass";
 	}
-	public void Mail(Model m,String email,String nd) {
+	public void Mail(Model m,String email,String nd,String tieude) {
 		Properties props = new Properties(); 
 		props.setProperty("mail.smtp.auth", "true");
 		props.setProperty("mail.smtp.starttls.enable", "true"); 
@@ -157,7 +157,7 @@ public class taiKhoan {
 	
 			mime.setFrom(new InternetAddress("trungttpc01815@fpt.edu.vn"));
 			mime.setRecipients(Message.RecipientType.TO,email);
-			mime.setSubject("Mã OTP","utf-8");
+			mime.setSubject(tieude,"utf-8");
 			mime.setReplyTo(mime.getFrom());
 			mime.setContent(mailmultipart);
 			
@@ -190,13 +190,15 @@ public class taiKhoan {
 	              randomInt =(int) random;                
 		}
 			String nd ="Nhập mã "+randomInt+" để xác nhận đổi mật khẩu";
-			this.Mail(m,email,nd);
+			this.Mail(m,email,nd,"Mã xác nhận");
 			name = username;
 			mail = email;
+			return "TaiKhoan/MaOTP";
 		}else {
 			m.addAttribute("tbforgotPassword","Tên đăng nhập hoặc email không chính xác");
+			return "TaiKhoan/FogetPass";
 		}
-		return "TaiKhoan/MaOTP";
+		
 	}
 	
 	@PostMapping("/XacThuc")
@@ -213,13 +215,14 @@ public class taiKhoan {
 	           random =random *1000000;   
 	              randomInt =(int) random;                
 		}
-			String nd ="Mật khẩu của bạn là:"+randomInt;
-			this.Mail(m,mail,nd);
+			String nd ="Mật khẩu mới của bạn là:"+randomInt;
+			this.Mail(m,mail,nd,"Mật khẩu mới");
 			acc.setPassword(pe.encode(randomInt+""));
 			accountDAO.save(acc);
+			m.addAttribute("tbforgotPassword","Vui lòng đăng nhập với mật khẩu mới!");
 			//abc
 		}
-		return "TaiKhoan/MaOTP";
+		return "TaiKhoan/login";
 	}
 
 	@GetMapping("/changePass")
