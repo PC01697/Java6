@@ -1,12 +1,14 @@
 # Nhóm Normal_J6 
 ## Giảng viên bộ môn: Nguyễn Trung Kiên
 ## Thành viên trong nhóm:
-> Võ Đăng Khoa,
-> Nguyễn Thành Trung,
+> Võ Đăng Khoa \n,
+> Trần Thành Trung,
 > Dương Gia Bảo,
 > Đinh Nguyễn Hải Sang,
-> Nguyễn Trọng Nhân,
-> Trần Đăng Khôi,
-> Nguyễn Hồng Đăng
+> Trần Đăng Khôi
 ###### Công nghệ sử dụng:
->**Angular**, **Spring Boot API**, **SQL Server**
+>**AngularJS**, **Spring Boot API**, **MySQL Server**,**Thymleaf**
+
+
+
+
