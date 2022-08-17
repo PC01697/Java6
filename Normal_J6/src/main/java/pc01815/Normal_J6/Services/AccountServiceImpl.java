@@ -73,12 +73,13 @@ public class AccountServiceImpl implements AccountsService{
 			String pass = account.getPassword();
 
 			String[] roles = account.getAuthoritieses().stream()
-					.map(t -> t.getRoles().getName()).collect(Collectors.toList()).toArray(new String[0]);
-			String getRoles = null;
-			for (String string : roles) {
-				getRoles = string;
-			}
-			UserDetails user = 	User.withUsername(account.getUsername()).password(pass).roles(getRoles).build();
+					.map(t -> t.getRoles().getName())
+					.collect(Collectors.toList()).toArray(new String[0]);
+//			String getRoles = null;
+//			for (String string : roles) {
+//				getRoles = string;
+//			}
+			UserDetails user = 	User.withUsername(account.getUsername()).password(pass).roles(roles).build();
 			return user;
 
 
@@ -89,12 +90,11 @@ public class AccountServiceImpl implements AccountsService{
 		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
 		String name = oauth2.getPrincipal().getAttribute("name");
 		String pass = Long.toHexString(System.currentTimeMillis());
+		System.err.println(pass);
 		UserDetails user = User.withUsername(name).password(pe.encode(pass)).roles("User").build();
 		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(auth);
-		String id = oauth2.getPrincipal().getAttribute("id");
-		System.err.println(id);
-		System.err.println(name);
+		
 		String email = oauth2.getPrincipal().getAttribute("email");
 		
 		if(accountsRepository.findByEmail(email) == null){
@@ -102,7 +102,7 @@ public class AccountServiceImpl implements AccountsService{
 			System.err.println("Chưa tồn tại");
 			acc.setFullname(name);
 			acc.setEmail(oauth2.getPrincipal().getAttribute("email"));
-			acc.setPassword(pe.encode("12345"));
+			acc.setPassword(pe.encode(pass));
 			acc.setUsername(name);
 			accountsRepository.save(acc);
 		}

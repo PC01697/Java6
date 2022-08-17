@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 			.antMatchers("/order/**","/giohang").authenticated()
 			.antMatchers("/admin/**").hasAnyRole("ADMIN")
-			.antMatchers("/rest/authorities").hasRole("ADMIN")
+//			.antMatchers("/rest/authorities").hasRole("ADMIN")
 			.anyRequest().permitAll();
 		
 		http.formLogin()
